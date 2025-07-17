@@ -17,7 +17,7 @@ from utils import (
 
 MODEL_IDS = ["yolov10n", "yolov10s", "yolov10m", "yolov10b", "yolov10l", "yolov10x"]
 DATASET_DIR = "../../../data/coco-val-2017"
-LICENSE = "APGL-3.0"
+LICENSE = "AGPL-3.0"
 
 GIT_REPO_URL = "https://github.com/THU-MIG/yolov10"
 PAPER_URL = "https://arxiv.org/abs/2405.14458"

@@ -1,7 +1,7 @@
 {
     "metadata": {
         "model": "yolov8s",
-        "license": "APGL-3.0",
+        "license": "AGPL-3.0",
         "github_url": "https://github.com/ultralytics/ultralytics",
         "paper_url": "",
         "run_parameters": {

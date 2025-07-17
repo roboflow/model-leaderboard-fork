@@ -18,7 +18,7 @@ from utils import (
 )
 
 MODEL_IDS = ["yolo11n", "yolo11s", "yolo11m", "yolo11l", "yolo11x"]
-LICENSE = "APGL-3.0"
+LICENSE = "AGPL-3.0"
 RUN_PARAMETERS = dict(
     imgsz=640,
     iou=0.7,
