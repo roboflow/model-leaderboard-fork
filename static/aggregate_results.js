@@ -2,7 +2,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov8l",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -75,7 +75,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov8x",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -148,7 +148,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov8m",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -221,7 +221,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov8s",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -294,7 +294,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov8n",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -1141,7 +1141,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10s",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1214,7 +1214,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10l",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1287,7 +1287,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10m",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1360,7 +1360,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10x",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1433,7 +1433,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10n",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1506,7 +1506,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov10b",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/THU-MIG/yolov10",
       "paper_url": "https://arxiv.org/abs/2405.14458",
       "run_parameters": {
@@ -1579,7 +1579,7 @@ const results = [
   {
     "metadata": {
       "model": "yolo11l",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -1652,7 +1652,7 @@ const results = [
   {
     "metadata": {
       "model": "yolo11m",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -1725,7 +1725,7 @@ const results = [
   {
     "metadata": {
       "model": "yolo11x",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -1798,7 +1798,7 @@ const results = [
   {
     "metadata": {
       "model": "yolo11s",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -1871,7 +1871,7 @@ const results = [
   {
     "metadata": {
       "model": "yolo11n",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/ultralytics/ultralytics",
       "paper_url": "",
       "run_parameters": {
@@ -3359,7 +3359,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov13x.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/iMoonLab/yolov13",
       "paper_url": "https://arxiv.org/abs/2506.17733",
       "run_parameters": {
@@ -3432,7 +3432,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov13l.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/iMoonLab/yolov13",
       "paper_url": "https://arxiv.org/abs/2506.17733",
       "run_parameters": {
@@ -3505,7 +3505,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov13n.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/iMoonLab/yolov13",
       "paper_url": "https://arxiv.org/abs/2506.17733",
       "run_parameters": {
@@ -3578,7 +3578,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov13s.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/iMoonLab/yolov13",
       "paper_url": "https://arxiv.org/abs/2506.17733",
       "run_parameters": {
@@ -4290,7 +4290,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov12s.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/sunsmarterjie/yolov12",
       "paper_url": "https://arxiv.org/abs/2502.12524",
       "run_parameters": {
@@ -4363,7 +4363,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov12l.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/sunsmarterjie/yolov12",
       "paper_url": "https://arxiv.org/abs/2502.12524",
       "run_parameters": {
@@ -4436,7 +4436,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov12x.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/sunsmarterjie/yolov12",
       "paper_url": "https://arxiv.org/abs/2502.12524",
       "run_parameters": {
@@ -4509,7 +4509,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov12m.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/sunsmarterjie/yolov12",
       "paper_url": "https://arxiv.org/abs/2502.12524",
       "run_parameters": {
@@ -4582,7 +4582,7 @@ const results = [
   {
     "metadata": {
       "model": "yolov12n.pt",
-      "license": "APGL-3.0",
+      "license": "AGPL-3.0",
       "github_url": "https://github.com/sunsmarterjie/yolov12",
       "paper_url": "https://arxiv.org/abs/2502.12524",
       "run_parameters": {

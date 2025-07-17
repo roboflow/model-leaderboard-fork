@@ -27,7 +27,7 @@ MODEL_URLS: dict[str, str] = {
 }
 
 
-LICENSE = "APGL-3.0"
+LICENSE = "AGPL-3.0"
 RUN_PARAMETERS = dict(
     imgsz=640,
     iou=0.7,
