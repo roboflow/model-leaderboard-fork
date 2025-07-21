@@ -4,9 +4,9 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  },
-  // Only use custom distDir for production builds
-  distDir: process.env.NODE_ENV === 'production' ? '../docs' : '.next'
+  }
+  // Note: distDir temporarily disabled for development
+  // distDir: process.env.NODE_ENV === 'production' ? '../docs' : '.next'
 }
 
 module.exports = nextConfig 
