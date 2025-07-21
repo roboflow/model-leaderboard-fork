@@ -28,8 +28,8 @@ interface ModelResult {
       max_det?: number
       conf?: number
       verbose?: boolean
-      
-      // DETR-style parameters  
+
+      // DETR-style parameters
       resolution?: number
       num_queries?: number
       num_select?: number
@@ -102,13 +102,13 @@ function formatParameters(count: number): string {
 export function ModelTableRow({ result, columns, sortColumn, columnRange }: ModelTableRowProps) {
   const renderCellContent = (columnKey: string) => {
     let baseContent
-    
+
     switch (columnKey) {
       case "metadata.model":
         const modelContent = result.metadata.github_url ? (
-          <Link 
-            href={result.metadata.github_url} 
-            target="_blank" 
+          <Link
+            href={result.metadata.github_url}
+            target="_blank"
             rel="noopener noreferrer"
             className="font-medium hover:text-primary-foreground transition-colors duration-200 inline-flex items-center gap-2 group"
           >
@@ -120,11 +120,11 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
 
         // Access run_parameters from metadata
         const runParams = result.metadata.run_parameters
-        
+
         // Create mapping of parameter keys to descriptive names
         const parameterLabels = {
           imgsz: 'Image size',
-          iou: 'IoU threshold', 
+          iou: 'IoU threshold',
           max_det: 'Maximum detections',
           conf: 'Confidence threshold',
           verbose: 'Verbose output',
@@ -133,14 +133,14 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
           num_select: 'Number of selections',
           threshold: 'Detection threshold'
         }
-        
+
         // Build tooltip content, only including defined parameters
         let tooltipContent = ''
         if (runParams) {
           const paramEntries = Object.entries(runParams)
             .filter(([key, value]) => value !== undefined && value !== null)
             .map(([key, value]) => `${parameterLabels[key as keyof typeof parameterLabels]}: ${value}`)
-          
+
           tooltipContent = paramEntries.join('\n')
         }
 
@@ -163,11 +163,11 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
           </div>
         )
         break
-      
+
       case "metadata.param_count":
         baseContent = formatParameters(result.metadata.param_count)
         break
-      
+
       case "paper":
         baseContent = (
           <div className="flex gap-1">
@@ -186,7 +186,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
           </div>
         )
         break
-      
+
       case "metadata.license":
         baseContent = (
           <span className="text-xs bg-secondary px-2 py-1 rounded">
@@ -194,7 +194,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
           </span>
         )
         break
-      
+
       default:
         const value = getNestedValue(result, columnKey)
         baseContent = typeof value === 'number' ? formatPercentage(value) : value
@@ -204,14 +204,14 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
     if (columnRange && columnKey === columnRange.column) {
       const value = getNestedValue(result, columnKey)
       if (typeof value === 'number') {
-        const percentage = columnRange.max === columnRange.min 
-          ? 0 
+        const percentage = columnRange.max === columnRange.min
+          ? 0
           : ((value - columnRange.min) / (columnRange.max - columnRange.min)) * 100
-        
+
         return (
           <div className="relative">
             {/* Background bar */}
-            <div 
+            <div
               className="absolute inset-0 bg-gradient-primary border border-gradient-primary rounded transition-all duration-200"
               style={{ width: `${Math.max(percentage, 2)}%` }}
             />
@@ -223,7 +223,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
         )
       }
     }
-    
+
     return baseContent
   }
 
@@ -236,4 +236,4 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
       ))}
     </TableRow>
   )
-} 
+}

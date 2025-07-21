@@ -21,9 +21,9 @@ export function Header() {
     <header className="py-4">
       <div className="container-base mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <RoboflowLogo 
-            className="text-violet-700 dark:text-white h-8 w-auto" 
-            width={120} 
+          <RoboflowLogo
+            className="text-violet-700 dark:text-white h-8 w-auto"
+            width={120}
             height={32}
           />
         </Link>

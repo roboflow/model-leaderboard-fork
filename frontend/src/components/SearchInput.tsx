@@ -11,11 +11,11 @@ interface SearchInputProps {
   className?: string
 }
 
-export function SearchInput({ 
-  value, 
-  onChange, 
-  placeholder = "Search models...", 
-  className = "" 
+export function SearchInput({
+  value,
+  onChange,
+  placeholder = "Search models...",
+  className = ""
 }: SearchInputProps) {
   const clearSearch = () => {
     onChange("")
@@ -43,4 +43,4 @@ export function SearchInput({
       )}
     </div>
   )
-} 
+}

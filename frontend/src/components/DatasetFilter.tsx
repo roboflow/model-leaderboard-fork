@@ -41,7 +41,7 @@ export function DatasetFilter({
           <DropdownMenuContent className="w-56" align="end">
             <DropdownMenuLabel>Select Dataset</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            
+
             <div className="p-2">
               <RadioGroup
                 value={selectedDataset}
@@ -50,8 +50,8 @@ export function DatasetFilter({
               >
                 {availableDatasets.map((dataset) => (
                   <div key={dataset} className="flex items-center space-x-2">
-                    <RadioGroupItem 
-                      value={dataset} 
+                    <RadioGroupItem
+                      value={dataset}
                       id={dataset}
                       className="shrink-0"
                     />

@@ -9,4 +9,4 @@ const nextConfig = {
   distDir: '../docs'
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

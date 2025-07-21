@@ -39,8 +39,8 @@ interface ModelResult {
       max_det?: number
       conf?: number
       verbose?: boolean
-      
-      // DETR-style parameters  
+
+      // DETR-style parameters
       resolution?: number
       num_queries?: number
       num_select?: number
@@ -92,148 +92,148 @@ interface Column {
 }
 
 const allColumns: Column[] = [
-  { 
-    key: "metadata.model", 
-    label: "Model", 
-    width: "w-24", 
-    group: 'Basic', 
+  {
+    key: "metadata.model",
+    label: "Model",
+    width: "w-24",
+    group: 'Basic',
     defaultVisible: true,
     tooltip: "Name of the computer vision model"
   },
-  { 
-    key: "metadata.param_count", 
-    label: "Parameters (M)", 
-    width: "w-10", 
-    group: 'Basic', 
+  {
+    key: "metadata.param_count",
+    label: "Parameters (M)",
+    width: "w-10",
+    group: 'Basic',
     defaultVisible: true,
     tooltip: "Total number of trainable parameters in millions"
   },
-  { 
-    key: "map50_95", 
-    label: "mAP 50:95", 
-    width: "w-40", 
-    group: 'Core Metrics', 
+  {
+    key: "map50_95",
+    label: "mAP 50:95",
+    width: "w-40",
+    group: 'Core Metrics',
     defaultVisible: true,
     tooltip: "Mean Average Precision at IoU thresholds from 0.5 to 0.95 (primary COCO metric)"
   },
-  { 
-    key: "map50", 
-    label: "mAP 50", 
-    width: "w-40", 
-    group: 'Core Metrics', 
+  {
+    key: "map50",
+    label: "mAP 50",
+    width: "w-40",
+    group: 'Core Metrics',
     defaultVisible: true,
     tooltip: "Mean Average Precision at IoU threshold of 0.5"
   },
-  { 
-    key: "map75", 
-    label: "mAP 75", 
-    width: "w-40", 
-    group: 'Core Metrics', 
+  {
+    key: "map75",
+    label: "mAP 75",
+    width: "w-40",
+    group: 'Core Metrics',
     defaultVisible: false,
     tooltip: "Mean Average Precision at IoU threshold of 0.75 (stricter localization)"
   },
-  { 
-    key: "small_objects.map50_95", 
-    label: "mAP 50:95 (Small)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "small_objects.map50_95",
+    label: "mAP 50:95 (Small)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "mAP 50:95 for small objects"
   },
-  { 
-    key: "medium_objects.map50_95", 
-    label: "mAP 50:95 (Medium)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "medium_objects.map50_95",
+    label: "mAP 50:95 (Medium)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "mAP 50:95 for medium objects"
   },
-  { 
-    key: "large_objects.map50_95", 
-    label: "mAP 50:95 (Large)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "large_objects.map50_95",
+    label: "mAP 50:95 (Large)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "mAP 50:95 for large objects"
   },
-  { 
-    key: "f1_50", 
-    label: "F1 50", 
-    width: "w-40", 
-    group: 'F1 Metrics', 
+  {
+    key: "f1_50",
+    label: "F1 50",
+    width: "w-40",
+    group: 'F1 Metrics',
     defaultVisible: false,
     tooltip: "F1 score at IoU threshold of 0.5"
   },
-  { 
-    key: "f1_75", 
-    label: "F1 75", 
-    width: "w-40", 
-    group: 'F1 Metrics', 
+  {
+    key: "f1_75",
+    label: "F1 75",
+    width: "w-40",
+    group: 'F1 Metrics',
     defaultVisible: false,
     tooltip: "F1 score at IoU threshold of 0.75"
   },
-  { 
-    key: "f1_small_objects.f1_50", 
-    label: "F1 50 (Small)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_small_objects.f1_50",
+    label: "F1 50 (Small)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.5 for small objects"
   },
-  { 
-    key: "f1_small_objects.f1_75", 
-    label: "F1 75 (Small)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_small_objects.f1_75",
+    label: "F1 75 (Small)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.75 for small objects"
   },
-  { 
-    key: "f1_medium_objects.f1_50", 
-    label: "F1 50 (Medium)", 
-    width: "w-40", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_medium_objects.f1_50",
+    label: "F1 50 (Medium)",
+    width: "w-40",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.5 for medium objects"
   },
-  { 
-    key: "f1_medium_objects.f1_75", 
-    label: "F1 75 (Medium)", 
-    width: "w-28", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_medium_objects.f1_75",
+    label: "F1 75 (Medium)",
+    width: "w-28",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.75 for medium objects"
   },
-  { 
-    key: "f1_large_objects.f1_50", 
-    label: "F1 50 (Large)", 
-    width: "w-24", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_large_objects.f1_50",
+    label: "F1 50 (Large)",
+    width: "w-24",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.5 for large objects"
   },
-  { 
-    key: "f1_large_objects.f1_75", 
-    label: "F1 75 (Large)", 
-    width: "w-24", 
-    group: 'Size-Specific', 
+  {
+    key: "f1_large_objects.f1_75",
+    label: "F1 75 (Large)",
+    width: "w-24",
+    group: 'Size-Specific',
     defaultVisible: false,
     tooltip: "F1 score at IoU 0.75 for large objects"
   },
-  { 
-    key: "paper", 
-    label: "Paper", 
-    width: "w-10", 
-    sortable: false, 
-    group: 'Metadata', 
+  {
+    key: "paper",
+    label: "Paper",
+    width: "w-10",
+    sortable: false,
+    group: 'Metadata',
     defaultVisible: true,
     tooltip: "Link to research paper"
   },
-  { 
-    key: "metadata.license", 
-    label: "License", 
-    width: "w-10", 
-    group: 'Metadata', 
+  {
+    key: "metadata.license",
+    label: "License",
+    width: "w-10",
+    group: 'Metadata',
     defaultVisible: true,
     tooltip: "Software license (e.g., MIT, Apache-2.0, AGPL-3.0)"
   },
@@ -289,7 +289,7 @@ function getSearchableText(result: ModelResult): string {
     result.f1_75.toFixed(3),
     result.metadata.param_count.toString(),
   ]
-  
+
   return searchableFields.join(' ').toLowerCase()
 }
 
@@ -308,7 +308,7 @@ export default function Home() {
   const handleToggleColumn = (columnKey: string) => {
     console.log("🔄 Toggle column clicked:", columnKey)
     console.log("Current visible:", Array.from(visibleColumns))
-    
+
     const newVisibleColumns = new Set(visibleColumns)
     if (newVisibleColumns.has(columnKey)) {
       console.log("   Removing:", columnKey)
@@ -405,8 +405,8 @@ export default function Home() {
   }
 
   // Get only visible columns
-  const columns = useMemo(() => 
-    allColumns.filter(col => visibleColumns.has(col.key)), 
+  const columns = useMemo(() =>
+    allColumns.filter(col => visibleColumns.has(col.key)),
     [visibleColumns]
   )
 
@@ -457,11 +457,11 @@ export default function Home() {
     const paramCounts = aggregateResults.map(result => result.metadata.param_count / 1_000_000)
     const min = Math.min(...paramCounts)
     const max = Math.max(...paramCounts)
-    
+
     // Round to nice values
     const roundedMin = Math.floor(min)
     const roundedMax = Math.ceil(max)
-    
+
     return {
       minParams: roundedMin,
       maxParams: roundedMax
@@ -485,25 +485,25 @@ export default function Home() {
   // Filter and sort results
   const filteredAndSortedResults = useMemo(() => {
     let filtered = aggregateResults
-    
+
     // Apply search filter
     if (search.trim()) {
       const searchLower = search.toLowerCase().trim()
-      filtered = filtered.filter(result => 
+      filtered = filtered.filter(result =>
         getSearchableText(result).includes(searchLower)
       )
     }
 
     // Apply license filter
     if (selectedLicenses.size > 0) {
-      filtered = filtered.filter(result => 
+      filtered = filtered.filter(result =>
         selectedLicenses.has(result.metadata.license)
       )
     }
 
     // Apply architecture filter
     if (selectedArchitectures.size > 0) {
-      filtered = filtered.filter(result => 
+      filtered = filtered.filter(result =>
         selectedArchitectures.has(result.metadata.architecture)
       )
     }
@@ -512,7 +512,7 @@ export default function Home() {
     if (selectedPretrainDatasets.size > 0) {
       filtered = filtered.filter(result => {
         // Check if any of the selected datasets is in the model's pretrain_datasets array
-        return result.metadata.pretrain_datasets?.some(dataset => 
+        return result.metadata.pretrain_datasets?.some(dataset =>
           selectedPretrainDatasets.has(dataset)
         )
       })
@@ -540,16 +540,16 @@ export default function Home() {
   // Calculate value range for horizontal bars in sorted column
   const columnRange = useMemo(() => {
     if (!sortColumn || filteredAndSortedResults.length === 0) return null
-    
+
     // Check if it's a numeric column (exclude non-numeric columns)
     const nonNumericColumns = ['metadata.model', 'metadata.license', 'paper']
     if (nonNumericColumns.includes(sortColumn)) return null
-    
+
     const values = filteredAndSortedResults.map(result => getNestedValue(result, sortColumn))
     const numericValues = values.filter(v => typeof v === 'number')
-    
+
     if (numericValues.length === 0) return null
-    
+
     return {
       min: Math.min(...numericValues),
       max: Math.max(...numericValues),
@@ -590,7 +590,7 @@ export default function Home() {
                 placeholder="Search models..."
                 className="flex-1"
               />
-              
+
               {/* Desktop Filters */}
               <div className="hidden sm:flex gap-2 flex-wrap">
                 <FilterDropdown
@@ -603,7 +603,7 @@ export default function Home() {
                   onClearAll={handleClearAllArchitectures}
                   onSelectAll={handleSelectAllArchitectures}
                 />
-                
+
                 <ParameterFilter
                   minParams={minParams}
                   maxParams={maxParams}
@@ -641,7 +641,7 @@ export default function Home() {
                 />
 
                 <Separator orientation="vertical" className="max-h-9" />
-                
+
                 <ColumnToggle
                   columns={allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
                   visibleColumns={visibleColumns}
@@ -719,8 +719,8 @@ export default function Home() {
                         {search ? (
                           <div>
                             <p>No models found matching "{search}"</p>
-                            <Button 
-                              variant="link" 
+                            <Button
+                              variant="link"
                               onClick={() => setSearch("")}
                               className="mt-2"
                             >
@@ -747,7 +747,7 @@ export default function Home() {
               </Table>
               <ScrollBar orientation="horizontal" />
               </ScrollArea>
-              
+
               {/* Results Counter */}
               <div className="w-full mt-4 flex flex-wrap items-start gap-2 justify-between">
                 <div className="space-y-2">
@@ -755,7 +755,7 @@ export default function Home() {
                     Displaying <span className="font-medium text-foreground">{filteredAndSortedResults.length}</span> out of{" "}
                     <span className="font-medium text-foreground">{aggregateResults.length}</span> models
                   </div>
-                  
+
                   {/* Active Filters Indicator */}
                   {(search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -771,10 +771,10 @@ export default function Home() {
                 <div className="text-sm text-muted-foreground">Made with <HeartIcon size={14} weight="fill" className="inline-block text-primary-foreground" /> by <Link href="https://roboflow.com" target="_blank" className="text-primary-foreground">Roboflow</Link></div>
               </div>
           </div>
-          
-          
+
+
         </div>
       </section>
     </>
   )
-} 
+}

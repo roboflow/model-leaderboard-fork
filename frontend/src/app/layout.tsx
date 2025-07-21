@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
@@ -98,4 +98,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-} 
+}

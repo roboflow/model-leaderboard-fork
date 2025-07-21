@@ -100,7 +100,7 @@ export function ColumnToggle({
             >
               Hide All
             </Button>
-            
+
             <Button
               variant="secondary"
               size="xs"
@@ -126,4 +126,4 @@ export function ColumnToggle({
       </div>
     </>
   )
-} 
+}

@@ -35,10 +35,10 @@ export function MobileCheckboxItem({
     >
       <span className="text-left">{children}</span>
       {selected && (
-        <CheckIcon 
-          size={16} 
-          weight="bold" 
-          className="text-primary-foreground shrink-0" 
+        <CheckIcon
+          size={16}
+          weight="bold"
+          className="text-primary-foreground shrink-0"
         />
       )}
     </button>

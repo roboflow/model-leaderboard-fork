@@ -43,4 +43,4 @@ This will create static files in the `out/` directory that can replace the curre
 - `src/app/` - Next.js app router pages
 - `src/components/ui/` - shadcn/ui components
 - `src/lib/` - Utility functions
-- `public/` - Static assets 
+- `public/` - Static assets

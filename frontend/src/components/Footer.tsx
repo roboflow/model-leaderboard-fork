@@ -2,7 +2,7 @@ import { ThemeToggle } from "@/components/ThemeToggle"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
-  
+
   return (
     <footer className="py-4">
       <div className="container-base">
