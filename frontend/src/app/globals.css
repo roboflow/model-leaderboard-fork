@@ -125,7 +125,7 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
   /* Background */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   /* Card */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -240,7 +240,7 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
     overflow: hidden;
     z-index: -1;
   }
-  
+
   .orb {
     position: absolute;
     width: 1000px;
@@ -251,24 +251,24 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
     filter: blur(80px);
     animation: float 60s infinite ease-in-out alternate;
   }
-  
+
   .orb-1 {
     top: -40%;
     right: -30%;
   }
-  
+
   .orb-2 {
     bottom: 15%;
     right: 25%;
     animation-delay: 5s;
   }
-  
+
   .orb-3 {
     bottom: -90%;
     left: 50%;
     animation-delay: 10s;
   }
-  
+
   @keyframes float {
     0% {
       transform: translate(0px, 0px) scale(1);

@@ -33,7 +33,7 @@ export function ParameterFilter({
 }: ParameterFilterProps) {
   const [localRange, setLocalRange] = useState<[number, number]>(selectedRange)
   const [hasUserChanged, setHasUserChanged] = useState(false)
-  
+
   const isFiltered = hasUserChanged && (selectedRange[0] !== minParams || selectedRange[1] !== maxParams)
 
   // Update local range when prop changes
@@ -75,7 +75,7 @@ export function ParameterFilter({
           <DropdownMenuContent className="w-80" align="end">
             <DropdownMenuLabel className="text-sm">Filter by Parameter Count</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            
+
             <div className="p-2 space-y-3">
               {/* Range Display */}
               <div className="flex justify-between text-xs">
@@ -86,7 +86,7 @@ export function ParameterFilter({
                   {formatParameters(localRange[1])}
                 </span>
               </div>
-              
+
               {/* Slider */}
               <div className="px-2">
                 <Slider
@@ -99,19 +99,19 @@ export function ParameterFilter({
                   className="w-full"
                 />
               </div>
-              
+
               {/* Min/Max Labels */}
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>{formatParameters(minParams)}</span>
                 <span>{formatParameters(maxParams)}</span>
               </div>
-              
+
             </div>
-            
+
             {/* Reset Button */}
             <DropdownMenuSeparator />
             <div className="dropdown-footer">
-              
+
               <Button
                 variant="secondary"
                 size="xs"
@@ -135,7 +135,7 @@ export function ParameterFilter({
                   {formatParameters(localRange[1])}
                 </span>
               </div>
-              
+
               {/* Slider */}
               <div className="px-2">
                 <Slider
@@ -148,13 +148,13 @@ export function ParameterFilter({
                   className="w-full"
                 />
               </div>
-              
+
               {/* Min/Max Labels */}
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>{formatParameters(minParams)}</span>
                 <span>{formatParameters(maxParams)}</span>
               </div>
-              
+
             </div>
       </div>
     </>

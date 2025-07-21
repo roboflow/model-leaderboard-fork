@@ -122,9 +122,9 @@ export function MobileControls({
                 <Filter className="h-4 w-4" />
                 <h3 className="font-semibold">Filters</h3>
               </div>
-              
+
               <div className="space-y-6">
-                
+
                   <div className="space-y-6">
                     <label className="text-sm font-medium mb-2 block">Architecture</label>
                     <FilterDropdown
@@ -151,7 +151,7 @@ export function MobileControls({
                     />
                   </div>
                   <Separator />
-                  
+
 
                   <div>
                     <label className="text-sm font-medium mb-2 block">Pretrained On</label>
@@ -203,7 +203,7 @@ export function MobileControls({
                 <Settings className="h-4 w-4" />
                 <h3 className="font-semibold">Columns</h3>
               </div>
-              
+
               <ColumnToggle
                 columns={columns}
                 visibleColumns={visibleColumns}

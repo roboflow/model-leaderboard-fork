@@ -8,23 +8,23 @@ interface RoboflowLogoProps {
   color?: string
 }
 
-export function RoboflowLogo({ 
-  className, 
-  width = 120, 
+export function RoboflowLogo({
+  className,
+  width = 120,
   height = 32,
   color = "currentColor"
 }: RoboflowLogoProps) {
   return (
-    <svg 
-      version="1.1" 
-      id="Layer_1" 
-      xmlns="http://www.w3.org/2000/svg" 
-      xmlnsXlink="http://www.w3.org/1999/xlink" 
-      x="0px" 
+    <svg
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      x="0px"
       y="0px"
       width={width}
       height={height}
-      viewBox="0 0 666 201.6" 
+      viewBox="0 0 666 201.6"
       className={cn("", className)}
       xmlSpace="preserve"
     >
@@ -69,4 +69,4 @@ export function RoboflowLogo({
       </g>
     </svg>
   )
-} 
+}

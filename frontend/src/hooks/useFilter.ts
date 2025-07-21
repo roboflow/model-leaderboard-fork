@@ -25,4 +25,4 @@ export function useFilter<T extends string>(
     availableItems: allItems,
     ...handlers,
   }
-} 
+}

@@ -37,8 +37,8 @@ export function SortableTableHeader({
 }: SortableTableHeaderProps) {
   const getSortIcon = () => {
     if (currentSortColumn !== columnKey) return <ArrowsDownUpIcon size={16} />
-    return currentSortDirection === "asc" ? 
-      <ArrowUpIcon size={16} /> : 
+    return currentSortDirection === "asc" ?
+      <ArrowUpIcon size={16} /> :
       <ArrowDownIcon size={16} />
   }
 
@@ -64,7 +64,7 @@ export function SortableTableHeader({
 
   return (
     <TableHead className={`${width} ${className}`}>
-      
+
       {tooltip ? (
         <TooltipProvider>
           <Tooltip delayDuration={700}>

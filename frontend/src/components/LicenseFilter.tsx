@@ -42,7 +42,7 @@ export function LicenseFilter({
               {activeCount > 0 && activeCount < totalCount && (
                 <div className="flex gap-1 flex-wrap">
                   {Array.from(selectedLicenses).map((license) => (
-                    <span 
+                    <span
                       key={license}
                       className="tag-primary"
                     >
@@ -77,7 +77,7 @@ export function LicenseFilter({
 
             {/* Reset Button */}
             <DropdownMenuSeparator />
-            <div className="dropdown-footer">  
+            <div className="dropdown-footer">
               <Button
                 variant="secondary"
                 size="xs"

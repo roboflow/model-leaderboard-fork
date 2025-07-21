@@ -35,12 +35,12 @@ export function MobileRadioItem({
     >
       <span className="text-left">{children}</span>
       {selected && (
-        <CircleIcon 
-          size={16} 
-          weight="fill" 
-          className="text-primary-foreground shrink-0" 
+        <CircleIcon
+          size={16}
+          weight="fill"
+          className="text-primary-foreground shrink-0"
         />
       )}
     </button>
   )
-} 
+}
