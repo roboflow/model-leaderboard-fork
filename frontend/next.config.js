@@ -4,9 +4,9 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
-  }
-  // Note: distDir temporarily disabled for development
-  // distDir: process.env.NODE_ENV === 'production' ? '../docs' : '.next'
+  },
+  // Build to docs directory for GitHub Pages
+  distDir: '../docs'
 }
 
 module.exports = nextConfig 
