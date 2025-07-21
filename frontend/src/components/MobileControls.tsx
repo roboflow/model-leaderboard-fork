@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Settings, Filter } from "lucide-react"
-import { FadersIcon, FileTextIcon, CircuitryIcon } from "@phosphor-icons/react"
+import { FadersIcon, FileTextIcon, CircuitryIcon, DatabaseIcon } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { useIsMobile } from "@/hooks/useMobile"
 import {
@@ -34,6 +34,13 @@ interface MobileControlsProps {
   onArchitectureToggle: (architecture: string) => void
   onClearAllArchitectures: () => void
   onSelectAllArchitectures: () => void
+
+  // Pretrain datasets filter props
+  availablePretrainDatasets: string[]
+  selectedPretrainDatasets: Set<string>
+  onPretrainDatasetToggle: (dataset: string) => void
+  onClearAllPretrainDatasets: () => void
+  onSelectAllPretrainDatasets: () => void
 
   // Parameter filter props
   minParams: number
@@ -67,6 +74,11 @@ export function MobileControls({
   onArchitectureToggle,
   onClearAllArchitectures,
   onSelectAllArchitectures,
+  availablePretrainDatasets,
+  selectedPretrainDatasets,
+  onPretrainDatasetToggle,
+  onClearAllPretrainDatasets,
+  onSelectAllPretrainDatasets,
   minParams,
   maxParams,
   parameterRange,
@@ -139,20 +151,38 @@ export function MobileControls({
                     />
                   </div>
                   <Separator />
+                  
+
                   <div>
-                    <label className="text-sm font-medium mb-2 block">License</label>
+                    <label className="text-sm font-medium mb-2 block">Pretrained On</label>
                     <FilterDropdown
-                      icon={FileTextIcon}
-                      title="License"
-                      label="Filter by License"
-                      availableItems={availableLicenses}
-                      selectedItems={selectedLicenses}
-                      onItemToggle={onLicenseToggle}
-                      onClearAll={onClearAllLicenses}
-                      onSelectAll={onSelectAllLicenses}
+                      icon={DatabaseIcon}
+                      title="Pretrain Datasets"
+                      label="Filter by Pretrain Datasets"
+                      availableItems={availablePretrainDatasets}
+                      selectedItems={selectedPretrainDatasets}
+                      onItemToggle={onPretrainDatasetToggle}
+                      onClearAll={onClearAllPretrainDatasets}
+                      onSelectAll={onSelectAllPretrainDatasets}
                     />
                   </div>
                 </div>
+                <Separator />
+
+              <div>
+                  <label className="text-sm font-medium mb-2 block">License</label>
+                  <FilterDropdown
+                    icon={FileTextIcon}
+                    title="License"
+                    label="Filter by License"
+                    availableItems={availableLicenses}
+                    selectedItems={selectedLicenses}
+                    onItemToggle={onLicenseToggle}
+                    onClearAll={onClearAllLicenses}
+                    onSelectAll={onSelectAllLicenses}
+                  />
+                </div>
+
                 <Separator />
                 <div>
                   <label className="text-sm font-medium mb-2 block">Dataset</label>

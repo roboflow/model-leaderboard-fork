@@ -20,6 +20,7 @@ interface ModelResult {
     github_url: string
     paper_url: string
     param_count: number
+    pretrain_datasets: string[]
     run_parameters: {
       // YOLO-style parameters
       imgsz?: number

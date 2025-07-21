@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator"
 import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
 import { FilterDropdown } from "@/components/FilterDropdown"
-import { CircuitryIcon, FileTextIcon } from "@phosphor-icons/react"
+import { CircuitryIcon, FileTextIcon, DatabaseIcon } from "@phosphor-icons/react"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -31,6 +31,7 @@ interface ModelResult {
     github_url: string
     paper_url: string
     param_count: number
+    pretrain_datasets: string[]
     run_parameters: {
       // YOLO-style parameters
       imgsz?: number
@@ -370,6 +371,25 @@ export default function Home() {
     setSelectedArchitectures(new Set(availableArchitectures))
   }
 
+  // Pretrain datasets filter handlers
+  const handlePretrainDatasetToggle = (dataset: string) => {
+    const newSelectedDatasets = new Set(selectedPretrainDatasets)
+    if (newSelectedDatasets.has(dataset)) {
+      newSelectedDatasets.delete(dataset)
+    } else {
+      newSelectedDatasets.add(dataset)
+    }
+    setSelectedPretrainDatasets(newSelectedDatasets)
+  }
+
+  const handleClearAllPretrainDatasets = () => {
+    setSelectedPretrainDatasets(new Set())
+  }
+
+  const handleSelectAllPretrainDatasets = () => {
+    setSelectedPretrainDatasets(new Set(availablePretrainDatasets))
+  }
+
   // Parameter filter handlers
   const handleParameterRangeChange = (range: [number, number]) => {
     setParameterRange(range)
@@ -412,8 +432,22 @@ export default function Home() {
     return Array.from(architectures).sort()
   }, [])
 
+  // Extract unique pretrain datasets
+  const availablePretrainDatasets = useMemo(() => {
+    const datasets = new Set<string>()
+    aggregateResults.forEach(result => {
+      if (result.metadata.pretrain_datasets) {
+        result.metadata.pretrain_datasets.forEach(dataset => {
+          datasets.add(dataset)
+        })
+      }
+    })
+    return Array.from(datasets).sort()
+  }, [])
+
   const [selectedLicenses, setSelectedLicenses] = useState<Set<string>>(new Set())
   const [selectedArchitectures, setSelectedArchitectures] = useState<Set<string>>(new Set())
+  const [selectedPretrainDatasets, setSelectedPretrainDatasets] = useState<Set<string>>(new Set())
 
   // Available datasets (currently only COCO 2017)
   const availableDatasets = useMemo(() => ["COCO 2017"], [])
@@ -474,6 +508,16 @@ export default function Home() {
       )
     }
 
+    // Apply pretrain datasets filter
+    if (selectedPretrainDatasets.size > 0) {
+      filtered = filtered.filter(result => {
+        // Check if any of the selected datasets is in the model's pretrain_datasets array
+        return result.metadata.pretrain_datasets?.some(dataset => 
+          selectedPretrainDatasets.has(dataset)
+        )
+      })
+    }
+
     // Apply parameter range filter
     const [minParamsMillion, maxParamsMillion] = parameterRange
     filtered = filtered.filter(result => {
@@ -491,7 +535,7 @@ export default function Home() {
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
-  }, [search, selectedLicenses, selectedArchitectures, parameterRange, sortColumn, sortDirection])
+  }, [search, selectedLicenses, selectedArchitectures, selectedPretrainDatasets, parameterRange, sortColumn, sortDirection])
 
   // Calculate value range for horizontal bars in sorted column
   const columnRange = useMemo(() => {
@@ -560,6 +604,25 @@ export default function Home() {
                   onSelectAll={handleSelectAllArchitectures}
                 />
                 
+                <ParameterFilter
+                  minParams={minParams}
+                  maxParams={maxParams}
+                  selectedRange={parameterRange}
+                  onRangeChange={handleParameterRangeChange}
+                  onReset={handleParameterReset}
+                />
+
+                <FilterDropdown
+                  icon={DatabaseIcon}
+                  title="Pretrain on"
+                  label="Filter by Pretrain Datasets"
+                  availableItems={availablePretrainDatasets}
+                  selectedItems={selectedPretrainDatasets}
+                  onItemToggle={handlePretrainDatasetToggle}
+                  onClearAll={handleClearAllPretrainDatasets}
+                  onSelectAll={handleSelectAllPretrainDatasets}
+                />
+
                 <FilterDropdown
                   icon={FileTextIcon}
                   title="License"
@@ -569,14 +632,6 @@ export default function Home() {
                   onItemToggle={handleLicenseToggle}
                   onClearAll={handleClearAllLicenses}
                   onSelectAll={handleSelectAllLicenses}
-                />
-                
-                <ParameterFilter
-                  minParams={minParams}
-                  maxParams={maxParams}
-                  selectedRange={parameterRange}
-                  onRangeChange={handleParameterRangeChange}
-                  onReset={handleParameterReset}
                 />
 
                 <DatasetFilter
@@ -609,6 +664,11 @@ export default function Home() {
                 onArchitectureToggle={handleArchitectureToggle}
                 onClearAllArchitectures={handleClearAllArchitectures}
                 onSelectAllArchitectures={handleSelectAllArchitectures}
+                availablePretrainDatasets={availablePretrainDatasets}
+                selectedPretrainDatasets={selectedPretrainDatasets}
+                onPretrainDatasetToggle={handlePretrainDatasetToggle}
+                onClearAllPretrainDatasets={handleClearAllPretrainDatasets}
+                onSelectAllPretrainDatasets={handleSelectAllPretrainDatasets}
                 minParams={minParams}
                 maxParams={maxParams}
                 parameterRange={parameterRange}
@@ -697,12 +757,13 @@ export default function Home() {
                   </div>
                   
                   {/* Active Filters Indicator */}
-                  {(search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
+                  {(search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>Filtered by:</span>
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
                       {selectedLicenses.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
                       {selectedArchitectures.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
+                      {selectedPretrainDatasets.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrain Datasets</span>}
                       {(parameterRange[0] !== minParams || parameterRange[1] !== maxParams) && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
                     </div>
                   )}
