@@ -18,7 +18,7 @@ import { ArrowSquareOutIcon } from "@phosphor-icons/react"
 import { Separator } from "@/components/ui/separator"
 import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
-import { FilterDropdown } from "@/components/ui/filter-dropdown"
+import { FilterDropdown } from "@/components/FilterDropdown"
 import { CircuitryIcon, FileTextIcon } from "@phosphor-icons/react"
 
 type SortDirection = "asc" | "desc" | null

@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator"
 import { ParameterFilter } from "@/components/ParameterFilter"
 import { DatasetFilter } from "@/components/DatasetFilter"
 import { ColumnToggle } from "@/components/ColumnToggle"
-import { FilterDropdown } from "@/components/ui/filter-dropdown"
+import { FilterDropdown } from "@/components/FilterDropdown"
 
 interface MobileControlsProps {
   // License filter props
