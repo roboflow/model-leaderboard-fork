@@ -487,7 +487,7 @@ export default function Home() {
 
   // Handle loading state
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 150)
+    const timer = setTimeout(() => setIsLoading(false), 100)
     return () => clearTimeout(timer)
   }, [])
 
