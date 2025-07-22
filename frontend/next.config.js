@@ -7,5 +7,6 @@ const nextConfig = {
   },
   basePath: '/model-leaderboard-fork',
   assetPrefix: '/model-leaderboard-fork',
+}
 
 module.exports = nextConfig
