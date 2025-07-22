@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
 import { ParameterFilter } from "@/components/ParameterFilter"
-import { DatasetFilter } from "@/components/BenchmarkFilter"
+import { BenchmarkFilter } from "@/components/BenchmarkFilter"
 import { ColumnToggle } from "@/components/ColumnToggle"
 import { FilterDropdown } from "@/components/FilterDropdown"
 
@@ -186,7 +186,7 @@ export function MobileControls({
                 <Separator />
                 <div>
                   <label className="text-sm font-medium mb-2 block">Dataset</label>
-                  <DatasetFilter
+                  <BenchmarkFilter
                     availableDatasets={availableDatasets}
                     selectedDataset={selectedDataset}
                     onDatasetChange={onDatasetChange}
