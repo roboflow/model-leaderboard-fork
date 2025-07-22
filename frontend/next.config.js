@@ -5,9 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // Configure for GitHub Pages deployment on fork
-  basePath: '/model-leaderboard-fork', // Replace with your actual fork name
-  assetPrefix: '/model-leaderboard-fork', // Replace with your actual fork name
-}
+  basePath: '/model-leaderboard-fork',
+  assetPrefix: '/model-leaderboard-fork',
 
 module.exports = nextConfig
