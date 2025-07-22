@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "build:docs": "rm -rf ../docs/* && next build && cp -r out/* ../docs/",
+        "build:docs": "next build && rm -rf ../docs/* && cp -r out/* ../docs/",
         "start": "next start",
         "lint": "next lint"
     },
