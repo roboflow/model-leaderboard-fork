@@ -46,9 +46,9 @@ export default function FAQPage() {
         <div className="container-narrow space-y-6">
           <div className="space-y-6">
             <h1 className="text-4xl">Frequently Asked Questions</h1>
-            <div className="prose prose-sm">
+            <h2 className="prose prose-sm">
               Get answers to common questions about benchmarks, datasets, metrics, and how the leaderboard works.
-            </div>
+            </h2>
           </div>
         </div>
       </section>

@@ -22,7 +22,7 @@ export function Header() {
   return (
     <header className="py-4">
       <div className="container-base mx-auto flex justify-between items-center">
-        <Link href="https://roboflow.com" className="flex items-center">
+        <Link href="https://roboflow.com" className="flex items-center" aria-label="Visit Roboflow website">
           <RoboflowLogo
             className="text-violet-700 dark:text-white h-8 w-auto"
             width={120}
