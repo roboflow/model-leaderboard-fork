@@ -95,7 +95,7 @@ const allColumns: Column[] = [
   {
     key: "metadata.model",
     label: "Model",
-    width: "w-24",
+    width: "w-50",
     group: 'Basic',
     defaultVisible: true,
     tooltip: "Name of the computer vision model"
@@ -103,7 +103,7 @@ const allColumns: Column[] = [
   {
     key: "metadata.param_count",
     label: "Parameters (M)",
-    width: "w-10",
+    width: "w-48",
     group: 'Basic',
     defaultVisible: true,
     tooltip: "Total number of trainable parameters in millions"
@@ -295,11 +295,28 @@ function getSearchableText(result: ModelResult): string {
 
 
 
+function TableSkeleton({ columns }: { columns: Column[] }) {
+  return (
+    <>
+      {Array.from({ length: 13 }).map((_, i) => (
+        <TableRow key={i}>
+          {columns.map((column) => (
+            <TableCell key={column.key} className={`${column.width} px-4 h-[45px]`}>
+              <div className="h-4 bg-muted/50 animate-pulse rounded w-16"></div>
+            </TableCell>
+          ))}
+        </TableRow>
+      ))}
+    </>
+  )
+}
+
 export default function Home() {
   const [search, setSearch] = useState("")
   const [sortColumn, setSortColumn] = useState<string>("map50_95")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [visibleColumns, setVisibleColumns] = useState<Set<string>>(getDefaultVisibleColumns())
+  const [isLoading, setIsLoading] = useState(true)
 
   const [parameterRange, setParameterRange] = useState<[number, number]>([0, 100])
   const [selectedDataset, setSelectedDataset] = useState<string>("COCO 2017")
@@ -467,6 +484,12 @@ export default function Home() {
   useEffect(() => {
     setParameterRange([minParams, maxParams])
   }, [minParams, maxParams])
+
+  // Handle loading state
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 150)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleSort = (key: string) => {
     if (sortColumn === key) {
@@ -708,7 +731,9 @@ export default function Home() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredAndSortedResults.length === 0 ? (
+                  {isLoading ? (
+                    <TableSkeleton columns={columns} />
+                  ) : filteredAndSortedResults.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={columns.length} className="text-center py-8 text-muted-foreground">
                         {search ? (
@@ -717,7 +742,7 @@ export default function Home() {
                             <Button
                               variant="link"
                               onClick={() => setSearch("")}
-                              className="mt-2"
+                              className="mt-2 text-primary-foreground"
                             >
                               Clear search
                             </Button>
@@ -747,12 +772,18 @@ export default function Home() {
               <div className="w-full mt-4 flex flex-wrap items-start gap-2 justify-between">
                 <div className="space-y-2">
                   <div className="text-sm text-muted-foreground">
-                    Displaying <span className="font-medium text-foreground">{filteredAndSortedResults.length}</span> out of{" "}
-                    <span className="font-medium text-foreground">{aggregateResults.length}</span> models
+                    {isLoading ? (
+                      <div className="h-4 bg-muted/50 animate-pulse rounded w-40"></div>
+                    ) : (
+                      <>
+                        Displaying <span className="font-medium text-foreground">{filteredAndSortedResults.length}</span> out of{" "}
+                        <span className="font-medium text-foreground">{aggregateResults.length}</span> models
+                      </>
+                    )}
                   </div>
 
                   {/* Active Filters Indicator */}
-                  {(search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
+                  {!isLoading && (search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>Filtered by:</span>
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
