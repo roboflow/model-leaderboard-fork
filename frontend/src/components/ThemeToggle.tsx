@@ -25,7 +25,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <div className="space-y-2">
-        <div className="flex gap-0.25 bg-muted p-0.5 rounded-full">
+        <div className="flex gap-0.5 bg-foreground/6 p-0.5 rounded-full">
           {themes.map(({ value, label, icon: Icon }) => (
             <div key={value} className="flex items-center">
               <div className="flex items-center p-2 rounded-full text-sm text-muted-foreground">
