@@ -49,7 +49,7 @@ export function ThemeToggle() {
         {themes.map(({ value, label, icon: Icon }) => (
           <div key={value} className="flex items-center">
             <RadioGroupItem value={value} id={value} className="peer sr-only" />
-            <label htmlFor={value} className="flex items-center p-2 rounded-full cursor-pointer text-sm text-foreground/60 peer-data-[state=checked]:bg-background/90 peer-data-[state=checked]:text-foreground">
+            <label htmlFor={value} className="flex items-center p-2 rounded-full cursor-pointer text-sm text-foreground/60 peer-data-[state=checked]:bg-foreground/10 peer-data-[state=checked]:text-foreground">
               <Icon size={16} weight="bold" />
               <span className="sr-only">{label}</span>
             </label>
