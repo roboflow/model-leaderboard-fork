@@ -16,27 +16,23 @@ npm run dev
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Adding shadcn/ui Components
-
-To add new shadcn/ui components:
-
-```bash
-npx shadcn-ui@latest add [component-name]
-```
-
-For example:
-```bash
-npx shadcn-ui@latest add table
-npx shadcn-ui@latest add dialog
-```
-
 ## Building for Production
+
+### For GitHub Pages
+
+```bash
+npm run build:docs
+```
+
+This will create static files in the `out/` directory and copy them to the `../docs/` directory for GitHub Pages deployment. It also creates a `.nojekyll` file to ensure proper deployment.
+
+### For Regular Production Build
 
 ```bash
 npm run build
 ```
 
-This will create static files in the `out/` directory that can replace the current static site.
+This creates static files in the `out/` directory that can be used for other deployment methods.
 
 ## Project Structure
 
