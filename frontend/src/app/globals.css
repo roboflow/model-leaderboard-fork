@@ -187,10 +187,10 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
   }
 
   /* Hide focus ring unless keyboard navigating */
-:focus {
-  outline: none;
-}
-:focus-visible {
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
