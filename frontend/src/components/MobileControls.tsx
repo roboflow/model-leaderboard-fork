@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
 import { ParameterFilter } from "@/components/ParameterFilter"
-import { DatasetFilter } from "@/components/DatasetFilter"
+import { DatasetFilter } from "@/components/BenchmarkFilter"
 import { ColumnToggle } from "@/components/ColumnToggle"
 import { FilterDropdown } from "@/components/FilterDropdown"
 

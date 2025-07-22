@@ -13,7 +13,7 @@ import { useState, useMemo, useEffect } from "react"
 
 import aggregateResults from "@/data/aggregate_results.json"
 import { ParameterFilter } from "@/components/ParameterFilter"
-import { DatasetFilter } from "@/components/DatasetFilter"
+import { BenchmarkFilter } from "@/components/BenchmarkFilter"
 import { ArrowSquareOutIcon } from "@phosphor-icons/react"
 import { Separator } from "@/components/ui/separator"
 import { HeartIcon } from "@phosphor-icons/react"
@@ -652,7 +652,7 @@ export default function Home() {
                   onSelectAll={handleSelectAllLicenses}
                 />
 
-                <DatasetFilter
+                <BenchmarkFilter
                   availableDatasets={availableDatasets}
                   selectedDataset={selectedDataset}
                   onDatasetChange={handleDatasetChange}

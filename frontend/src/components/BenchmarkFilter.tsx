@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Database } from "lucide-react"
+import { GaugeIcon } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,17 +13,17 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { MobileRadioItem } from "@/components/MobileRadioItem"
 
-interface DatasetFilterProps {
+interface BenchmarkFilterProps {
   availableDatasets: string[]
   selectedDataset: string
   onDatasetChange: (dataset: string) => void
 }
 
-export function DatasetFilter({
+export function BenchmarkFilter({
   availableDatasets,
   selectedDataset,
   onDatasetChange,
-}: DatasetFilterProps) {
+}: BenchmarkFilterProps) {
   return (
     <>
       {/* Desktop Version */}
@@ -31,8 +31,8 @@ export function DatasetFilter({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="flex items-center gap-2">
-              <Database className="h-4 w-4" />
-              Dataset
+              <GaugeIcon size={16} />
+              Benchmark
               <span className="tag-primary">
                 {selectedDataset}
               </span>
