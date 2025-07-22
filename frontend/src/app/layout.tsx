@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   description: 'Benchmarks showing the performance of popular computer vision models across metrics like mAP and F1 score.',
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.png', type: 'image/png', sizes: '32x32' },
+      { url: './favicon.ico', sizes: 'any' },
+      { url: './favicon.svg', type: 'image/svg+xml' },
+      { url: './favicon.png', type: 'image/png', sizes: '32x32' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: './apple-touch-icon.png', sizes: '180x180' }],
   },
   openGraph: {
     title: 'Computer Vision Model Leaderboard',
@@ -69,10 +69,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="./favicon.ico" sizes="any" />
+        <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="./favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
       </head>
       <body className={`flex flex-col min-h-full ${inter.className}`}>
         <ThemeProvider
