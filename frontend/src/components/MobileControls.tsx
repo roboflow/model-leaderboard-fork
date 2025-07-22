@@ -157,8 +157,8 @@ export function MobileControls({
                     <label className="text-sm font-medium mb-2 block">Pretrained On</label>
                     <FilterDropdown
                       icon={DatabaseIcon}
-                      title="Pretrain Datasets"
-                      label="Filter by Pretrain Datasets"
+                      title="Pretrained Datasets"
+                      label="Filter by Pretrained Datasets"
                       availableItems={availablePretrainDatasets}
                       selectedItems={selectedPretrainDatasets}
                       onItemToggle={onPretrainDatasetToggle}

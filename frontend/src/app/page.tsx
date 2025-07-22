@@ -306,18 +306,13 @@ export default function Home() {
 
   // Column toggle handlers
   const handleToggleColumn = (columnKey: string) => {
-    console.log("🔄 Toggle column clicked:", columnKey)
-    console.log("Current visible:", Array.from(visibleColumns))
 
     const newVisibleColumns = new Set(visibleColumns)
     if (newVisibleColumns.has(columnKey)) {
-      console.log("   Removing:", columnKey)
       newVisibleColumns.delete(columnKey)
     } else {
-      console.log("   Adding:", columnKey)
       newVisibleColumns.add(columnKey)
     }
-    console.log("New visible:", Array.from(newVisibleColumns))
     setVisibleColumns(newVisibleColumns)
   }
 
@@ -614,8 +609,8 @@ export default function Home() {
 
                 <FilterDropdown
                   icon={DatabaseIcon}
-                  title="Pretrain on"
-                  label="Filter by Pretrain Datasets"
+                  title="Pretrained on"
+                  label="Filter by Pretrained Datasets"
                   availableItems={availablePretrainDatasets}
                   selectedItems={selectedPretrainDatasets}
                   onItemToggle={handlePretrainDatasetToggle}
