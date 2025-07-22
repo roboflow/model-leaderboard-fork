@@ -13,9 +13,11 @@ import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { ListIcon } from "@phosphor-icons/react"
 import { Separator } from "@/components/ui/separator"
+import { usePathname } from "next/navigation";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname();
 
   return (
     <header className="py-4">
@@ -31,23 +33,21 @@ export function Header() {
         <div className="hidden sm:flex items-center gap-2 ">
           <NavigationMenu>
             <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink className="hover:bg-transparent focus:bg-transparent" asChild>
-                  <Link href="/">Leaderboard</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink className="hover:bg-transparent focus:bg-transparent" asChild>
-                  <Link href="/methodology">Methodology</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink className="hover:bg-transparent focus:bg-transparent" asChild>
-                  <Link href="/faq">FAQ</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem >
-                <NavigationMenuLink className="hover:bg-transparent focus:bg-transparent" asChild>
+              {[
+                { href: "/", label: "Leaderboard" },
+                { href: "/methodology/", label: "Methodology" },
+                { href: "/faq/", label: "FAQ" },
+              ].map(({ href, label }) => (
+                <NavigationMenuItem key={href}>
+                  <NavigationMenuLink 
+                  data-active={pathname === href}
+                  className="bg-transparent focus-visible:bg-transparent hover:bg-transparent hover:text-primary-foreground data-[active=true]:bg-transparent data-[active=true]:focus:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:text-primary-foreground focus:bg-transparent" asChild>
+                    <Link href={href}>{label}</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+               <NavigationMenuItem >
+                <NavigationMenuLink className="hover:bg-transparent hover:text-primary-foreground focus:bg-transparent" asChild>
                   <Link href="https://github.com/roboflow/model-leaderboard" target="_blank">
                     <SiGithub size={16} className="text-foreground" />
                   </Link>
@@ -63,11 +63,11 @@ export function Header() {
             <PopoverTrigger><ListIcon size={24} /></PopoverTrigger>
             <PopoverContent className="w-screen md:hidden rounded-none border-none bg-background/10 backdrop-blur-lg text-foreground h-screen px-4 sm:px-6 lg:px-8 py-8">
               <div className="flex flex-col gap-0.25">
-                <Link className="flex py-4 px-1.5" href="/" onClick={() => setIsOpen(false)}>Leaderboard</Link>
+                <Link className="flex py-4 px-1.5 nav-menu-link" href="/" onClick={() => setIsOpen(false)}>Leaderboard</Link>
                 <Separator />
-                <Link className="flex py-4 px-1.5" href="/methodology" onClick={() => setIsOpen(false)}>Methodology</Link>
+                <Link className="flex py-4 px-1.5 nav-menu-link" href="/methodology" onClick={() => setIsOpen(false)}>Methodology</Link>
                 <Separator />
-                <Link className="flex py-4 px-1.5" href="/faq" onClick={() => setIsOpen(false)}>FAQ</Link>
+                <Link className="flex py-4 px-1.5 nav-menu-link" href="/faq" onClick={() => setIsOpen(false)}>FAQ</Link>
                 <Separator />
                 <div className="flex justify-between items-center py-4 px-1.5">
                   <div className="text-sm text-muted-foreground">Appearance</div>

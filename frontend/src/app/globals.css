@@ -185,6 +185,15 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide focus ring unless keyboard navigating */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
 }
 
 @layer utilities {
@@ -230,6 +239,10 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
 
   .link-primary {
     @apply text-primary-foreground hover:underline;
+  }
+
+  .nav-menu-link {
+    @apply hover:bg-transparent hover:text-primary-foreground focus:bg-transparent;
   }
 
 

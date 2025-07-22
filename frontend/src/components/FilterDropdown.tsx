@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -38,6 +38,7 @@ export function FilterDropdown({
   maxDisplayItems = 2,
   className,
 }: FilterDropdownProps) {
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const totalCount = availableItems.length
   const activeCount = selectedItems.size
   const isFiltered = activeCount > 0 && activeCount < totalCount
@@ -47,7 +48,12 @@ export function FilterDropdown({
       {/* Desktop Version */}
       <div className="hidden sm:block">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger
+            ref={triggerRef}
+            className="focus-visible:outline-none"
+            onMouseDown={(e) => e.preventDefault()}
+            asChild
+          >
             <Button variant="outline" size="sm" className={`flex items-center gap-2 ${className}`}>
               <Icon size={16} />
               {title}
@@ -70,7 +76,14 @@ export function FilterDropdown({
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end">
+          <DropdownMenuContent
+              className="w-56"
+            align="end"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              triggerRef.current?.click();
+            }}
+          >
             <DropdownMenuLabel>{label}</DropdownMenuLabel>
             <DropdownMenuSeparator />
 
