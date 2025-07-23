@@ -23,72 +23,42 @@ import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 import { CpuIcon, GaugeIcon } from "@phosphor-icons/react"
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { formatters } from "@/lib/formatters"
+import { useSetFilter } from "@/hooks/useSetFilter"
+import { useColumnManager } from "@/hooks/useColumnManager"
 
 interface MobileControlsProps {
-  // License filter props
-  availableLicenses: string[]
-  selectedLicenses: Set<string>
-  onLicenseToggle: (license: string) => void
-  onClearAllLicenses: () => void
-  onSelectAllLicenses: () => void
-
-  // Architecture filter props
-  availableArchitectures: string[]
-  selectedArchitectures: Set<string>
-  onArchitectureToggle: (architecture: string) => void
-  onClearAllArchitectures: () => void
-  onSelectAllArchitectures: () => void
-
-  // Pretrain datasets filter props
-  availablePretrainDatasets: string[]
-  selectedPretrainDatasets: Set<string>
-  onPretrainDatasetToggle: (dataset: string) => void
-  onClearAllPretrainDatasets: () => void
-  onSelectAllPretrainDatasets: () => void
-
-  // Parameter filter props
+  // Filter objects
+  licenseFilter: ReturnType<typeof useSetFilter>
+  architectureFilter: ReturnType<typeof useSetFilter>
+  pretrainDatasetFilter: ReturnType<typeof useSetFilter>
   parameterFilter: ReturnType<typeof useRangeFilter>
-
-  // Dataset filter props
+  
+  // Available data
+  availableLicenses: string[]
+  availableArchitectures: string[]
+  availablePretrainDatasets: string[]
+  
+  // Dataset selection
   availableDatasets: string[]
   selectedDataset: string
   onDatasetChange: (dataset: string) => void
-
-  // Column toggle props
-  columns: { key: string; label: string; group: string }[]
-  visibleColumns: Set<string>
-  onToggleColumn: (columnKey: string) => void
-  onShowAllColumns: () => void
-  onHideAllColumns: () => void
-  onResetToDefaults: () => void
+  
+  // Column management
+  columnManager: ReturnType<typeof useColumnManager>
 }
 
 export function MobileControls({
-  availableLicenses,
-  selectedLicenses,
-  onLicenseToggle,
-  onClearAllLicenses,
-  onSelectAllLicenses,
-  availableArchitectures,
-  selectedArchitectures,
-  onArchitectureToggle,
-  onClearAllArchitectures,
-  onSelectAllArchitectures,
-  availablePretrainDatasets,
-  selectedPretrainDatasets,
-  onPretrainDatasetToggle,
-  onClearAllPretrainDatasets,
-  onSelectAllPretrainDatasets,
+  licenseFilter,
+  architectureFilter,
+  pretrainDatasetFilter,
   parameterFilter,
+  availableLicenses,
+  availableArchitectures,
+  availablePretrainDatasets,
   availableDatasets,
   selectedDataset,
   onDatasetChange,
-  columns,
-  visibleColumns,
-  onToggleColumn,
-  onShowAllColumns,
-  onHideAllColumns,
-  onResetToDefaults,
+  columnManager,
 }: MobileControlsProps) {
   const isMobile = useIsMobile();
 
@@ -128,10 +98,10 @@ export function MobileControls({
                     title="Architecture"
                     label="Filter by Architecture"
                     availableItems={availableArchitectures}
-                    selectedItems={selectedArchitectures}
-                    onItemToggle={onArchitectureToggle}
-                    onClearAll={onClearAllArchitectures}
-                    onSelectAll={onSelectAllArchitectures}
+                    selectedItems={architectureFilter.selectedItems}
+                    onItemToggle={architectureFilter.toggleItem}
+                    onClearAll={architectureFilter.clearAll}
+                    onSelectAll={architectureFilter.selectAll}
                   />
 
                   <Separator />
@@ -157,10 +127,10 @@ export function MobileControls({
                       title="Pretrained Datasets"
                       label="Filter by Pretrained Datasets"
                       availableItems={availablePretrainDatasets}
-                      selectedItems={selectedPretrainDatasets}
-                      onItemToggle={onPretrainDatasetToggle}
-                      onClearAll={onClearAllPretrainDatasets}
-                      onSelectAll={onSelectAllPretrainDatasets}
+                      selectedItems={pretrainDatasetFilter.selectedItems}
+                      onItemToggle={pretrainDatasetFilter.toggleItem}
+                      onClearAll={pretrainDatasetFilter.clearAll}
+                      onSelectAll={pretrainDatasetFilter.selectAll}
                     />
                   </div>
                 </div>
@@ -173,10 +143,10 @@ export function MobileControls({
                     title="License"
                     label="Filter by License"
                     availableItems={availableLicenses}
-                    selectedItems={selectedLicenses}
-                    onItemToggle={onLicenseToggle}
-                    onClearAll={onClearAllLicenses}
-                    onSelectAll={onSelectAllLicenses}
+                    selectedItems={licenseFilter.selectedItems}
+                    onItemToggle={licenseFilter.toggleItem}
+                    onClearAll={licenseFilter.clearAll}
+                    onSelectAll={licenseFilter.selectAll}
                   />
                 </div>
 
@@ -205,12 +175,12 @@ export function MobileControls({
               </div>
 
               <ColumnToggle
-                columns={columns}
-                visibleColumns={visibleColumns}
-                onToggleColumn={onToggleColumn}
-                onShowAll={onShowAllColumns}
-                onHideAll={onHideAllColumns}
-                onResetToDefaults={onResetToDefaults}
+                columns={columnManager.allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
+                visibleColumns={columnManager.visibleColumns}
+                onToggleColumn={columnManager.toggleColumn}
+                onShowAll={columnManager.showAllColumns}
+                onHideAll={columnManager.hideAllColumns}
+                onResetToDefaults={columnManager.resetToDefaults}
               />
             </div>
 

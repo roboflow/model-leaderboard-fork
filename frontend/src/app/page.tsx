@@ -1,30 +1,38 @@
 "use client"
 
+// UI Components
 import { Table, TableBody, TableHeader, TableCell, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import { SearchInput } from "@/components/SearchInput"
-import { ColumnToggle } from "@/components/ColumnToggle"
-import { SortableTableHeader } from "@/components/SortableTableHeader"
-import { ModelTableRow } from "@/components/ModelTableRow"
-import { useState, useMemo, useEffect } from "react"
+import { Separator } from "@/components/ui/separator"
+import Link from "next/link"
 
+// Custom Hooks
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { useUniqueValues } from "@/hooks/useUniqueValues"
 import { useSetFilter } from "@/hooks/useSetFilter"
 import { useColumnManager } from "@/hooks/useColumnManager"
+
+// Filter Components
+import { SearchInput } from "@/components/SearchInput"
+import { ColumnToggle } from "@/components/ColumnToggle"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
-
-import aggregateResults from "@/data/aggregate_results.json"
-import { Separator } from "@/components/ui/separator"
-import { MobileControls } from "@/components/MobileControls"
 import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
-import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon, ArrowSquareOutIcon, HeartIcon } from "@phosphor-icons/react"
-import { formatters } from "@/lib/formatters"
+import { MobileControls } from "@/components/MobileControls"
+
+// Table Components
+import { SortableTableHeader } from "@/components/SortableTableHeader"
+import { ModelTableRow } from "@/components/ModelTableRow"
 import { SkeletonTable } from "@/components/SkeletonTable"
+
+// Data & Utils
+import aggregateResults from "@/data/aggregate_results.json"
+import { formatters } from "@/lib/formatters"
+import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon, ArrowSquareOutIcon, HeartIcon } from "@phosphor-icons/react"
+
+import { useState, useMemo, useEffect } from "react"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -134,66 +142,44 @@ function getSearchableText(result: ModelResult): string {
 
 
 export default function Home() {
+  // ============================================================================
+  // STATE
+  // ============================================================================
   const [search, setSearch] = useState("")
   const [sortColumn, setSortColumn] = useState<string>("map50_95")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedDataset, setSelectedDataset] = useState("COCO 2017")
 
-  // Extract unique values using the generic hook
-  const availableLicenses = useUniqueValues(
-    aggregateResults, 
-    (result) => result.metadata.license
-  )
-
-  const availableArchitectures = useUniqueValues(
-    aggregateResults,
-    (result) => result.metadata.architecture
-  )
-
-  const availablePretrainDatasets = useUniqueValues(
-    aggregateResults,
-    (result) => result.metadata.pretrain_datasets
-  )
-
-  // Available datasets (currently only COCO 2017)
+  // ============================================================================
+  // DATA EXTRACTION & FILTERS
+  // ============================================================================
+  // Extract unique values for filter dropdowns
+  const availableLicenses = useUniqueValues(aggregateResults, (result) => result.metadata.license)
+  const availableArchitectures = useUniqueValues(aggregateResults, (result) => result.metadata.architecture)
+  const availablePretrainDatasets = useUniqueValues(aggregateResults, (result) => result.metadata.pretrain_datasets)
   const availableDatasets = useMemo(() => ["COCO 2017"], [])
 
-  // Dataset filter handler
-  const [selectedDataset, setSelectedDataset] = useState("COCO 2017")
-  const handleDatasetChange = (dataset: string) => {
-    setSelectedDataset(dataset)
-  }
-
-  // Use generic set filter hooks
+  // Initialize filter hooks
   const licenseFilter = useSetFilter(availableLicenses)
   const architectureFilter = useSetFilter(availableArchitectures)
   const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets)
 
-  // Extract parameter range (in millions)
+  // Calculate parameter range for slider
   const { minParams, maxParams } = useMemo(() => {
-    if (aggregateResults.length === 0) {
-      return { minParams: 0, maxParams: 100 }
-    }
-    
+    if (aggregateResults.length === 0) return { minParams: 0, maxParams: 100 }
     const paramCounts = aggregateResults.map(result => result.metadata.param_count / 1_000_000)
-    return {
-      minParams: Math.min(...paramCounts),
-      maxParams: Math.max(...paramCounts)
-    }
+    return { minParams: Math.min(...paramCounts), maxParams: Math.max(...paramCounts) }
   }, [])
 
-  // Initialize parameter filter (after minParams/maxParams are calculated)
   const parameterFilter = useRangeFilter(minParams, maxParams)
-
-  // Use centralized column management
   const columnManager = useColumnManager()
 
-  // Handle loading state
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 100)
-    return () => clearTimeout(timer)
-  }, [])
-
+  // ============================================================================
+  // HANDLERS
+  // ============================================================================
+  const handleDatasetChange = (dataset: string) => setSelectedDataset(dataset)
+  
   const handleSort = (key: string) => {
     if (sortColumn === key) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc")
@@ -203,85 +189,84 @@ export default function Home() {
     }
   }
 
-  // Filter and sort results
+  // ============================================================================
+  // EFFECTS
+  // ============================================================================
+  // Loading simulation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 100)
+    return () => clearTimeout(timer)
+  }, [])
+
+  // ============================================================================
+  // COMPUTED VALUES
+  // ============================================================================
+  // Apply all filters and sorting
   const filteredAndSortedResults = useMemo(() => {
     let filtered = aggregateResults
 
-    // Apply search filter
+    // Search filter
     if (search.trim()) {
       const searchLower = search.toLowerCase().trim()
-      filtered = filtered.filter(result =>
-        getSearchableText(result).includes(searchLower)
-      )
+      filtered = filtered.filter(result => getSearchableText(result).includes(searchLower))
     }
 
-    // Apply license filter
+    // License filter
     if (licenseFilter.selectedItems.size > 0) {
-      filtered = filtered.filter(result =>
-        licenseFilter.selectedItems.has(result.metadata.license)
-      )
+      filtered = filtered.filter(result => licenseFilter.selectedItems.has(result.metadata.license))
     }
 
-    // Apply architecture filter
+    // Architecture filter
     if (architectureFilter.selectedItems.size > 0) {
-      filtered = filtered.filter(result =>
-        architectureFilter.selectedItems.has(result.metadata.architecture)
-      )
+      filtered = filtered.filter(result => architectureFilter.selectedItems.has(result.metadata.architecture))
     }
 
-    // Apply pretrain datasets filter
+    // Pretrain datasets filter
     if (pretrainDatasetFilter.selectedItems.size > 0) {
       filtered = filtered.filter(result => {
-        // Check if any of the selected datasets is in the model's pretrain_datasets array
         return result.metadata.pretrain_datasets?.some(dataset =>
           pretrainDatasetFilter.selectedItems.has(dataset)
         )
       })
     }
 
-    // Apply parameter range filter
+    // Parameter range filter
     const [minParamsMillion, maxParamsMillion] = parameterFilter.value
     filtered = filtered.filter(result => {
       const paramCountMillion = result.metadata.param_count / 1_000_000
       return paramCountMillion >= minParamsMillion && paramCountMillion <= maxParamsMillion
     })
 
+    // Apply sorting
     if (!sortColumn || !sortDirection) return filtered
-
     return [...filtered].sort((a, b) => {
       const aValue = getNestedValue(a, sortColumn)
       const bValue = getNestedValue(b, sortColumn)
-
       if (aValue < bValue) return sortDirection === "asc" ? -1 : 1
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
   }, [search, licenseFilter.selectedItems, architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, sortColumn, sortDirection])
 
-  // Calculate value range for horizontal bars in sorted column
+  // Calculate range for bar indicators
   const columnRange = useMemo(() => {
     if (!sortColumn || filteredAndSortedResults.length === 0) return null
-
-    // Check if it's a numeric column (exclude non-numeric columns)
     const nonNumericColumns = ['metadata.model', 'metadata.license', 'paper']
     if (nonNumericColumns.includes(sortColumn)) return null
-
+    
     const values = filteredAndSortedResults.map(result => getNestedValue(result, sortColumn))
     const numericValues = values.filter(v => typeof v === 'number')
-
     if (numericValues.length === 0) return null
-
-    return {
-      min: Math.min(...numericValues),
-      max: Math.max(...numericValues),
-      column: sortColumn
-    }
+    
+    return { min: Math.min(...numericValues), max: Math.max(...numericValues), column: sortColumn }
   }, [sortColumn, filteredAndSortedResults])
 
-  
-
+  // ============================================================================
+  // RENDER
+  // ============================================================================
   return (
     <>
+      {/* Hero Section */}
       <section className="pt-12">
         <div className="container-base mx-auto">
           <div className="flex justify-between">
@@ -300,10 +285,11 @@ export default function Home() {
         </div>
       </section>
 
-
+      {/* Main Leaderboard */}
       <section className="pb-12">
         <div className="container-base mx-auto">
           <div className="relative">
+            {/* Search & Filters */}
             <div className="flex flex-row gap-2 py-4 sm:flex-wrap">
               <SearchInput
                 value={search}
@@ -379,34 +365,28 @@ export default function Home() {
 
               {/* Mobile Controls */}
               <MobileControls
+                // Pass the complete filter objects
+                licenseFilter={licenseFilter}
+                architectureFilter={architectureFilter}
+                pretrainDatasetFilter={pretrainDatasetFilter}
+                parameterFilter={parameterFilter}
+                
+                // Pass the available data
                 availableLicenses={availableLicenses}
-                selectedLicenses={licenseFilter.selectedItems}
-                onLicenseToggle={licenseFilter.toggleItem}
-                onClearAllLicenses={licenseFilter.clearAll}
-                onSelectAllLicenses={licenseFilter.selectAll}
                 availableArchitectures={availableArchitectures}
-                selectedArchitectures={architectureFilter.selectedItems}
-                onArchitectureToggle={architectureFilter.toggleItem}
-                onClearAllArchitectures={architectureFilter.clearAll}
-                onSelectAllArchitectures={architectureFilter.selectAll}
                 availablePretrainDatasets={availablePretrainDatasets}
-                selectedPretrainDatasets={pretrainDatasetFilter.selectedItems}
-                onPretrainDatasetToggle={pretrainDatasetFilter.toggleItem}
-                onClearAllPretrainDatasets={pretrainDatasetFilter.clearAll}
-                onSelectAllPretrainDatasets={pretrainDatasetFilter.selectAll}
-                parameterFilter={parameterFilter} 
+                
+                // Dataset selection (simple)
                 availableDatasets={availableDatasets}
                 selectedDataset={selectedDataset}
                 onDatasetChange={handleDatasetChange}
-                columns={columnManager.allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
-                visibleColumns={columnManager.visibleColumns}
-                onToggleColumn={columnManager.toggleColumn}
-                onShowAllColumns={columnManager.showAllColumns}
-                onHideAllColumns={columnManager.hideAllColumns}
-                onResetToDefaults={columnManager.resetToDefaults}
+                
+                // Column management (already consolidated)
+                columnManager={columnManager}
               />
             </div>
 
+            {/* Results Table */}
             <ScrollArea className="h-[625px] w-full max-w-[1504px] overflow-x-auto rounded-md border whitespace-nowrap">
               <Table className="min-w-max table-auto text-foreground/60">
                 <TableHeader>
@@ -465,7 +445,7 @@ export default function Home() {
               <ScrollBar orientation="horizontal" />
               </ScrollArea>
 
-              {/* Results Counter */}
+              {/* Results Summary */}
               <div className="w-full mt-4 flex flex-wrap items-start gap-2 justify-between">
                 <div className="space-y-2">
                   <div className="text-sm text-muted-foreground">
@@ -486,7 +466,7 @@ export default function Home() {
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
                       {licenseFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
                       {architectureFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
-                      {pretrainDatasetFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrain Datasets</span>}
+                      {pretrainDatasetFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrained Datasets</span>}
                       {parameterFilter.isFiltered && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
                     </div>
                   )}
