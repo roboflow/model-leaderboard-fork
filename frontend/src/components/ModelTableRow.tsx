@@ -5,6 +5,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip
 import { SiArxiv } from "@icons-pack/react-simple-icons"
 import { SlidersHorizontalIcon } from "@phosphor-icons/react"
 import Link from "next/link"
+import { formatters } from "@/lib/formatters"
 
 // Utility function to parse arXiv ID from URL
 const parseArxivId = (url: string): string => {
@@ -91,14 +92,6 @@ function getNestedValue(obj: any, path: string) {
   return path.split('.').reduce((current, key) => current?.[key], obj)
 }
 
-function formatPercentage(value: number): string {
-  return `${(value * 100).toFixed(1)}%`
-}
-
-function formatParameters(count: number): string {
-  return `${(count / 1_000_000).toFixed(1)}M`
-}
-
 export function ModelTableRow({ result, columns, sortColumn, columnRange }: ModelTableRowProps) {
   const renderCellContent = (columnKey: string) => {
     let baseContent
@@ -165,7 +158,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
         break
 
       case "metadata.param_count":
-        baseContent = formatParameters(result.metadata.param_count)
+        baseContent = formatters.parameters(result.metadata.param_count)
         break
 
       case "paper":
@@ -197,7 +190,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
 
       default:
         const value = getNestedValue(result, columnKey)
-        baseContent = typeof value === 'number' ? formatPercentage(value) : value
+        baseContent = typeof value === 'number' ? formatters.percentage(value) : value
     }
 
     // Add horizontal bar background if this is the sorted column and it's numeric

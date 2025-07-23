@@ -17,13 +17,10 @@ import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
 import aggregateResults from "@/data/aggregate_results.json"
-import { BenchmarkFilter } from "@/components/BenchmarkFilter"
-import { ArrowSquareOutIcon } from "@phosphor-icons/react"
 import { Separator } from "@/components/ui/separator"
-import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
 import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
-import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon } from "@phosphor-icons/react"
+import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon, ArrowSquareOutIcon, HeartIcon } from "@phosphor-icons/react"
 import { formatters } from "@/lib/formatters"
 
 type SortDirection = "asc" | "desc" | null
@@ -281,11 +278,11 @@ function getSearchableText(result: ModelResult): string {
     formatters.percentage(result.f1_medium_objects.f1_75),
     formatters.percentage(result.f1_large_objects.f1_50),
     formatters.percentage(result.f1_large_objects.f1_75),
-    result.map50_95.toFixed(3),
-    result.map50.toFixed(3),
-    result.map75.toFixed(3),
-    result.f1_50.toFixed(3),
-    result.f1_75.toFixed(3),
+    formatters.decimal(result.map50_95),
+    formatters.decimal(result.map50),
+    formatters.decimal(result.map75),
+    formatters.decimal(result.f1_50),
+    formatters.decimal(result.f1_75),
     result.metadata.param_count.toString(),
   ]
 
