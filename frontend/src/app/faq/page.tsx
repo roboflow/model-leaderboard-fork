@@ -45,7 +45,7 @@ export default function FAQPage() {
       <section className="pt-6 sm:pt-12">
         <div className="container-narrow space-y-6">
           <div className="space-y-6">
-            <h1 className="text-4xl">Frequently Asked Questions</h1>
+            <h1 className="text-3xl sm:text-4xl">Frequently Asked Questions</h1>
             <h2 className="prose prose-sm">
               Get answers to common questions about benchmarks, datasets, metrics, and how the leaderboard works.
             </h2>

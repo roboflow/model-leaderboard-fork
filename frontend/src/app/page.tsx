@@ -276,7 +276,7 @@ export default function Home() {
                   Powered by SuperVision <ArrowSquareOutIcon size={14} weight="thin" />
                 </Link>
               </Badge>
-              <h1 className="text-4xl"><span className="text-primary-foreground">Computer Vision</span><br />Model Leaderboard</h1>
+              <h1 className="text-3xl sm:text-4xl"><span className="text-primary-foreground">Computer Vision</span><br />Model Leaderboard</h1>
               <p className="prose prose-sm max-w-lg">
                 Compare computer vision models benchmarked on the COCO 2017 dataset using standardized mAP and F1 metrics. Filter by architecture, size, or license to find the best model for your use case.
               </p>

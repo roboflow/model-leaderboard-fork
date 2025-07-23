@@ -18,7 +18,7 @@ export default function MethodologyPage() {
     <section className="py-pt-6 sm:pt-12">
       <div className="container-narrow">
         <div className="space-y-6">
-          <h1 className="text-4xl">Methodology</h1>
+          <h1 className="text-3xl sm:text-4xl">Methodology</h1>
           <div className="prose prose-sm max-w-lg">
             <p>The Roboflow computer vision model leaderboard benchmarks popular object detection models against the Microsoft COCO dataset. The Microsoft COCO dataset is commonly used to evaluate and compare the performance of object detection models.</p>
 
