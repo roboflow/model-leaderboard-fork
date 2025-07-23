@@ -103,7 +103,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
             href={result.metadata.github_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium hover:text-primary-foreground transition-colors duration-200 inline-flex items-center gap-2 group"
+            className="font-medium link-primary transition-colors duration-200 inline-flex items-center gap-2 group"
           >
             <span>{result.metadata.model}</span>
           </Link>
@@ -170,7 +170,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold transition-colors
-                          text-primary-foreground bg-accent hover:bg-primary"
+                          text-primary-foreground bg-foreground/6 hover:bg-primary"
             >
               <SiArxiv size={10} />
               <span>Arxiv</span>
@@ -182,7 +182,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
 
       case "metadata.license":
         baseContent = (
-          <span className="text-xs bg-secondary px-2 py-1 rounded">
+          <span className="text-xs bg-foreground/6 px-2 py-1 rounded">
             {result.metadata.license}
           </span>
         )

@@ -260,7 +260,7 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
 
 
   .orb-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
