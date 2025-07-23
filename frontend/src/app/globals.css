@@ -261,7 +261,11 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
 
   .orb-container {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: max(100vh, 100%); /* Whichever is larger */
     overflow: hidden;
     z-index: -1;
   }

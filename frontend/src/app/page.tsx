@@ -390,7 +390,7 @@ export default function Home() {
             <ScrollArea className="h-[625px] w-full max-w-[1504px] overflow-x-auto rounded-md border whitespace-nowrap">
               <Table className="min-w-max table-auto text-foreground/60">
                 <TableHeader>
-                  <TableRow className="sticky top-0 z-20 bg-background/80 backdrop-blur-lg px-0">
+                  <TableRow className="sticky top-0 z-20 bg-background/10 backdrop-blur-lg px-0">
                     {columnManager.filteredColumns.map((column) => (
                       <SortableTableHeader
                         key={column.key}
