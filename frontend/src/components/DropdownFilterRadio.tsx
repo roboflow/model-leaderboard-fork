@@ -79,7 +79,9 @@ export function DropdownFilterRadio({
       </div>
 
       {/* Mobile Version */}
-      <div className="block sm:hidden space-y-1">
+      <div className="block sm:hidden space-y-2">
+        <div className="text-sm font-medium">{title}</div>
+        <div className="block sm:hidden space-y-1">
         {availableItems.map((item) => (
           <MobileRadioItem
             key={item}
@@ -89,6 +91,7 @@ export function DropdownFilterRadio({
             {item}
           </MobileRadioItem>
         ))}
+      </div>
       </div>
     </>
   )

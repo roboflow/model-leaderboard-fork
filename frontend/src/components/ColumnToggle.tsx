@@ -113,17 +113,21 @@ export function ColumnToggle({
       </DropdownMenu>
       </div>
 
-      <div className="block sm:hidden space-y-1">
-      {columns.map((column) => (
-        <MobileCheckboxItem
-        key={column.key}
-        selected={visibleColumns.has(column.key)}
-        onSelect={() => onToggleColumn(column.key)}
-      >
-        {column.label}
-      </MobileCheckboxItem>
-      ))}
-      </div>
+      {/* Mobile Version */}
+      <div className="block sm:hidden space-y-2">
+        {/* <div className="text-sm font-medium">Columns</div> */}
+        <div className="space-y-1">
+          {columns.map((column) => (
+            <MobileCheckboxItem
+            key={column.key}
+            selected={visibleColumns.has(column.key)}
+            onSelect={() => onToggleColumn(column.key)}
+          >
+            {column.label}
+          </MobileCheckboxItem>
+          ))}
+          </div>
+      </div>  
     </>
   )
 }

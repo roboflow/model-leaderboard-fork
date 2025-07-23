@@ -134,16 +134,19 @@ export function DropdownFilterCheckbox({
       </div>
 
       {/* Mobile Version */}
-      <div className="block sm:hidden space-y-1">
-        {availableItems.map((item) => (
-          <MobileCheckboxItem
-            key={item}
-            selected={selectedItems.has(item)}
-            onSelect={() => onItemToggle(item)}
-          >
-            {item}
-          </MobileCheckboxItem>
-        ))}
+      <div className="block sm:hidden space-y-2">
+        <div className="text-sm font-medium">{title}</div>
+        <div className=" space-y-1">
+          {availableItems.map((item) => (
+            <MobileCheckboxItem
+              key={item}
+              selected={selectedItems.has(item)}
+              onSelect={() => onItemToggle(item)}
+            >
+              {item}
+            </MobileCheckboxItem>
+          ))}
+        </div>
       </div>
     </>
   )

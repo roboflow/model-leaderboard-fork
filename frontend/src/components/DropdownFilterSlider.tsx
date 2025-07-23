@@ -117,7 +117,8 @@ export function DropdownFilterSlider({
       </div>
 
       {/* Mobile Version */}
-      <div className="block sm:hidden">
+      <div className="block sm:hidden space-y-2">
+        <div className="text-sm font-medium">{title}</div>
         <div className="p-2 space-y-3">
           <div className="flex justify-between text-xs">
             <span className="text-primary-foreground">{formatter(localRange[0])}</span>
