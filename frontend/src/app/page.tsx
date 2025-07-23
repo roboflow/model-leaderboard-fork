@@ -267,7 +267,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-12">
+      <section className="pt-6 sm:pt-12">
         <div className="container-base mx-auto">
           <div className="flex justify-between">
             <div className="space-y-2">

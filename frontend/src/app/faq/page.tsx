@@ -42,7 +42,7 @@ declare global {
 export default function FAQPage() {
   return (
     <>
-      <section className="pt-12">
+      <section className="pt-6 sm:pt-12">
         <div className="container-narrow space-y-6">
           <div className="space-y-6">
             <h1 className="text-4xl">Frequently Asked Questions</h1>

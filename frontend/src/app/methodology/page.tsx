@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function MethodologyPage() {
   return (
-    <section className="py-12">
+    <section className="py-pt-6 sm:pt-12">
       <div className="container-narrow">
         <div className="space-y-6">
           <h1 className="text-4xl">Methodology</h1>
