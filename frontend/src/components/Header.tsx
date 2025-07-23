@@ -24,9 +24,7 @@ export function Header() {
       <div className="container-base mx-auto flex justify-between items-center">
         <Link href="https://roboflow.com" className="flex items-center" aria-label="Visit Roboflow website">
           <RoboflowLogo
-            className="text-violet-700 dark:text-white h-8 w-auto"
-            width={120}
-            height={32}
+            className="text-violet-700 dark:text-white h-6 w-auto"
           />
         </Link>
 
