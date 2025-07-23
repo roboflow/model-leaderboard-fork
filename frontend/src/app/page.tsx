@@ -12,6 +12,7 @@ import { ModelTableRow } from "@/components/ModelTableRow"
 import { useState, useMemo, useEffect } from "react"
 
 import { useRangeFilter } from "@/hooks/useRangeFilter"
+import { useUniqueValues } from "@/hooks/useUniqueValues"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
@@ -420,40 +421,21 @@ export default function Home() {
     [visibleColumns]
   )
 
-  // Extract unique licenses
-  const availableLicenses = useMemo(() => {
-    const licenses = new Set<string>()
-    aggregateResults.forEach(result => {
-      if (result.metadata.license) {
-        licenses.add(result.metadata.license)
-      }
-    })
-    return Array.from(licenses).sort()
-  }, [])
+  // Extract unique values using the generic hook
+  const availableLicenses = useUniqueValues(
+    aggregateResults, 
+    (result) => result.metadata.license
+  )
 
-  // Extract unique architectures
-  const availableArchitectures = useMemo(() => {
-    const architectures = new Set<string>()
-    aggregateResults.forEach(result => {
-      if (result.metadata.architecture) {
-        architectures.add(result.metadata.architecture)
-      }
-    })
-    return Array.from(architectures).sort()
-  }, [])
+  const availableArchitectures = useUniqueValues(
+    aggregateResults,
+    (result) => result.metadata.architecture
+  )
 
-  // Extract unique pretrain datasets
-  const availablePretrainDatasets = useMemo(() => {
-    const datasets = new Set<string>()
-    aggregateResults.forEach(result => {
-      if (result.metadata.pretrain_datasets) {
-        result.metadata.pretrain_datasets.forEach(dataset => {
-          datasets.add(dataset)
-        })
-      }
-    })
-    return Array.from(datasets).sort()
-  }, [])
+  const availablePretrainDatasets = useUniqueValues(
+    aggregateResults,
+    (result) => result.metadata.pretrain_datasets
+  )
 
   const [selectedLicenses, setSelectedLicenses] = useState<Set<string>>(new Set())
   const [selectedArchitectures, setSelectedArchitectures] = useState<Set<string>>(new Set())
