@@ -11,6 +11,9 @@ import { SortableTableHeader } from "@/components/SortableTableHeader"
 import { ModelTableRow } from "@/components/ModelTableRow"
 import { useState, useMemo, useEffect } from "react"
 
+import { useRangeFilter } from "@/hooks/useRangeFilter"
+import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
+
 import aggregateResults from "@/data/aggregate_results.json"
 import { ParameterFilter } from "@/components/ParameterFilter"
 import { BenchmarkFilter } from "@/components/BenchmarkFilter"
@@ -19,7 +22,7 @@ import { Separator } from "@/components/ui/separator"
 import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
 import { FilterDropdown } from "@/components/FilterDropdown"
-import { CircuitryIcon, FileTextIcon, DatabaseIcon } from "@phosphor-icons/react"
+import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon } from "@phosphor-icons/react"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -403,13 +406,13 @@ export default function Home() {
   }
 
   // Parameter filter handlers
-  const handleParameterRangeChange = (range: [number, number]) => {
-    setParameterRange(range)
-  }
+  // const handleParameterRangeChange = (range: [number, number]) => {
+  //   setParameterRange(range)
+  // }
 
-  const handleParameterReset = () => {
-    setParameterRange([minParams, maxParams])
-  }
+  // const handleParameterReset = () => {
+  //   setParameterRange([minParams, maxParams])
+  // }
 
   // Dataset filter handler
   const handleDatasetChange = (dataset: string) => {
@@ -481,9 +484,12 @@ export default function Home() {
   }, [])
 
   // Initialize parameter range state
-  useEffect(() => {
-    setParameterRange([minParams, maxParams])
-  }, [minParams, maxParams])
+  // useEffect(() => {
+  //   setParameterRange([minParams, maxParams])
+  // }, [minParams, maxParams])
+
+  // Initialize parameter filter  
+  const parameterFilter = useRangeFilter(minParams, maxParams)
 
   // Handle loading state
   useEffect(() => {
@@ -537,7 +543,7 @@ export default function Home() {
     }
 
     // Apply parameter range filter
-    const [minParamsMillion, maxParamsMillion] = parameterRange
+    const [minParamsMillion, maxParamsMillion] = parameterFilter.value
     filtered = filtered.filter(result => {
       const paramCountMillion = result.metadata.param_count / 1_000_000
       return paramCountMillion >= minParamsMillion && paramCountMillion <= maxParamsMillion
@@ -553,7 +559,7 @@ export default function Home() {
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
-  }, [search, selectedLicenses, selectedArchitectures, selectedPretrainDatasets, parameterRange, sortColumn, sortDirection])
+  }, [search, selectedLicenses, selectedArchitectures, selectedPretrainDatasets, parameterFilter.value, sortColumn, sortDirection])
 
   // Calculate value range for horizontal bars in sorted column
   const columnRange = useMemo(() => {
@@ -575,7 +581,7 @@ export default function Home() {
     }
   }, [sortColumn, filteredAndSortedResults])
 
-
+  
 
   return (
     <>
@@ -622,13 +628,22 @@ export default function Home() {
                   onSelectAll={handleSelectAllArchitectures}
                 />
 
-                <ParameterFilter
+                <DropdownFilterSlider
+                  icon={CpuIcon}
+                  title="Parameters"
+                  label="Filter by Parameter Count"
+                  formatter={(count) => `${count.toFixed(1)}M`}
+                  step={0.1}
+                  {...parameterFilter}
+                />
+
+                {/* <ParameterFilter
                   minParams={minParams}
                   maxParams={maxParams}
                   selectedRange={parameterRange}
                   onRangeChange={handleParameterRangeChange}
                   onReset={handleParameterReset}
-                />
+                /> */}
 
                 <FilterDropdown
                   icon={DatabaseIcon}
@@ -687,11 +702,7 @@ export default function Home() {
                 onPretrainDatasetToggle={handlePretrainDatasetToggle}
                 onClearAllPretrainDatasets={handleClearAllPretrainDatasets}
                 onSelectAllPretrainDatasets={handleSelectAllPretrainDatasets}
-                minParams={minParams}
-                maxParams={maxParams}
-                parameterRange={parameterRange}
-                onParameterRangeChange={handleParameterRangeChange}
-                onParameterReset={handleParameterReset}
+                parameterFilter={parameterFilter} 
                 availableDatasets={availableDatasets}
                 selectedDataset={selectedDataset}
                 onDatasetChange={handleDatasetChange}
@@ -783,14 +794,14 @@ export default function Home() {
                   </div>
 
                   {/* Active Filters Indicator */}
-                  {!isLoading && (search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || (parameterRange[0] !== minParams || parameterRange[1] !== maxParams)) && (
+                  {!isLoading && (search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || parameterFilter.isFiltered) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>Filtered by:</span>
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
                       {selectedLicenses.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
                       {selectedArchitectures.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
                       {selectedPretrainDatasets.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrain Datasets</span>}
-                      {(parameterRange[0] !== minParams || parameterRange[1] !== maxParams) && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
+                      {parameterFilter.isFiltered && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
                     </div>
                   )}
                 </div>

@@ -15,10 +15,12 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
-import { ParameterFilter } from "@/components/ParameterFilter"
+import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { BenchmarkFilter } from "@/components/BenchmarkFilter"
 import { ColumnToggle } from "@/components/ColumnToggle"
 import { FilterDropdown } from "@/components/FilterDropdown"
+import { CpuIcon } from "@phosphor-icons/react"
+import { useRangeFilter } from "@/hooks/useRangeFilter"
 
 interface MobileControlsProps {
   // License filter props
@@ -43,11 +45,7 @@ interface MobileControlsProps {
   onSelectAllPretrainDatasets: () => void
 
   // Parameter filter props
-  minParams: number
-  maxParams: number
-  parameterRange: [number, number]
-  onParameterRangeChange: (range: [number, number]) => void
-  onParameterReset: () => void
+  parameterFilter: ReturnType<typeof useRangeFilter>
 
   // Dataset filter props
   availableDatasets: string[]
@@ -79,11 +77,7 @@ export function MobileControls({
   onPretrainDatasetToggle,
   onClearAllPretrainDatasets,
   onSelectAllPretrainDatasets,
-  minParams,
-  maxParams,
-  parameterRange,
-  onParameterRangeChange,
-  onParameterReset,
+  parameterFilter,
   availableDatasets,
   selectedDataset,
   onDatasetChange,
@@ -142,12 +136,13 @@ export function MobileControls({
 
                   <div>
                     <label className="text-sm font-medium mb-2 block">Parameters</label>
-                    <ParameterFilter
-                      minParams={minParams}
-                      maxParams={maxParams}
-                      selectedRange={parameterRange}
-                      onRangeChange={onParameterRangeChange}
-                      onReset={onParameterReset}
+                    <DropdownFilterSlider
+                      icon={CpuIcon}
+                      title="Parameters"
+                      label="Filter by Parameter Count"
+                      formatter={(count) => `${count.toFixed(1)}M`}
+                      step={0.1}
+                      {...parameterFilter}
                     />
                   </div>
                   <Separator />
