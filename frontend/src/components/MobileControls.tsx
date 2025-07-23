@@ -22,6 +22,7 @@ import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
 import { CpuIcon, GaugeIcon } from "@phosphor-icons/react"
 import { useRangeFilter } from "@/hooks/useRangeFilter"
+import { formatters } from "@/lib/formatters"
 
 interface MobileControlsProps {
   // License filter props
@@ -141,7 +142,7 @@ export function MobileControls({
                       icon={CpuIcon}
                       title="Parameters"
                       label="Filter by Parameter Count"
-                      formatter={(count) => `${count.toFixed(1)}M`}
+                      formatter={formatters.parametersFromMillion}
                       step={0.1}
                       {...parameterFilter}
                     />

@@ -23,6 +23,7 @@ import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
 import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
 import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon } from "@phosphor-icons/react"
+import { formatters } from "@/lib/formatters"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -251,40 +252,34 @@ function getNestedValue(obj: any, path: string) {
   return path.split('.').reduce((current, key) => current?.[key], obj)
 }
 
-function formatPercentage(value: number): string {
-  return `${(value * 100).toFixed(1)}%`
-}
-
-function formatParameters(count: number): string {
-  return `${(count / 1_000_000).toFixed(1)}M`
-}
-
-// Get searchable text for all fields in a result
 function getSearchableText(result: ModelResult): string {
   const searchableFields = [
     result.metadata.model,
     result.metadata.license,
-    formatParameters(result.metadata.param_count),
-    formatPercentage(result.map50_95),
-    formatPercentage(result.map50),
-    formatPercentage(result.map75),
-    formatPercentage(result.f1_50),
-    formatPercentage(result.f1_75),
-    formatPercentage(result.small_objects.map50_95),
-    formatPercentage(result.small_objects.map50),
-    formatPercentage(result.small_objects.map75),
-    formatPercentage(result.medium_objects.map50_95),
-    formatPercentage(result.medium_objects.map50),
-    formatPercentage(result.medium_objects.map75),
-    formatPercentage(result.large_objects.map50_95),
-    formatPercentage(result.large_objects.map50),
-    formatPercentage(result.large_objects.map75),
-    formatPercentage(result.f1_small_objects.f1_50),
-    formatPercentage(result.f1_small_objects.f1_75),
-    formatPercentage(result.f1_medium_objects.f1_50),
-    formatPercentage(result.f1_medium_objects.f1_75),
-    formatPercentage(result.f1_large_objects.f1_50),
-    formatPercentage(result.f1_large_objects.f1_75),
+    formatters.parameters(result.metadata.param_count),
+    formatters.percentage(result.map50_95),
+    formatters.percentage(result.map50),
+    formatters.percentage(result.map75),
+    formatters.decimal(result.map50_95),
+    formatters.decimal(result.map50),
+    formatters.decimal(result.map75),
+    formatters.percentage(result.f1_50),
+    formatters.percentage(result.f1_75),
+    formatters.percentage(result.small_objects.map50_95),
+    formatters.percentage(result.small_objects.map50),
+    formatters.percentage(result.small_objects.map75),
+    formatters.percentage(result.medium_objects.map50_95),
+    formatters.percentage(result.medium_objects.map50),
+    formatters.percentage(result.medium_objects.map75),
+    formatters.percentage(result.large_objects.map50_95),
+    formatters.percentage(result.large_objects.map50),
+    formatters.percentage(result.large_objects.map75),
+    formatters.percentage(result.f1_small_objects.f1_50),
+    formatters.percentage(result.f1_small_objects.f1_75),
+    formatters.percentage(result.f1_medium_objects.f1_50),
+    formatters.percentage(result.f1_medium_objects.f1_75),
+    formatters.percentage(result.f1_large_objects.f1_50),
+    formatters.percentage(result.f1_large_objects.f1_75),
     result.map50_95.toFixed(3),
     result.map50.toFixed(3),
     result.map75.toFixed(3),
@@ -632,7 +627,7 @@ export default function Home() {
                   icon={CpuIcon}
                   title="Parameters"
                   label="Filter by Parameter Count"
-                  formatter={(count) => `${count.toFixed(1)}M`}
+                  formatter={formatters.parametersFromMillion}
                   step={0.1}
                   {...parameterFilter}
                 />
