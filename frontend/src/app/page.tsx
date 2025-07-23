@@ -13,6 +13,7 @@ import { useState, useMemo, useEffect } from "react"
 
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { useUniqueValues } from "@/hooks/useUniqueValues"
+import { useSetFilter } from "@/hooks/useSetFilter"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
@@ -341,72 +342,6 @@ export default function Home() {
     setVisibleColumns(getDefaultVisibleColumns())
   }
 
-  // License filter handlers
-  const handleLicenseToggle = (license: string) => {
-    const newSelectedLicenses = new Set(selectedLicenses)
-    if (newSelectedLicenses.has(license)) {
-      newSelectedLicenses.delete(license)
-    } else {
-      newSelectedLicenses.add(license)
-    }
-    setSelectedLicenses(newSelectedLicenses)
-  }
-
-  const handleClearAllLicenses = () => {
-    setSelectedLicenses(new Set())
-  }
-
-  const handleSelectAllLicenses = () => {
-    setSelectedLicenses(new Set(availableLicenses))
-  }
-
-  // Architecture filter handlers
-  const handleArchitectureToggle = (architecture: string) => {
-    const newSelectedArchitectures = new Set(selectedArchitectures)
-    if (newSelectedArchitectures.has(architecture)) {
-      newSelectedArchitectures.delete(architecture)
-    } else {
-      newSelectedArchitectures.add(architecture)
-    }
-    setSelectedArchitectures(newSelectedArchitectures)
-  }
-
-  const handleClearAllArchitectures = () => {
-    setSelectedArchitectures(new Set())
-  }
-
-  const handleSelectAllArchitectures = () => {
-    setSelectedArchitectures(new Set(availableArchitectures))
-  }
-
-  // Pretrain datasets filter handlers
-  const handlePretrainDatasetToggle = (dataset: string) => {
-    const newSelectedDatasets = new Set(selectedPretrainDatasets)
-    if (newSelectedDatasets.has(dataset)) {
-      newSelectedDatasets.delete(dataset)
-    } else {
-      newSelectedDatasets.add(dataset)
-    }
-    setSelectedPretrainDatasets(newSelectedDatasets)
-  }
-
-  const handleClearAllPretrainDatasets = () => {
-    setSelectedPretrainDatasets(new Set())
-  }
-
-  const handleSelectAllPretrainDatasets = () => {
-    setSelectedPretrainDatasets(new Set(availablePretrainDatasets))
-  }
-
-  // Parameter filter handlers
-  // const handleParameterRangeChange = (range: [number, number]) => {
-  //   setParameterRange(range)
-  // }
-
-  // const handleParameterReset = () => {
-  //   setParameterRange([minParams, maxParams])
-  // }
-
   // Dataset filter handler
   const handleDatasetChange = (dataset: string) => {
     setSelectedDataset(dataset)
@@ -434,9 +369,10 @@ export default function Home() {
     (result) => result.metadata.pretrain_datasets
   )
 
-  const [selectedLicenses, setSelectedLicenses] = useState<Set<string>>(new Set())
-  const [selectedArchitectures, setSelectedArchitectures] = useState<Set<string>>(new Set())
-  const [selectedPretrainDatasets, setSelectedPretrainDatasets] = useState<Set<string>>(new Set())
+  // Use generic set filter hooks
+  const licenseFilter = useSetFilter(availableLicenses)
+  const architectureFilter = useSetFilter(availableArchitectures)
+  const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets)
 
   // Available datasets (currently only COCO 2017)
   const availableDatasets = useMemo(() => ["COCO 2017"], [])
@@ -493,25 +429,25 @@ export default function Home() {
     }
 
     // Apply license filter
-    if (selectedLicenses.size > 0) {
+    if (licenseFilter.selectedItems.size > 0) {
       filtered = filtered.filter(result =>
-        selectedLicenses.has(result.metadata.license)
+        licenseFilter.selectedItems.has(result.metadata.license)
       )
     }
 
     // Apply architecture filter
-    if (selectedArchitectures.size > 0) {
+    if (architectureFilter.selectedItems.size > 0) {
       filtered = filtered.filter(result =>
-        selectedArchitectures.has(result.metadata.architecture)
+        architectureFilter.selectedItems.has(result.metadata.architecture)
       )
     }
 
     // Apply pretrain datasets filter
-    if (selectedPretrainDatasets.size > 0) {
+    if (pretrainDatasetFilter.selectedItems.size > 0) {
       filtered = filtered.filter(result => {
         // Check if any of the selected datasets is in the model's pretrain_datasets array
         return result.metadata.pretrain_datasets?.some(dataset =>
-          selectedPretrainDatasets.has(dataset)
+          pretrainDatasetFilter.selectedItems.has(dataset)
         )
       })
     }
@@ -533,7 +469,7 @@ export default function Home() {
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
-  }, [search, selectedLicenses, selectedArchitectures, selectedPretrainDatasets, parameterFilter.value, sortColumn, sortDirection])
+  }, [search, licenseFilter.selectedItems, architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, sortColumn, sortDirection])
 
   // Calculate value range for horizontal bars in sorted column
   const columnRange = useMemo(() => {
@@ -596,10 +532,10 @@ export default function Home() {
                   title="Architecture"
                   label="Filter by Architecture"
                   availableItems={availableArchitectures}
-                  selectedItems={selectedArchitectures}
-                  onItemToggle={handleArchitectureToggle}
-                  onClearAll={handleClearAllArchitectures}
-                  onSelectAll={handleSelectAllArchitectures}
+                  selectedItems={architectureFilter.selectedItems}
+                  onItemToggle={architectureFilter.toggleItem}
+                  onClearAll={architectureFilter.clearAll}
+                  onSelectAll={architectureFilter.selectAll}
                 />
 
                 <DropdownFilterSlider
@@ -616,10 +552,10 @@ export default function Home() {
                   title="Pretrained on"
                   label="Filter by Pretrained Datasets"
                   availableItems={availablePretrainDatasets}
-                  selectedItems={selectedPretrainDatasets}
-                  onItemToggle={handlePretrainDatasetToggle}
-                  onClearAll={handleClearAllPretrainDatasets}
-                  onSelectAll={handleSelectAllPretrainDatasets}
+                  selectedItems={pretrainDatasetFilter.selectedItems}
+                  onItemToggle={pretrainDatasetFilter.toggleItem}
+                  onClearAll={pretrainDatasetFilter.clearAll}
+                  onSelectAll={pretrainDatasetFilter.selectAll}
                 />
 
                 <DropdownFilterCheckbox
@@ -627,10 +563,10 @@ export default function Home() {
                   title="License"
                   label="Filter by License"
                   availableItems={availableLicenses}
-                  selectedItems={selectedLicenses}
-                  onItemToggle={handleLicenseToggle}
-                  onClearAll={handleClearAllLicenses}
-                  onSelectAll={handleSelectAllLicenses}
+                  selectedItems={licenseFilter.selectedItems}
+                  onItemToggle={licenseFilter.toggleItem}
+                  onClearAll={licenseFilter.clearAll}
+                  onSelectAll={licenseFilter.selectAll}
                 />
 
                 <DropdownFilterRadio
@@ -657,20 +593,20 @@ export default function Home() {
               {/* Mobile Controls */}
               <MobileControls
                 availableLicenses={availableLicenses}
-                selectedLicenses={selectedLicenses}
-                onLicenseToggle={handleLicenseToggle}
-                onClearAllLicenses={handleClearAllLicenses}
-                onSelectAllLicenses={handleSelectAllLicenses}
+                selectedLicenses={licenseFilter.selectedItems}
+                onLicenseToggle={licenseFilter.toggleItem}
+                onClearAllLicenses={licenseFilter.clearAll}
+                onSelectAllLicenses={licenseFilter.selectAll}
                 availableArchitectures={availableArchitectures}
-                selectedArchitectures={selectedArchitectures}
-                onArchitectureToggle={handleArchitectureToggle}
-                onClearAllArchitectures={handleClearAllArchitectures}
-                onSelectAllArchitectures={handleSelectAllArchitectures}
+                selectedArchitectures={architectureFilter.selectedItems}
+                onArchitectureToggle={architectureFilter.toggleItem}
+                onClearAllArchitectures={architectureFilter.clearAll}
+                onSelectAllArchitectures={architectureFilter.selectAll}
                 availablePretrainDatasets={availablePretrainDatasets}
-                selectedPretrainDatasets={selectedPretrainDatasets}
-                onPretrainDatasetToggle={handlePretrainDatasetToggle}
-                onClearAllPretrainDatasets={handleClearAllPretrainDatasets}
-                onSelectAllPretrainDatasets={handleSelectAllPretrainDatasets}
+                selectedPretrainDatasets={pretrainDatasetFilter.selectedItems}
+                onPretrainDatasetToggle={pretrainDatasetFilter.toggleItem}
+                onClearAllPretrainDatasets={pretrainDatasetFilter.clearAll}
+                onSelectAllPretrainDatasets={pretrainDatasetFilter.selectAll}
                 parameterFilter={parameterFilter} 
                 availableDatasets={availableDatasets}
                 selectedDataset={selectedDataset}
@@ -763,13 +699,13 @@ export default function Home() {
                   </div>
 
                   {/* Active Filters Indicator */}
-                  {!isLoading && (search || selectedLicenses.size > 0 || selectedArchitectures.size > 0 || selectedPretrainDatasets.size > 0 || parameterFilter.isFiltered) && (
+                  {!isLoading && (search || licenseFilter.selectedItems.size > 0 || architectureFilter.selectedItems.size > 0 || pretrainDatasetFilter.selectedItems.size > 0 || parameterFilter.isFiltered) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>Filtered by:</span>
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
-                      {selectedLicenses.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
-                      {selectedArchitectures.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
-                      {selectedPretrainDatasets.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrain Datasets</span>}
+                      {licenseFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
+                      {architectureFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
+                      {pretrainDatasetFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrain Datasets</span>}
                       {parameterFilter.isFiltered && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
                     </div>
                   )}
