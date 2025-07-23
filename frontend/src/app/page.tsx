@@ -14,6 +14,8 @@ import { useState, useMemo, useEffect } from "react"
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { useUniqueValues } from "@/hooks/useUniqueValues"
 import { useSetFilter } from "@/hooks/useSetFilter"
+import { useColumnManager } from "@/hooks/useColumnManager"
+import { Column } from "@/lib/columns"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
@@ -84,169 +86,6 @@ interface ModelResult {
   }
 }
 
-interface Column {
-  key: string
-  label: string
-  width: string
-  sortable?: boolean
-  group: 'Basic' | 'Core Metrics' | 'F1 Metrics' | 'Size-Specific' | 'Metadata'
-  defaultVisible: boolean
-  tooltip?: string // Add tooltip support
-}
-
-const allColumns: Column[] = [
-  {
-    key: "metadata.model",
-    label: "Model",
-    width: "w-50",
-    group: 'Basic',
-    defaultVisible: true,
-    tooltip: "Name of the computer vision model"
-  },
-  {
-    key: "metadata.param_count",
-    label: "Parameters (M)",
-    width: "w-48",
-    group: 'Basic',
-    defaultVisible: true,
-    tooltip: "Total number of trainable parameters in millions"
-  },
-  {
-    key: "map50_95",
-    label: "mAP 50:95",
-    width: "w-40",
-    group: 'Core Metrics',
-    defaultVisible: true,
-    tooltip: "Mean Average Precision at IoU thresholds from 0.5 to 0.95 (primary COCO metric)"
-  },
-  {
-    key: "map50",
-    label: "mAP 50",
-    width: "w-40",
-    group: 'Core Metrics',
-    defaultVisible: true,
-    tooltip: "Mean Average Precision at IoU threshold of 0.5"
-  },
-  {
-    key: "map75",
-    label: "mAP 75",
-    width: "w-40",
-    group: 'Core Metrics',
-    defaultVisible: false,
-    tooltip: "Mean Average Precision at IoU threshold of 0.75 (stricter localization)"
-  },
-  {
-    key: "small_objects.map50_95",
-    label: "mAP 50:95 (Small)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "mAP 50:95 for small objects"
-  },
-  {
-    key: "medium_objects.map50_95",
-    label: "mAP 50:95 (Medium)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "mAP 50:95 for medium objects"
-  },
-  {
-    key: "large_objects.map50_95",
-    label: "mAP 50:95 (Large)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "mAP 50:95 for large objects"
-  },
-  {
-    key: "f1_50",
-    label: "F1 50",
-    width: "w-40",
-    group: 'F1 Metrics',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU threshold of 0.5"
-  },
-  {
-    key: "f1_75",
-    label: "F1 75",
-    width: "w-40",
-    group: 'F1 Metrics',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU threshold of 0.75"
-  },
-  {
-    key: "f1_small_objects.f1_50",
-    label: "F1 50 (Small)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.5 for small objects"
-  },
-  {
-    key: "f1_small_objects.f1_75",
-    label: "F1 75 (Small)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.75 for small objects"
-  },
-  {
-    key: "f1_medium_objects.f1_50",
-    label: "F1 50 (Medium)",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.5 for medium objects"
-  },
-  {
-    key: "f1_medium_objects.f1_75",
-    label: "F1 75 (Medium)",
-    width: "w-28",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.75 for medium objects"
-  },
-  {
-    key: "f1_large_objects.f1_50",
-    label: "F1 50 (Large)",
-    width: "w-24",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.5 for large objects"
-  },
-  {
-    key: "f1_large_objects.f1_75",
-    label: "F1 75 (Large)",
-    width: "w-24",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    tooltip: "F1 score at IoU 0.75 for large objects"
-  },
-  {
-    key: "paper",
-    label: "Paper",
-    width: "w-10",
-    sortable: false,
-    group: 'Metadata',
-    defaultVisible: true,
-    tooltip: "Link to research paper"
-  },
-  {
-    key: "metadata.license",
-    label: "License",
-    width: "w-10",
-    group: 'Metadata',
-    defaultVisible: true,
-    tooltip: "Software license (e.g., MIT, Apache-2.0, AGPL-3.0)"
-  },
-]
-
-// Use the correct keys from allColumns for defaults
-const getDefaultVisibleColumns = () => {
-  return new Set(allColumns.filter(col => col.defaultVisible).map(col => col.key))
-}
-
 function getNestedValue(obj: any, path: string) {
   return path.split('.').reduce((current, key) => current?.[key], obj)
 }
@@ -312,46 +151,7 @@ export default function Home() {
   const [search, setSearch] = useState("")
   const [sortColumn, setSortColumn] = useState<string>("map50_95")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
-  const [visibleColumns, setVisibleColumns] = useState<Set<string>>(getDefaultVisibleColumns())
   const [isLoading, setIsLoading] = useState(true)
-
-  const [parameterRange, setParameterRange] = useState<[number, number]>([0, 100])
-  const [selectedDataset, setSelectedDataset] = useState<string>("COCO 2017")
-
-  // Column toggle handlers
-  const handleToggleColumn = (columnKey: string) => {
-
-    const newVisibleColumns = new Set(visibleColumns)
-    if (newVisibleColumns.has(columnKey)) {
-      newVisibleColumns.delete(columnKey)
-    } else {
-      newVisibleColumns.add(columnKey)
-    }
-    setVisibleColumns(newVisibleColumns)
-  }
-
-  const handleShowAllColumns = () => {
-    setVisibleColumns(new Set(allColumns.map(col => col.key)))
-  }
-
-  const handleHideAllColumns = () => {
-    setVisibleColumns(new Set(['metadata.model'])) // Keep at least model column
-  }
-
-  const handleResetToDefaults = () => {
-    setVisibleColumns(getDefaultVisibleColumns())
-  }
-
-  // Dataset filter handler
-  const handleDatasetChange = (dataset: string) => {
-    setSelectedDataset(dataset)
-  }
-
-  // Get only visible columns
-  const columns = useMemo(() =>
-    allColumns.filter(col => visibleColumns.has(col.key)),
-    [visibleColumns]
-  )
 
   // Extract unique values using the generic hook
   const availableLicenses = useUniqueValues(
@@ -369,37 +169,43 @@ export default function Home() {
     (result) => result.metadata.pretrain_datasets
   )
 
+  // Available datasets (currently only COCO 2017)
+  const availableDatasets = useMemo(() => ["COCO 2017"], [])
+
+  // Dataset filter handler
+  const [selectedDataset, setSelectedDataset] = useState("COCO 2017")
+  const handleDatasetChange = (dataset: string) => {
+    setSelectedDataset(dataset)
+  }
+
   // Use generic set filter hooks
   const licenseFilter = useSetFilter(availableLicenses)
   const architectureFilter = useSetFilter(availableArchitectures)
   const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets)
 
-  // Available datasets (currently only COCO 2017)
-  const availableDatasets = useMemo(() => ["COCO 2017"], [])
-
   // Extract parameter range (in millions)
   const { minParams, maxParams } = useMemo(() => {
+    if (aggregateResults.length === 0) {
+      return { minParams: 0, maxParams: 100 }
+    }
+    
     const paramCounts = aggregateResults.map(result => result.metadata.param_count / 1_000_000)
-    const min = Math.min(...paramCounts)
-    const max = Math.max(...paramCounts)
-
-    // Round to nice values
-    const roundedMin = Math.floor(min)
-    const roundedMax = Math.ceil(max)
-
     return {
-      minParams: roundedMin,
-      maxParams: roundedMax
+      minParams: Math.min(...paramCounts),
+      maxParams: Math.max(...paramCounts)
     }
   }, [])
+
+  // Initialize parameter filter (after minParams/maxParams are calculated)
+  const parameterFilter = useRangeFilter(minParams, maxParams)
+
+  // Use centralized column management
+  const columnManager = useColumnManager()
 
   // Initialize parameter range state
   // useEffect(() => {
   //   setParameterRange([minParams, maxParams])
   // }, [minParams, maxParams])
-
-  // Initialize parameter filter  
-  const parameterFilter = useRangeFilter(minParams, maxParams)
 
   // Handle loading state
   useEffect(() => {
@@ -581,12 +387,12 @@ export default function Home() {
                 <Separator orientation="vertical" className="max-h-9" />
 
                 <ColumnToggle
-                  columns={allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
-                  visibleColumns={visibleColumns}
-                  onToggleColumn={handleToggleColumn}
-                  onShowAll={handleShowAllColumns}
-                  onHideAll={handleHideAllColumns}
-                  onResetToDefaults={handleResetToDefaults}
+                  columns={columnManager.allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
+                  visibleColumns={columnManager.visibleColumns}
+                  onToggleColumn={columnManager.toggleColumn}
+                  onShowAll={columnManager.showAllColumns}
+                  onHideAll={columnManager.hideAllColumns}
+                  onResetToDefaults={columnManager.resetToDefaults}
                 />
               </div>
 
@@ -611,12 +417,12 @@ export default function Home() {
                 availableDatasets={availableDatasets}
                 selectedDataset={selectedDataset}
                 onDatasetChange={handleDatasetChange}
-                columns={allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
-                visibleColumns={visibleColumns}
-                onToggleColumn={handleToggleColumn}
-                onShowAllColumns={handleShowAllColumns}
-                onHideAllColumns={handleHideAllColumns}
-                onResetToDefaults={handleResetToDefaults}
+                columns={columnManager.allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
+                visibleColumns={columnManager.visibleColumns}
+                onToggleColumn={columnManager.toggleColumn}
+                onShowAllColumns={columnManager.showAllColumns}
+                onHideAllColumns={columnManager.hideAllColumns}
+                onResetToDefaults={columnManager.resetToDefaults}
               />
             </div>
 
@@ -630,7 +436,7 @@ export default function Home() {
               <Table className="min-w-max table-auto text-foreground/60">
                 <TableHeader>
                   <TableRow className="sticky top-0 z-20 bg-background/80 backdrop-blur-lg px-0">
-                    {columns.map((column) => (
+                    {columnManager.filteredColumns.map((column) => (
                       <SortableTableHeader
                         key={column.key}
                         columnKey={column.key}
@@ -648,10 +454,10 @@ export default function Home() {
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
-                    <TableSkeleton columns={columns} />
+                    <TableSkeleton columns={columnManager.filteredColumns} />
                   ) : filteredAndSortedResults.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={columns.length} className="text-center py-8 text-muted-foreground">
+                      <TableCell colSpan={columnManager.filteredColumns.length} className="text-center py-8 text-muted-foreground">
                         {search ? (
                           <div>
                             <p>No models found matching "{search}"</p>
@@ -673,7 +479,7 @@ export default function Home() {
                       <ModelTableRow
                         key={result.metadata.model}
                         result={result}
-                        columns={columns}
+                        columns={columnManager.filteredColumns}
                         sortColumn={sortColumn}
                         columnRange={columnRange}
                       />
