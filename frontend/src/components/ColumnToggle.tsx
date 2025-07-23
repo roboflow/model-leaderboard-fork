@@ -51,7 +51,7 @@ export function ColumnToggle({
       <div className="hidden sm:block">
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm" className="flex items-center gap-2 text-foreground/80">
+          <Button variant="transparent" size="sm" className="flex items-center gap-2 text-foreground/80">
             <ColumnsPlusRightIcon size={16} />
             Columns <span className="text-xs font-normal leading-tight text-muted-foreground">({visibleCount}/{totalCount})</span>
           </Button>

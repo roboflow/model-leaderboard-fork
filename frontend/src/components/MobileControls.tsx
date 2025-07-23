@@ -75,7 +75,7 @@ export function MobileControls({
       <Drawer>
         <DrawerTrigger asChild>
           <Button
-            variant="outline"
+            variant="transparent"
             size="sm"
             className="inline-flex items-center gap-2 sm:hidden"
           >

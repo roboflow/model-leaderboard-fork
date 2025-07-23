@@ -54,7 +54,7 @@ export function DropdownFilterCheckbox({
             onMouseDown={(e) => e.preventDefault()}
             asChild
           >
-            <Button variant="outline" size="sm" className={`flex items-center gap-2 text-foreground/80 ${className}`}>
+            <Button variant="transparent" size="sm" className={`flex items-center gap-2 text-foreground/80 ${className}`}>
               <Icon size={16} />
               {title}
               {isFiltered && (
