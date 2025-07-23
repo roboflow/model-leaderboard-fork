@@ -221,7 +221,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
   }
 
   return (
-    <TableRow key={result.metadata.model}>
+    <TableRow key={result.metadata.model} className="hover:bg-foreground/6">
       {columns.map((column) => (
         <TableCell key={column.key} className="px-4">
           {renderCellContent(column.key)}
