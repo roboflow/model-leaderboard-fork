@@ -15,7 +15,6 @@ import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { useUniqueValues } from "@/hooks/useUniqueValues"
 import { useSetFilter } from "@/hooks/useSetFilter"
 import { useColumnManager } from "@/hooks/useColumnManager"
-import { Column } from "@/lib/columns"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
 import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
@@ -25,6 +24,7 @@ import { MobileControls } from "@/components/MobileControls"
 import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
 import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon, ArrowSquareOutIcon, HeartIcon } from "@phosphor-icons/react"
 import { formatters } from "@/lib/formatters"
+import { SkeletonTable } from "@/components/SkeletonTable"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -131,21 +131,7 @@ function getSearchableText(result: ModelResult): string {
 
 
 
-function TableSkeleton({ columns }: { columns: Column[] }) {
-  return (
-    <>
-      {Array.from({ length: 13 }).map((_, i) => (
-        <TableRow key={i}>
-          {columns.map((column) => (
-            <TableCell key={column.key} className={`${column.width} px-4 h-[45px]`}>
-              <div className="h-4 bg-muted/50 animate-pulse rounded w-16"></div>
-            </TableCell>
-          ))}
-        </TableRow>
-      ))}
-    </>
-  )
-}
+
 
 export default function Home() {
   const [search, setSearch] = useState("")
@@ -201,11 +187,6 @@ export default function Home() {
 
   // Use centralized column management
   const columnManager = useColumnManager()
-
-  // Initialize parameter range state
-  // useEffect(() => {
-  //   setParameterRange([minParams, maxParams])
-  // }, [minParams, maxParams])
 
   // Handle loading state
   useEffect(() => {
@@ -426,12 +407,6 @@ export default function Home() {
               />
             </div>
 
-            {/* {search && (
-              <div className="text-xs text-muted-foreground mb-4 bg-muted/50 p-3 rounded">
-                <strong>Search tips:</strong> Try "yolo", "50%", "AGPL", "43M", "0.5", or any value you see in the table
-              </div>
-            )} */}
-
             <ScrollArea className="h-[625px] w-full max-w-[1504px] overflow-x-auto rounded-md border whitespace-nowrap">
               <Table className="min-w-max table-auto text-foreground/60">
                 <TableHeader>
@@ -454,7 +429,7 @@ export default function Home() {
                 </TableHeader>
                 <TableBody>
                   {isLoading ? (
-                    <TableSkeleton columns={columnManager.filteredColumns} />
+                    <SkeletonTable columns={columnManager.filteredColumns} />
                   ) : filteredAndSortedResults.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={columnManager.filteredColumns.length} className="text-center py-8 text-muted-foreground">
