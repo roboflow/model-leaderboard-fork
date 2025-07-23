@@ -13,16 +13,16 @@ import { useState, useMemo, useEffect } from "react"
 
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
+import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
 
 import aggregateResults from "@/data/aggregate_results.json"
-import { ParameterFilter } from "@/components/ParameterFilter"
 import { BenchmarkFilter } from "@/components/BenchmarkFilter"
 import { ArrowSquareOutIcon } from "@phosphor-icons/react"
 import { Separator } from "@/components/ui/separator"
 import { HeartIcon } from "@phosphor-icons/react"
 import { MobileControls } from "@/components/MobileControls"
-import { FilterDropdown } from "@/components/FilterDropdown"
-import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon } from "@phosphor-icons/react"
+import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
+import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon } from "@phosphor-icons/react"
 
 type SortDirection = "asc" | "desc" | null
 
@@ -607,7 +607,7 @@ export default function Home() {
       <section className="pb-12">
         <div className="container-base mx-auto">
           <div className="relative">
-            <div className="flex flex-row gap-2 py-4 flex-wrap">
+            <div className="flex flex-row gap-2 py-4 sm:flex-wrap">
               <SearchInput
                 value={search}
                 onChange={setSearch}
@@ -617,7 +617,7 @@ export default function Home() {
 
               {/* Desktop Filters */}
               <div className="hidden sm:flex gap-2 flex-wrap">
-                <FilterDropdown
+                <DropdownFilterCheckbox
                   icon={CircuitryIcon}
                   title="Architecture"
                   label="Filter by Architecture"
@@ -637,15 +637,7 @@ export default function Home() {
                   {...parameterFilter}
                 />
 
-                {/* <ParameterFilter
-                  minParams={minParams}
-                  maxParams={maxParams}
-                  selectedRange={parameterRange}
-                  onRangeChange={handleParameterRangeChange}
-                  onReset={handleParameterReset}
-                /> */}
-
-                <FilterDropdown
+                <DropdownFilterCheckbox
                   icon={DatabaseIcon}
                   title="Pretrained on"
                   label="Filter by Pretrained Datasets"
@@ -656,7 +648,7 @@ export default function Home() {
                   onSelectAll={handleSelectAllPretrainDatasets}
                 />
 
-                <FilterDropdown
+                <DropdownFilterCheckbox
                   icon={FileTextIcon}
                   title="License"
                   label="Filter by License"
@@ -667,10 +659,13 @@ export default function Home() {
                   onSelectAll={handleSelectAllLicenses}
                 />
 
-                <BenchmarkFilter
-                  availableDatasets={availableDatasets}
-                  selectedDataset={selectedDataset}
-                  onDatasetChange={handleDatasetChange}
+                <DropdownFilterRadio
+                  icon={GaugeIcon}
+                  title="Benchmark"
+                  label="Select Dataset"
+                  availableItems={availableDatasets}
+                  selectedItem={selectedDataset}
+                  onItemChange={handleDatasetChange}
                 />
 
                 <Separator orientation="vertical" className="max-h-9" />

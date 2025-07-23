@@ -22,14 +22,14 @@ export function SearchInput({
   }
 
   return (
-    <div className={`relative min-w-xs sm:max-w-xs ${className}`}>
+    <div className={`relative sm:min-w-xs sm:max-w-xs ${className}`}>
       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
       <Input
         type="text"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="pl-10 pr-10 h-9"
+        className="pl-10 pr-10 h-9 text-sm"
       />
       {value && (
         <Button

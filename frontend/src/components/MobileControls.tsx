@@ -16,10 +16,11 @@ import {
 } from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
 import { DropdownFilterSlider } from "@/components/DropdownFilterSlider"
-import { BenchmarkFilter } from "@/components/BenchmarkFilter"
 import { ColumnToggle } from "@/components/ColumnToggle"
-import { FilterDropdown } from "@/components/FilterDropdown"
-import { CpuIcon } from "@phosphor-icons/react"
+import { DropdownFilterCheckbox } from "@/components/DropdownFilterCheckbox"
+import { DropdownFilterRadio } from "@/components/DropdownFilterRadio"
+
+import { CpuIcon, GaugeIcon } from "@phosphor-icons/react"
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 
 interface MobileControlsProps {
@@ -121,7 +122,7 @@ export function MobileControls({
 
                   <div className="space-y-6">
                     <label className="text-sm font-medium mb-2 block">Architecture</label>
-                    <FilterDropdown
+                    <DropdownFilterCheckbox
                     icon={CircuitryIcon}
                     title="Architecture"
                     label="Filter by Architecture"
@@ -150,7 +151,7 @@ export function MobileControls({
 
                   <div>
                     <label className="text-sm font-medium mb-2 block">Pretrained On</label>
-                    <FilterDropdown
+                    <DropdownFilterCheckbox
                       icon={DatabaseIcon}
                       title="Pretrained Datasets"
                       label="Filter by Pretrained Datasets"
@@ -166,7 +167,7 @@ export function MobileControls({
 
               <div>
                   <label className="text-sm font-medium mb-2 block">License</label>
-                  <FilterDropdown
+                  <DropdownFilterCheckbox
                     icon={FileTextIcon}
                     title="License"
                     label="Filter by License"
@@ -180,11 +181,14 @@ export function MobileControls({
 
                 <Separator />
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Dataset</label>
-                  <BenchmarkFilter
-                    availableDatasets={availableDatasets}
-                    selectedDataset={selectedDataset}
-                    onDatasetChange={onDatasetChange}
+                  <label className="text-sm font-medium mb-2 block">Benchmark</label>
+                  <DropdownFilterRadio
+                    icon={GaugeIcon}
+                    title="Benchmark"  
+                    label="Select Dataset"
+                    availableItems={availableDatasets}
+                    selectedItem={selectedDataset}
+                    onItemChange={onDatasetChange}
                   />
                 </div>
               </div>

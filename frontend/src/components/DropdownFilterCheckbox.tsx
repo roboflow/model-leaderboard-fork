@@ -13,7 +13,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { MobileCheckboxItem } from "@/components/MobileCheckboxItem"
 
-interface FilterDropdownProps {
+interface DropdownFilterCheckboxProps {
   icon: React.ComponentType<any>
   title: string
   label: string
@@ -26,7 +26,7 @@ interface FilterDropdownProps {
   className?: string
 }
 
-export function FilterDropdown({
+export function DropdownFilterCheckbox({
   icon: Icon,
   title,
   label,
@@ -37,7 +37,7 @@ export function FilterDropdown({
   onSelectAll,
   maxDisplayItems = 2,
   className,
-}: FilterDropdownProps) {
+}: DropdownFilterCheckboxProps) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const totalCount = availableItems.length
   const activeCount = selectedItems.size
