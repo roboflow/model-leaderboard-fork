@@ -19,7 +19,7 @@ export default function MethodologyPage() {
       <div className="container-narrow">
         <div className="space-y-6">
           <h1 className="text-4xl">Methodology</h1>
-          <div className="prose prose-sm">
+          <div className="prose prose-sm max-w-lg">
             <p>The Roboflow computer vision model leaderboard benchmarks popular object detection models against the Microsoft COCO dataset. The Microsoft COCO dataset is commonly used to evaluate and compare the performance of object detection models.</p>
 
             <p>Benchmark data in the table was computed independently by the Roboflow team, following public inference instructions from each model vendor. We aim to achieve as close to the original benchmark results as possible by following all instructions.</p>

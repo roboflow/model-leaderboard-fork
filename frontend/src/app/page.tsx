@@ -589,7 +589,7 @@ export default function Home() {
                 </Link>
               </Badge>
               <h1 className="text-4xl"><span className="text-primary-foreground">Computer Vision</span><br />Model Leaderboard</h1>
-              <p className="text-sm text-foreground/60 max-w-lg">
+              <p className="prose prose-sm max-w-lg">
                 Compare computer vision models benchmarked on the COCO 2017 dataset using standardized mAP and F1 metrics. Filter by architecture, size, or license to find the best model for your use case.
               </p>
             </div>
@@ -711,7 +711,7 @@ export default function Home() {
             )} */}
 
             <ScrollArea className="h-[625px] w-full max-w-[1504px] overflow-x-auto rounded-md border whitespace-nowrap">
-              <Table className="min-w-max table-auto">
+              <Table className="min-w-max table-auto text-foreground/60">
                 <TableHeader>
                   <TableRow className="sticky top-0 z-20 bg-background/80 backdrop-blur-lg px-0">
                     {columns.map((column) => (
@@ -725,7 +725,7 @@ export default function Home() {
                         currentSortColumn={sortColumn}
                         currentSortDirection={sortDirection}
                         onSort={handleSort}
-                        className="px-4"
+                        className="px-4 text-foreground/60"
                       />
                     ))}
                   </TableRow>
@@ -794,7 +794,7 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="text-sm text-muted-foreground">Made with <HeartIcon size={14} weight="fill" className="inline-block text-primary-foreground" /> by <Link href="https://roboflow.com" target="_blank" className="text-primary-foreground">Roboflow</Link></div>
+                <div className="prose prose-sm">Made with <HeartIcon size={14} weight="fill" className="inline-block text-primary-foreground" /> by <Link href="https://roboflow.com" target="_blank" className="link-primary">Roboflow</Link></div>
               </div>
           </div>
 

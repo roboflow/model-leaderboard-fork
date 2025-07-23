@@ -198,13 +198,25 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
 
 @layer utilities {
   .prose {
-   --tw-prose-body: var(--muted-foreground);
+   --tw-prose-body: oklch(from var(--foreground) l c h / 0.6);
    --tw-prose-headings: var(--foreground);
    --tw-prose-links: var(--primary-foreground);
    --tw-prose-bullets: var(--border);
+   line-height: 1.5;
   }
   .prose-sm {
-    line-height: 1.45;
+    line-height: 1.6;
+  }
+  
+  /* Custom prose link styling */
+  .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+    color: var(--tw-prose-links);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)):hover {
+    text-decoration: underline;
   }
 }
 
@@ -238,7 +250,7 @@ nav a, nav button, [data-radix-navigation-menu] a, [data-radix-navigation-menu] 
   }
 
   .link-primary {
-    @apply text-primary-foreground hover:underline;
+    @apply text-primary-foreground no-underline hover:underline;
   }
 
   .nav-menu-link {

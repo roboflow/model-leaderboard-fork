@@ -54,7 +54,7 @@ export function FilterDropdown({
             onMouseDown={(e) => e.preventDefault()}
             asChild
           >
-            <Button variant="outline" size="sm" className={`flex items-center gap-2 ${className}`}>
+            <Button variant="outline" size="sm" className={`flex items-center gap-2 text-foreground/80 ${className}`}>
               <Icon size={16} />
               {title}
               {isFiltered && (

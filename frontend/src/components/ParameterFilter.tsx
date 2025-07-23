@@ -62,7 +62,7 @@ export function ParameterFilter({
       <div className="hidden sm:block">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Button variant="outline" size="sm" className="flex items-center gap-2 text-foreground/80">
               <CpuIcon size={16} />
               Parameters
               {isFiltered && (
