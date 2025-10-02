@@ -75,6 +75,15 @@ interface PCSModelResult {
     bronze?: number | null
     bio?: number | null
     miou?: number | null
+    // Optional asterisk control for each metric
+    cgf_asterisk?: boolean
+    ap_asterisk?: boolean
+    ap_coco_o_asterisk?: boolean
+    gold_asterisk?: boolean
+    silver_asterisk?: boolean
+    bronze_asterisk?: boolean
+    bio_asterisk?: boolean
+    miou_asterisk?: boolean
   }
 }
 

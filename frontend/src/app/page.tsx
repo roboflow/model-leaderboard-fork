@@ -307,7 +307,7 @@ export default function Home() {
       <TaskCard 
         title="Object Detection"
         description="Identify and localize objects in an image by predicting bounding boxes and class labels. Models are evaluated on the COCO 2017 dataset, measuring how accurately they detect and classify objects in diverse scenes."
-        videoUrl="/video-leaderboard-pcs.mp4"
+        videoUrl="/video-leaderboard-object-detection.mp4"
         videoPosterUrl="/video-leaderboard-pcs.avif"
       />
 

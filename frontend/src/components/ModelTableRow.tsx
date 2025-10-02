@@ -94,28 +94,49 @@ function getNestedValue(obj: any, path: string) {
 }
 
 // Helper function to format values based on column formatter
-const getFormattedValue = (value: any, column?: Column) => {
+const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: boolean = false) => {
+  if (value === null || value === undefined) return '—'
   if (typeof value !== 'number') return value
+  
+  let formattedValue: string
   
   // Check if column has a specific formatter
   if (column?.formatter) {
     switch (column.formatter) {
       case 'decimal':
-        return formatters.decimal(value, 1)
+        formattedValue = formatters.decimal(value, 1)
+        break
       case 'percentage': 
-        return formatters.percentage(value)
+        formattedValue = formatters.percentage(value)
+        break
       case 'parameters':
-        return formatters.parameters(value)
+        formattedValue = formatters.parameters(value)
+        break
       default:
-        return formatters.percentage(value) // Default for backward compatibility
+        formattedValue = formatters.percentage(value) // Default for backward compatibility
     }
+  } else {
+    // Default behavior for existing tables (object detection)
+    formattedValue = formatters.percentage(value)
   }
   
-  // Default behavior for existing tables (object detection)
-  return formatters.percentage(value)
+  // Add asterisk if explicitly requested
+  if (shouldShowAsterisk) {
+    formattedValue += '*'
+  }
+  
+  return formattedValue
 }
 
 export function ModelTableRow({ result, columns, sortColumn, columnRange }: ModelTableRowProps) {
+  // Check if this is a PCS table by looking for PCS-specific columns
+  const isPCSTable = columns.some(col => 
+    col.key === 'results.cgf' || 
+    col.key === 'results.miou' || 
+    col.key === 'results.gold' || 
+    col.key === 'results.ap_coco_o'
+  )
+
   const renderCellContent = (columnKey: string) => {
     let baseContent
     
@@ -209,7 +230,20 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
 
       default:
         const value = getNestedValue(result, columnKey)
-        baseContent = getFormattedValue(value, column)
+        
+        // Check if this specific value should have an asterisk
+        let shouldShowAsterisk = false
+        if (isPCSTable && column?.key.startsWith('results.')) {
+          // Extract the metric name from the column key (e.g., 'results.cgf' -> 'cgf')
+          const metricName = column.key.replace('results.', '')
+          const asteriskKey = `${metricName}_asterisk`
+          
+          // Check if asterisk flag exists and is true, otherwise default to true for non-null values
+          const asteriskFlag = getNestedValue(result, `results.${asteriskKey}`)
+          shouldShowAsterisk = asteriskFlag !== undefined ? asteriskFlag : (value !== null && value !== undefined)
+        }
+        
+        baseContent = getFormattedValue(value, column, shouldShowAsterisk)
     }
 
     // Add horizontal bar background if this is the sorted column and it's numeric
