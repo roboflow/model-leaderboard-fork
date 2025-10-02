@@ -32,6 +32,11 @@ import { formatters } from "@/lib/formatters";
 import { useSetFilter } from "@/hooks/useSetFilter";
 import { useColumnManager } from "@/hooks/useColumnManager";
 
+interface GroupedBenchmark {
+  groupName: string
+  items: { key: string; label: string }[]
+}
+
 interface MobileControlsProps {
   // Filter objects
   licenseFilter: ReturnType<typeof useSetFilter>;
@@ -44,10 +49,15 @@ interface MobileControlsProps {
   availableArchitectures: string[];
   availablePretrainDatasets: string[];
 
-  // Dataset selection
-  availableDatasets: string[];
-  selectedDataset: string;
-  onDatasetChange: (dataset: string) => void;
+  // Benchmark selection (supporting both old and new formats)
+  availableDatasets?: string[];
+  selectedDataset?: string;
+  onDatasetChange?: (dataset: string) => void;
+  
+  // New grouped benchmark selection
+  availableBenchmarks?: GroupedBenchmark[];
+  selectedBenchmark?: string;
+  onBenchmarkChange?: (benchmark: string) => void;
 
   // Column management
   columnManager: ReturnType<typeof useColumnManager>;
@@ -64,6 +74,9 @@ export function MobileControls({
   availableDatasets,
   selectedDataset,
   onDatasetChange,
+  availableBenchmarks,
+  selectedBenchmark,
+  onBenchmarkChange,
   columnManager,
 }: MobileControlsProps) {
   const isMobile = useIsMobile();
@@ -149,10 +162,23 @@ export function MobileControls({
                 <DropdownFilterRadio
                   icon={GaugeIcon}
                   title="Benchmark"
-                  label="Select Dataset"
-                  availableItems={availableDatasets}
-                  selectedItem={selectedDataset}
-                  onItemChange={onDatasetChange}
+                  label="Select Benchmark"
+                  {...(availableBenchmarks && selectedBenchmark && onBenchmarkChange ? {
+                    groupedItems: availableBenchmarks,
+                    selectedItem: selectedBenchmark,
+                    onItemChange: onBenchmarkChange,
+                    tag: (() => {
+                      const group = availableBenchmarks.find(g => 
+                        g.items.some(item => item.key === selectedBenchmark)
+                      )
+                      const benchmarkLabel = group?.items.find(item => item.key === selectedBenchmark)?.label
+                      return group && benchmarkLabel ? `${group.groupName}: ${benchmarkLabel}` : selectedBenchmark
+                    })()
+                  } : {
+                    availableItems: availableDatasets || [],
+                    selectedItem: selectedDataset || '',
+                    onItemChange: onDatasetChange || (() => {})
+                  })}
                 />
               </div>
 

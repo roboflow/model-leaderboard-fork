@@ -12,7 +12,7 @@ import Link from "next/link"
 import { useRangeFilter } from "@/hooks/useRangeFilter"
 import { useUniqueValues } from "@/hooks/useUniqueValues"
 import { useSetFilter } from "@/hooks/useSetFilter"
-import { useColumnManager } from "@/hooks/useColumnManager"
+import { usePCSColumnManager } from "@/hooks/usePCSColumnManager"
 
 // Filter Components
 import { SearchInput } from "@/components/SearchInput"
@@ -34,7 +34,7 @@ import { TaskCard } from "@/components/TaskCard"
 
 
 // Data & Utils
-import aggregateResults from "@/data/aggregate_results.json"
+import pcsResults from "@/data/pcs_sample_results.json"
 import { formatters } from "@/lib/formatters"
 import { CircuitryIcon, FileTextIcon, DatabaseIcon, CpuIcon, GaugeIcon, ArrowSquareOutIcon, HeartIcon } from "@phosphor-icons/react"
 
@@ -42,14 +42,14 @@ import { useState, useMemo, useEffect } from "react"
 
 type SortDirection = "asc" | "desc" | null
 
-interface ModelResult {
+interface PCSModelResult {
   metadata: {
     model: string
     license: string
     architecture: string
     github_url: string
     paper_url: string
-    param_count: number
+    param_count: number | null
     pretrain_datasets: string[]
     run_parameters: {
       // YOLO-style parameters
@@ -66,37 +66,42 @@ interface ModelResult {
       threshold?: number
     }
   }
-  map50_95: number
-  map50: number
-  map75: number
-  small_objects: {
-    map50_95: number
-    map50: number
-    map75: number
+  results: {
+    cgf?: number | null
+    ap?: number | null
+    ap_coco_o?: number | null
+    gold?: number | null
+    silver?: number | null
+    bronze?: number | null
+    bio?: number | null
+    miou?: number | null
   }
-  medium_objects: {
-    map50_95: number
-    map50: number
-    map75: number
+}
+
+interface BenchmarkData {
+  metadata: {
+    task: string
+    benchmark: string
+    description: string
+    columns: string[]
   }
-  large_objects: {
-    map50_95: number
-    map50: number
-    map75: number
+  models: PCSModelResult[]
+}
+
+interface PCSData {
+  instance_segmentation: {
+    lvis: BenchmarkData
+    sa_co: BenchmarkData
   }
-  f1_50: number
-  f1_75: number
-  f1_small_objects: {
-    f1_50: number
-    f1_75: number
+  box_detection: {
+    lvis: BenchmarkData
+    coco: BenchmarkData
+    sa_co: BenchmarkData
   }
-  f1_medium_objects: {
-    f1_50: number
-    f1_75: number
-  }
-  f1_large_objects: {
-    f1_50: number
-    f1_75: number
+  semantic_segmentation: {
+    ade_847: BenchmarkData
+    pc_59: BenchmarkData
+    cityscapes: BenchmarkData
   }
 }
 
@@ -104,41 +109,23 @@ function getNestedValue(obj: any, path: string) {
   return path.split('.').reduce((current, key) => current?.[key], obj)
 }
 
-function getSearchableText(result: ModelResult): string {
+function getSearchableText(result: PCSModelResult): string {
   const searchableFields = [
     result.metadata.model,
     result.metadata.license,
-    formatters.parameters(result.metadata.param_count),
-    formatters.percentage(result.map50_95),
-    formatters.percentage(result.map50),
-    formatters.percentage(result.map75),
-    formatters.decimal(result.map50_95),
-    formatters.decimal(result.map50),
-    formatters.decimal(result.map75),
-    formatters.percentage(result.f1_50),
-    formatters.percentage(result.f1_75),
-    formatters.percentage(result.small_objects.map50_95),
-    formatters.percentage(result.small_objects.map50),
-    formatters.percentage(result.small_objects.map75),
-    formatters.percentage(result.medium_objects.map50_95),
-    formatters.percentage(result.medium_objects.map50),
-    formatters.percentage(result.medium_objects.map75),
-    formatters.percentage(result.large_objects.map50_95),
-    formatters.percentage(result.large_objects.map50),
-    formatters.percentage(result.large_objects.map75),
-    formatters.percentage(result.f1_small_objects.f1_50),
-    formatters.percentage(result.f1_small_objects.f1_75),
-    formatters.percentage(result.f1_medium_objects.f1_50),
-    formatters.percentage(result.f1_medium_objects.f1_75),
-    formatters.percentage(result.f1_large_objects.f1_50),
-    formatters.percentage(result.f1_large_objects.f1_75),
-    formatters.decimal(result.map50_95),
-    formatters.decimal(result.map50),
-    formatters.decimal(result.map75),
-    formatters.decimal(result.f1_50),
-    formatters.decimal(result.f1_75),
-    result.metadata.param_count.toString(),
-  ]
+    result.metadata.architecture,
+    result.metadata.param_count ? formatters.parameters(result.metadata.param_count) : '',
+    result.metadata.param_count?.toString() || '',
+    // Add all result values that exist
+    result.results.cgf?.toString() || '',
+    result.results.ap?.toString() || '',
+    result.results.ap_coco_o?.toString() || '',
+    result.results.gold?.toString() || '',
+    result.results.silver?.toString() || '',
+    result.results.bronze?.toString() || '',
+    result.results.bio?.toString() || '',
+    result.results.miou?.toString() || '',
+  ].filter(Boolean) // Remove empty strings
 
   return searchableFields.join(' ').toLowerCase()
 }
@@ -146,45 +133,108 @@ function getSearchableText(result: ModelResult): string {
 
 
 
-
-export default function Home() {
+export default function PCSPage() {
   // ============================================================================
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("map50_95")
+  const [sortColumn, setSortColumn] = useState<string>("results.gold")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedDataset, setSelectedDataset] = useState("COCO 2017")
+  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.lvis")
+
+  // Cast the imported data to our PCS type
+  const pcsData = pcsResults as unknown as PCSData
+  
+  // Debug logging to help identify issues
+  useEffect(() => {
+    console.log('PCS Data loaded:', {
+      hasInstanceSegmentation: !!pcsData?.instance_segmentation,
+      hasBoxDetection: !!pcsData?.box_detection,
+      hasSemanticSegmentation: !!pcsData?.semantic_segmentation,
+      selectedBenchmark
+    })
+  }, [pcsData, selectedBenchmark])
+
+  // ============================================================================
+  // BENCHMARK GROUPS & CURRENT DATA
+  // ============================================================================
+  const benchmarkGroups = useMemo(() => [
+    {
+      groupName: "Instance Segmentation",
+      benchmarks: [
+        { key: "instance_segmentation.lvis", label: "LVIS" },
+        { key: "instance_segmentation.sa_co", label: "SA-Co" }
+      ]
+    },
+    {
+      groupName: "Box Detection",
+      benchmarks: [
+        { key: "box_detection.lvis", label: "LVIS" },
+        { key: "box_detection.coco", label: "COCO" },
+        { key: "box_detection.sa_co", label: "SA-Co" }
+      ]
+    },
+    {
+      groupName: "Semantic Segmentation",
+      benchmarks: [
+        { key: "semantic_segmentation.ade_847", label: "ADE-847" },
+        { key: "semantic_segmentation.pc_59", label: "PC-59" },
+        { key: "semantic_segmentation.cityscapes", label: "Cityscapes" }
+      ]
+    }
+  ], [])
+
+  // Get current benchmark data
+  const currentBenchmarkData = useMemo(() => {
+    const [task, benchmark] = selectedBenchmark.split('.')
+    if (task === 'instance_segmentation' && pcsData.instance_segmentation) {
+      return pcsData.instance_segmentation[benchmark as keyof typeof pcsData.instance_segmentation]
+    } else if (task === 'box_detection' && pcsData.box_detection) {
+      return pcsData.box_detection[benchmark as keyof typeof pcsData.box_detection]
+    } else if (task === 'semantic_segmentation' && pcsData.semantic_segmentation) {
+      return pcsData.semantic_segmentation[benchmark as keyof typeof pcsData.semantic_segmentation]
+    }
+    return null
+  }, [selectedBenchmark, pcsData])
+
+  const currentModels = currentBenchmarkData?.models || []
 
   // ============================================================================
   // DATA EXTRACTION & FILTERS
   // ============================================================================
-  // Extract unique values for filter dropdowns
-  const availableLicenses = useUniqueValues(aggregateResults, (result) => result.metadata.license)
-  const availableArchitectures = useUniqueValues(aggregateResults, (result) => result.metadata.architecture)
-  const availablePretrainDatasets = useUniqueValues(aggregateResults, (result) => result.metadata.pretrain_datasets)
-  const availableDatasets = useMemo(() => ["COCO 2017"], [])
+  // Extract unique values for filter dropdowns from current models
+  const availableLicenses = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.license)
+  const availableArchitectures = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.architecture)
+  const availablePretrainDatasets = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.pretrain_datasets)
 
   // Initialize filter hooks
   const licenseFilter = useSetFilter(availableLicenses)
   const architectureFilter = useSetFilter(availableArchitectures)
   const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets)
 
-  // Calculate parameter range for slider
+  // Calculate parameter range for slider - only for models with non-null param_count
   const { minParams, maxParams } = useMemo(() => {
-    if (aggregateResults.length === 0) return { minParams: 0, maxParams: 100 }
-    const paramCounts = aggregateResults.map(result => result.metadata.param_count / 1_000_000)
+    if (currentModels.length === 0) return { minParams: 0, maxParams: 100 }
+    const paramCounts = currentModels
+      .filter((result: PCSModelResult) => result.metadata.param_count !== null)
+      .map((result: PCSModelResult) => result.metadata.param_count! / 1_000_000)
+    if (paramCounts.length === 0) return { minParams: 0, maxParams: 100 }
     return { minParams: Math.min(...paramCounts), maxParams: Math.max(...paramCounts) }
-  }, [])
+  }, [currentModels])
 
   const parameterFilter = useRangeFilter(minParams, maxParams)
-  const columnManager = useColumnManager()
+  const columnManager = usePCSColumnManager(selectedBenchmark)
 
   // ============================================================================
   // HANDLERS
   // ============================================================================
-  const handleDatasetChange = (dataset: string) => setSelectedDataset(dataset)
+  const handleBenchmarkChange = (benchmark: string) => {
+    setSelectedBenchmark(benchmark)
+    // Reset sort to default when changing benchmarks
+    setSortColumn("results.gold")
+    setSortDirection("desc")
+  }
   
   const handleSort = (key: string) => {
     if (sortColumn === key) {
@@ -209,36 +259,40 @@ export default function Home() {
   // ============================================================================
   // Apply all filters and sorting
   const filteredAndSortedResults = useMemo(() => {
-    let filtered = aggregateResults
+    let filtered = currentModels
 
     // Search filter
     if (search.trim()) {
       const searchLower = search.toLowerCase().trim()
-      filtered = filtered.filter(result => getSearchableText(result).includes(searchLower))
+      filtered = filtered.filter((result: PCSModelResult) => getSearchableText(result).includes(searchLower))
     }
 
     // License filter
     if (licenseFilter.selectedItems.size > 0) {
-      filtered = filtered.filter(result => licenseFilter.selectedItems.has(result.metadata.license))
+      filtered = filtered.filter((result: PCSModelResult) => licenseFilter.selectedItems.has(result.metadata.license))
     }
 
     // Architecture filter
     if (architectureFilter.selectedItems.size > 0) {
-      filtered = filtered.filter(result => architectureFilter.selectedItems.has(result.metadata.architecture))
+      filtered = filtered.filter((result: PCSModelResult) => architectureFilter.selectedItems.has(result.metadata.architecture))
     }
 
     // Pretrain datasets filter
     if (pretrainDatasetFilter.selectedItems.size > 0) {
-      filtered = filtered.filter(result => {
-        return result.metadata.pretrain_datasets?.some(dataset =>
+      filtered = filtered.filter((result: PCSModelResult) => {
+        return result.metadata.pretrain_datasets?.some((dataset: string) =>
           pretrainDatasetFilter.selectedItems.has(dataset)
         )
       })
     }
 
-    // Parameter range filter
+    // Parameter range filter - only apply to models with non-null param_count
     const [minParamsMillion, maxParamsMillion] = parameterFilter.value
-    filtered = filtered.filter(result => {
+    filtered = filtered.filter((result: PCSModelResult) => {
+      // If param_count is null, include the model (don't filter it out)
+      if (result.metadata.param_count === null) return true
+      
+      // If param_count exists, apply the range filter
       const paramCountMillion = result.metadata.param_count / 1_000_000
       return paramCountMillion >= minParamsMillion && paramCountMillion <= maxParamsMillion
     })
@@ -252,19 +306,26 @@ export default function Home() {
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
-  }, [search, licenseFilter.selectedItems, architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, sortColumn, sortDirection])
+  }, [currentModels, search, licenseFilter.selectedItems, architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, sortColumn, sortDirection])
 
-  // Calculate range for bar indicators
+  // Calculate range for bar indicators with improved null handling
   const columnRange = useMemo(() => {
     if (!sortColumn || filteredAndSortedResults.length === 0) return null
     const nonNumericColumns = ['metadata.model', 'metadata.license', 'paper']
     if (nonNumericColumns.includes(sortColumn)) return null
     
-    const values = filteredAndSortedResults.map(result => getNestedValue(result, sortColumn))
-    const numericValues = values.filter(v => typeof v === 'number')
+    const values = filteredAndSortedResults.map((result: PCSModelResult) => getNestedValue(result, sortColumn))
+    // Filter out null, undefined, NaN, and non-numeric values
+    const numericValues = values.filter((v: any) => typeof v === 'number' && !isNaN(v) && isFinite(v))
     if (numericValues.length === 0) return null
     
-    return { min: Math.min(...numericValues), max: Math.max(...numericValues), column: sortColumn }
+    const min = Math.min(...numericValues)
+    const max = Math.max(...numericValues)
+    
+    // Only return range if we have meaningful data
+    if (min === max && numericValues.length === 1) return null
+    
+    return { min, max, column: sortColumn }
   }, [sortColumn, filteredAndSortedResults])
 
   // ============================================================================
@@ -305,8 +366,8 @@ export default function Home() {
       />
 
       <TaskCard 
-        title="Object Detection"
-        description="Identify and localize objects in an image by predicting bounding boxes and class labels. Models are evaluated on the COCO 2017 dataset, measuring how accurately they detect and classify objects in diverse scenes."
+        title="Promptable Concept Segmentation"
+        description="Segment objects with pixel-level precision using prompts such as text, points, or images. Models are evaluated on their ability to follow prompts and handle compositional queries for open-world understanding."
         videoUrl="/video-leaderboard-pcs.mp4"
         videoPosterUrl="/video-leaderboard-pcs.avif"
       />
@@ -371,10 +432,23 @@ export default function Home() {
                 <DropdownFilterRadio
                   icon={GaugeIcon}
                   title="Benchmark"
-                  label="Select Dataset"
-                  availableItems={availableDatasets}
-                  selectedItem={selectedDataset}
-                  onItemChange={handleDatasetChange}
+                  label="Select Benchmark"
+                  groupedItems={benchmarkGroups.map(group => ({
+                    groupName: group.groupName,
+                    items: group.benchmarks.map(b => ({
+                      key: b.key,
+                      label: b.label
+                    }))
+                  }))}
+                  selectedItem={selectedBenchmark}
+                  tag={(() => {
+                    const group = benchmarkGroups.find(g => 
+                      g.benchmarks.some(b => b.key === selectedBenchmark)
+                    )
+                    const benchmarkLabel = group?.benchmarks.find(b => b.key === selectedBenchmark)?.label
+                    return group && benchmarkLabel ? `${group.groupName}: ${benchmarkLabel}` : selectedBenchmark
+                  })()}
+                  onItemChange={handleBenchmarkChange}
                 />
 
                 <Separator orientation="vertical" className="max-h-9" />
@@ -402,10 +476,16 @@ export default function Home() {
                 availableArchitectures={availableArchitectures}
                 availablePretrainDatasets={availablePretrainDatasets}
                 
-                // Dataset selection (simple)
-                availableDatasets={availableDatasets}
-                selectedDataset={selectedDataset}
-                onDatasetChange={handleDatasetChange}
+                // Benchmark selection (using grouped data)
+                availableBenchmarks={benchmarkGroups.map(group => ({
+                  groupName: group.groupName,
+                  items: group.benchmarks.map(b => ({
+                    key: b.key,
+                    label: b.label
+                  }))
+                }))}
+                selectedBenchmark={selectedBenchmark}
+                onBenchmarkChange={handleBenchmarkChange}
                 
                 // Column management (already consolidated)
                 columnManager={columnManager}
@@ -456,11 +536,11 @@ export default function Home() {
                       </TableCell>
                     </TableRow>
                   ) : (
-                    filteredAndSortedResults.map((result) => (
+                    filteredAndSortedResults.map((result: PCSModelResult) => (
                       <ModelTableRow
                         key={result.metadata.model}
-                        result={result}
-                        columns={columnManager.filteredColumns}
+                        result={result as any} // Type assertion for compatibility
+                        columns={columnManager.filteredColumns as any} // Type assertion for compatibility
                         sortColumn={sortColumn}
                         columnRange={columnRange}
                       />
@@ -480,7 +560,7 @@ export default function Home() {
                     ) : (
                       <>
                         Displaying <span className="font-medium text-foreground">{filteredAndSortedResults.length}</span> out of{" "}
-                        <span className="font-medium text-foreground">{aggregateResults.length}</span> models
+                        <span className="font-medium text-foreground">{currentModels.length}</span> models
                       </>
                     )}
                   </div>
