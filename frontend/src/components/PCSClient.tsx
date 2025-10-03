@@ -356,7 +356,7 @@ export default function PCSClient() {
       <HeroSection 
         title="Computer Vision"
         subtitle="Model Leaderboard"
-        description="Compare computer vision models benchmarked on the COCO 2017 dataset using standardized mAP and F1 metrics. Filter by architecture, size, or license to find the best model for your use case."
+        description="Compare computer vision models across top benchmarks for their respective tasks."
       />
 
       <TaskToggle 
@@ -369,8 +369,8 @@ export default function PCSClient() {
       <TaskCard 
         title="Promptable Concept Segmentation"
         description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
-        videoUrl="/video-leaderboard-pcs.mp4"
-        videoPosterUrl="/video-leaderboard-pcs.avif"
+        videoUrl={ `${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-pcs.mp4`}
+        videoPosterUrl={`${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-pcs.avif`}
       />
 
       {/* Main Leaderboard */}
