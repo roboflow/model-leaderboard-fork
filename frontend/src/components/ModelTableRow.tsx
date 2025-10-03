@@ -211,9 +211,10 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
             href={result.metadata.paper_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-foreground/6 hover:bg-foreground/12 transition-colors duration-200"
+            className="inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold transition-colors text-primary-foreground bg-foreground/6 hover:bg-primary"
           >
-            <SiArxiv size={16} className="text-foreground/60" />
+            <SiArxiv size={10} className="text-primary-foreground" />
+            <span>Arxiv</span>
           </Link>
         ) : (
           <span className="text-muted-foreground text-xs">—</span>

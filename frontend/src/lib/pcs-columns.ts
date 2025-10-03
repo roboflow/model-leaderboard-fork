@@ -92,7 +92,7 @@ export const pcsColumns: PCSColumn[] = [
     label: "Silver",
     width: "w-40",
     group: 'Size-Specific',
-    defaultVisible: true,
+    defaultVisible: false,
     sortable: true,
     benchmarks: ["sa_co"], // Only SA-Co shows tier columns
     tooltip: "10 domains, 1 human annotation per image-NP pair",
