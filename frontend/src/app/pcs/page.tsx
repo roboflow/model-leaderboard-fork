@@ -2,16 +2,16 @@ import type { Metadata } from 'next'
 import PCSClient from '@/components/PCSClient'
 
 export const metadata: Metadata = {
-  title: 'Promptable Concept Segmentation (PCS) Model Leaderboard',
-  description: 'Compare PCS models for pixel-level object identification using text, point, and image prompts. Benchmarked on LVIS, COCO, SA-Co, ADE-847, PC-59, and Cityscapes datasets.',
+  title: 'Computer Vision Model Leaderboard | Promptable Concept Segmentation (PCS) Benchmarks',
+  description: 'Compare Promptable Concept Segmentation (PCS) models that you can prompt with text, points, or image regions.',
   openGraph: {
-    title: 'Promptable Concept Segmentation (PCS) Model Leaderboard',
-    description: 'Compare PCS models for pixel-level object identification using text, point, and image prompts. Benchmarked on LVIS, COCO, SA-Co, ADE-847, PC-59, and Cityscapes datasets.',
+    title: 'Computer Vision Model Leaderboard | Promptable Concept Segmentation (PCS) Benchmarks',
+    description: 'Compare Promptable Concept Segmentation (PCS) models that you can prompt with text, points, or image regions.',
     url: 'https://roboflow.github.io/model-leaderboard/pcs',
   },
   twitter: {
-    title: 'Promptable Concept Segmentation (PCS) Model Leaderboard',
-    description: 'Compare PCS models for pixel-level object identification using text, point, and image prompts. Benchmarked on LVIS, COCO, SA-Co, ADE-847, PC-59, and Cityscapes datasets.',
+    title: 'Computer Vision Model Leaderboard | Promptable Concept Segmentation (PCS) Benchmarks',
+    description: 'Compare Promptable Concept Segmentation (PCS) models that you can prompt with text, points, or image regions.',
   },
 }
 
