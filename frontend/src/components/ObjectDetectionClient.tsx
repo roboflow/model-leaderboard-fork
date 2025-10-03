@@ -288,8 +288,8 @@ export default function ObjectDetectionClient() {
       <TaskCard 
         title="Object Detection"
         description="Object detection models return bounding boxes that correspond to the location of objects in an image. Our leaderboard shows the accuracy of top-performing models on the industry-standard Microsoft COCO object detection benchmark."
-        videoUrl={ `${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-object-detection.mp4`}
-        videoPosterUrl={`${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-pcs.avif`}
+        videoUrl="/model-leaderboard-fork/video-leaderboard-object-detection.mp4"
+        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
       />
 
       {/* Main Leaderboard */}
