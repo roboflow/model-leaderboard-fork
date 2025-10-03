@@ -587,8 +587,8 @@ export default function PCSPage() {
                   )}
 
                   <div className="text-xs text-muted-foreground">
-                    <div>* not independently validated by Roboflow</div>
-                    <div>** partially trained on LVIS.</div>
+                    <div>*Author reported, not yet independently validated</div>
+                    <div>† partially trained on LVIS.</div>
                   </div>
                 </div>
                 <div className="prose prose-sm">Made with <HeartIcon size={14} weight="fill" className="inline-block text-primary-foreground" /> by <Link href="https://roboflow.com" target="_blank" className="link-primary">Roboflow</Link></div>
