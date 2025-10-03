@@ -147,23 +147,23 @@ export default function PCSClient() {
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("results.ap") // Default to AP for LVIS
+  const [sortColumn, setSortColumn] = useState<string>("results.gold") // Default to AP for LVIS
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.lvis")
+  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.sa_co")
 
   // Cast the imported data to our PCS type
   const pcsData = pcsResults as unknown as PCSData
   
   // Debug logging to help identify issues
-  useEffect(() => {
-    console.log('PCS Data loaded:', {
-      hasInstanceSegmentation: !!pcsData?.instance_segmentation,
-      hasBoxDetection: !!pcsData?.box_detection,
-      hasSemanticSegmentation: !!pcsData?.semantic_segmentation,
-      selectedBenchmark
-    })
-  }, [pcsData, selectedBenchmark])
+  // useEffect(() => {
+  //   console.log('PCS Data loaded:', {
+  //     hasInstanceSegmentation: !!pcsData?.instance_segmentation,
+  //     hasBoxDetection: !!pcsData?.box_detection,
+  //     hasSemanticSegmentation: !!pcsData?.semantic_segmentation,
+  //     selectedBenchmark
+  //   })
+  // }, [pcsData, selectedBenchmark])
 
   // ============================================================================
   // BENCHMARK GROUPS & CURRENT DATA
@@ -172,16 +172,16 @@ export default function PCSClient() {
     {
       groupName: "Instance Segmentation",
       benchmarks: [
-        { key: "instance_segmentation.lvis", label: "LVIS" },
-        { key: "instance_segmentation.sa_co", label: "SA-Co" }
+        { key: "instance_segmentation.sa_co", label: "SA-Co" },
+        { key: "instance_segmentation.lvis", label: "LVIS" }
       ]
     },
     {
       groupName: "Box Detection",
       benchmarks: [
+        { key: "box_detection.sa_co", label: "SA-Co" },
         { key: "box_detection.lvis", label: "LVIS" },
         { key: "box_detection.coco", label: "COCO" },
-        { key: "box_detection.sa_co", label: "SA-Co" }
       ]
     },
     {
