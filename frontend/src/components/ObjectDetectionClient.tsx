@@ -271,26 +271,31 @@ export default function ObjectDetectionClient() {
   // ============================================================================
   return (
     <>
-      {/* Hero Section */}
-      <HeroSection 
-        title="Computer Vision"
-        subtitle="Model Leaderboard"
-        description="Compare computer vision models across top benchmarks for their respective tasks."
-      />
 
       <TaskToggle 
         tasks={[
           { href: "/", label: "Object Detection" },
-          { href: "/pcs", label: "PCS" }
+          { href: "/pcs", label: "Promptable Concept Segmentation" }
         ]}
       />
 
-      <TaskCard 
+      {/* Hero Section */}
+      <HeroSection 
+        title="Object Detection"
+        subtitle="Model Leaderboard"
+        description="Object detection models return bounding boxes that correspond to the location of objects in an image. Our leaderboard shows the accuracy of top-performing models on the industry-standard Microsoft COCO object detection benchmark."
+        videoUrl="/model-leaderboard-fork/video-leaderboard-object-detection.mp4"
+        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-object-detection.avif"
+      />
+
+      
+
+      {/* <TaskCard 
         title="Object Detection"
         description="Object detection models return bounding boxes that correspond to the location of objects in an image. Our leaderboard shows the accuracy of top-performing models on the industry-standard Microsoft COCO object detection benchmark."
         videoUrl="/model-leaderboard-fork/video-leaderboard-object-detection.mp4"
         videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
-      />
+      /> */}
 
       {/* Main Leaderboard */}
       <section className="pb-12">

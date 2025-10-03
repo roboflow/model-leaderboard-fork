@@ -353,25 +353,50 @@ export default function PCSClient() {
   return (
     <>
       {/* Hero Section */}
-      <HeroSection 
-        title="Computer Vision"
-        subtitle="Model Leaderboard"
-        description="Compare computer vision models across top benchmarks for their respective tasks."
-      />
 
       <TaskToggle 
         tasks={[
           { href: "/", label: "Object Detection" },
-          { href: "/pcs", label: "PCS" }
+          { href: "/pcs", label: "Promptable Concept Segmentation" }
         ]}
       />
 
-      <TaskCard 
+      {/* <section className="pt-6 sm:pt-12">
+      <div className="container-base">
+        <div className="flex">
+          <div className="space-y-2">
+            <Badge variant="primary">
+              <Link href="https://github.com/roboflow/supervision" target="_blank" className="flex gap-1">
+              Powered by supervision <ArrowSquareOutIcon size={14} weight="thin" />
+              </Link>
+            </Badge>
+            <h1 className="text-3xl sm:text-4xl">
+              <span className="text-primary-foreground">Promptable Concept Segmentation</span>
+              Model Leaderboard
+            </h1>
+            <p className="prose prose-sm max-w-lg">
+            Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> */}
+      <HeroSection 
         title="Promptable Concept Segmentation"
+        subtitle="Model Leaderboard"
         description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
         videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
         videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
       />
+
+     
+
+      {/* <TaskCard 
+        title="Promptable Concept Segmentation"
+        description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
+        videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
+        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
+      /> */}
 
       {/* Main Leaderboard */}
       <section className="pb-12">
