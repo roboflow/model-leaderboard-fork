@@ -15,7 +15,7 @@ export function TaskToggle({ tasks }: TaskToggleProps) {
   const pathname = usePathname()
 
   return (
-    <div className="flex justify-center p-1 bg-muted w-full max-w-sm mx-auto rounded-full">
+    <div className="flex justify-center p-1 bg-muted w-full max-w-[280px] md:max-w-sm mx-auto rounded-full">
       {tasks.map((task) => (
         <Button 
           key={task.href}
