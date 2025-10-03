@@ -36,22 +36,24 @@ export function TaskToggle({ tasks }: TaskToggleProps) {
     // </div>
     <section className="">
       <div className="container-base">
-        <div className="w-full flex gap-3 border-b border-border">
-          {tasks.map((task) => (
-            <Button 
-              key={task.href}
-              asChild 
-              className={cn(` border-b rounded-none bg-transparent ${
-                pathname === task.href || (task.href !== "/" && pathname.startsWith(task.href))
-                  ? "border-primary-foreground hover:bg-transparent" 
-                  : "bg-transparent border-transparent text-muted-foreground hover:text-foreground hover:bg-transparent"
-              }`)}
-            >
-              <Link href={task.href}>
-                {task.label}
-              </Link>
-            </Button>
-          ))}
+        <div className="w-full overflow-x-auto border-b border-border [&::-webkit-scrollbar]:h-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted-foreground/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/40">
+          <div className="flex gap-3 min-w-max">
+            {tasks.map((task) => (
+              <Button 
+                key={task.href}
+                asChild 
+                className={cn(`border-b rounded-none bg-transparent whitespace-nowrap ${
+                  pathname === task.href || (task.href !== "/" && pathname.startsWith(task.href))
+                    ? "border-primary-foreground hover:bg-transparent" 
+                    : "bg-transparent border-transparent text-muted-foreground hover:text-foreground hover:bg-transparent"
+                }`)}
+              >
+                <Link href={task.href}>
+                  {task.label}
+                </Link>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </section>
