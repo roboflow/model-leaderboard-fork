@@ -482,7 +482,6 @@ export default function ObjectDetectionClient() {
               </div>
           </div>
 
-
         </div>
       </section>
     </>
