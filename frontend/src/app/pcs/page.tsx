@@ -147,7 +147,7 @@ export default function PCSPage() {
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("results.gold")
+  const [sortColumn, setSortColumn] = useState<string>("results.ap") // Default to AP for LVIS
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
   const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.lvis")
@@ -240,8 +240,18 @@ export default function PCSPage() {
   // ============================================================================
   const handleBenchmarkChange = (benchmark: string) => {
     setSelectedBenchmark(benchmark)
-    // Reset sort to default when changing benchmarks
-    setSortColumn("results.gold")
+    // Set appropriate default sort column based on benchmark
+    if (benchmark.includes('lvis')) {
+      setSortColumn("results.ap")
+    } else if (benchmark.includes('coco')) {
+      setSortColumn("results.ap")
+    } else if (benchmark.includes('sa_co')) {
+      setSortColumn("results.gold")
+    } else if (benchmark.includes('ade_847') || benchmark.includes('pc_59') || benchmark.includes('cityscapes')) {
+      setSortColumn("results.miou")
+    } else {
+      setSortColumn("results.gold") // fallback
+    }
     setSortDirection("desc")
   }
   
