@@ -151,10 +151,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -287,10 +287,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -409,10 +409,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -533,10 +533,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -668,10 +668,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -723,10 +723,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -778,10 +778,10 @@
         {
           "metadata": {
             "model": "OWLv2†",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
