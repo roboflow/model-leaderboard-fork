@@ -26,22 +26,11 @@ export const pcsColumns: PCSColumn[] = [
     label: "Parameters (M)",
     width: "w-48",
     group: 'Basic',
-    defaultVisible: true,
+    defaultVisible: false,
     sortable: true,
     benchmarks: ["lvis", "sa_co", "coco", "ade_847", "pc_59", "cityscapes"],
     tooltip: "Total number of trainable parameters in millions",
     formatter: 'parameters'
-  },
-  {
-    key: "results.cgf",
-    label: "CGF",
-    width: "w-40",
-    group: 'Core Metrics',
-    defaultVisible: true,
-    sortable: true,
-    benchmarks: ["lvis"], // Only LVIS shows CGF
-    tooltip: "Compositional Generalization Factor",
-    formatter: 'decimal'
   },
   {
     key: "results.ap",
@@ -52,6 +41,17 @@ export const pcsColumns: PCSColumn[] = [
     sortable: true,
     benchmarks: ["lvis", "coco"], // LVIS and COCO show AP
     tooltip: "Average Precision",
+    formatter: 'decimal'
+  },
+  {
+    key: "results.cgf",
+    label: "CGF",
+    width: "w-40",
+    group: 'Core Metrics',
+    defaultVisible: true,
+    sortable: true,
+    benchmarks: ["lvis"], // Only LVIS shows CGF
+    tooltip: "Compositional Generalization Factor",
     formatter: 'decimal'
   },
   {

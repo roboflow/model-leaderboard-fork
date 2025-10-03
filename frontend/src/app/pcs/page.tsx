@@ -214,13 +214,13 @@ export default function PCSPage() {
   // ============================================================================
   // Extract unique values for filter dropdowns from current models
   const availableLicenses = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.license)
-  const availableArchitectures = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.architecture)
-  const availablePretrainDatasets = useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.pretrain_datasets)
+  const availableArchitectures: string[] = [] // Commented out: useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.architecture)
+  const availablePretrainDatasets: string[] = [] // Commented out: useUniqueValues(currentModels, (result: PCSModelResult) => result.metadata.pretrain_datasets)
 
   // Initialize filter hooks
   const licenseFilter = useSetFilter(availableLicenses)
-  const architectureFilter = useSetFilter(availableArchitectures)
-  const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets)
+  const architectureFilter = useSetFilter(availableArchitectures) // Empty array - filter disabled
+  const pretrainDatasetFilter = useSetFilter(availablePretrainDatasets) // Empty array - filter disabled
 
   // Calculate parameter range for slider - only for models with non-null param_count
   const { minParams, maxParams } = useMemo(() => {
@@ -281,30 +281,30 @@ export default function PCSPage() {
       filtered = filtered.filter((result: PCSModelResult) => licenseFilter.selectedItems.has(result.metadata.license))
     }
 
-    // Architecture filter
-    if (architectureFilter.selectedItems.size > 0) {
-      filtered = filtered.filter((result: PCSModelResult) => architectureFilter.selectedItems.has(result.metadata.architecture))
-    }
+    // Architecture filter - commented out
+    // if (architectureFilter.selectedItems.size > 0) {
+    //   filtered = filtered.filter((result: PCSModelResult) => architectureFilter.selectedItems.has(result.metadata.architecture))
+    // }
 
-    // Pretrain datasets filter
-    if (pretrainDatasetFilter.selectedItems.size > 0) {
-      filtered = filtered.filter((result: PCSModelResult) => {
-        return result.metadata.pretrain_datasets?.some((dataset: string) =>
-          pretrainDatasetFilter.selectedItems.has(dataset)
-        )
-      })
-    }
+    // Pretrain datasets filter - commented out
+    // if (pretrainDatasetFilter.selectedItems.size > 0) {
+    //   filtered = filtered.filter((result: PCSModelResult) => {
+    //     return result.metadata.pretrain_datasets?.some((dataset: string) =>
+    //       pretrainDatasetFilter.selectedItems.has(dataset)
+    //     )
+    //   })
+    // }
 
-    // Parameter range filter - only apply to models with non-null param_count
-    const [minParamsMillion, maxParamsMillion] = parameterFilter.value
-    filtered = filtered.filter((result: PCSModelResult) => {
-      // If param_count is null, include the model (don't filter it out)
-      if (result.metadata.param_count === null) return true
-      
-      // If param_count exists, apply the range filter
-      const paramCountMillion = result.metadata.param_count / 1_000_000
-      return paramCountMillion >= minParamsMillion && paramCountMillion <= maxParamsMillion
-    })
+    // Parameter range filter - commented out since all param_count values are null
+    // const [minParamsMillion, maxParamsMillion] = parameterFilter.value
+    // filtered = filtered.filter((result: PCSModelResult) => {
+    //   // If param_count is null, include the model (don't filter it out)
+    //   if (result.metadata.param_count === null) return true
+    //   
+    //   // If param_count exists, apply the range filter
+    //   const paramCountMillion = result.metadata.param_count / 1_000_000
+    //   return paramCountMillion >= minParamsMillion && paramCountMillion <= maxParamsMillion
+    // })
 
     // Apply sorting
     if (!sortColumn || !sortDirection) return filtered
@@ -315,7 +315,7 @@ export default function PCSPage() {
       if (aValue > bValue) return sortDirection === "asc" ? 1 : -1
       return 0
     })
-  }, [currentModels, search, licenseFilter.selectedItems, architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, sortColumn, sortDirection])
+  }, [currentModels, search, licenseFilter.selectedItems, /* architectureFilter.selectedItems, pretrainDatasetFilter.selectedItems, parameterFilter.value, */ sortColumn, sortDirection])
 
   // Calculate range for bar indicators with improved null handling
   const columnRange = useMemo(() => {
@@ -396,7 +396,7 @@ export default function PCSPage() {
 
               {/* Desktop Filters */}
               <div className="hidden sm:flex gap-2 flex-wrap">
-                <DropdownFilterCheckbox
+                {/* <DropdownFilterCheckbox
                   icon={CircuitryIcon}
                   title="Architecture"
                   label="Filter by Architecture"
@@ -405,17 +405,17 @@ export default function PCSPage() {
                   onItemToggle={architectureFilter.toggleItem}
                   onClearAll={architectureFilter.clearAll}
                   onSelectAll={architectureFilter.selectAll}
-                />
+                /> */}
 
-                <DropdownFilterSlider
+                {/* <DropdownFilterSlider
                   icon={CpuIcon}
                   title="Parameters"
                   label="Filter by Parameter Count"
                   formatter={formatters.parametersFromMillion}
                   step={0.1}
                   {...parameterFilter}
-                />
-
+                /> */}
+{/* 
                 <DropdownFilterCheckbox
                   icon={DatabaseIcon}
                   title="Pretrained on"
@@ -425,7 +425,7 @@ export default function PCSPage() {
                   onItemToggle={pretrainDatasetFilter.toggleItem}
                   onClearAll={pretrainDatasetFilter.clearAll}
                   onSelectAll={pretrainDatasetFilter.selectAll}
-                />
+                /> */}
 
                 <DropdownFilterCheckbox
                   icon={FileTextIcon}
@@ -463,7 +463,9 @@ export default function PCSPage() {
                 <Separator orientation="vertical" className="max-h-9" />
 
                 <ColumnToggle
-                  columns={columnManager.allColumns.map(col => ({ key: col.key, label: col.label, group: col.group }))}
+                  columns={columnManager.allColumns
+                    .filter(col => col.key !== 'metadata.param_count') // Hide parameter column from toggle
+                    .map(col => ({ key: col.key, label: col.label, group: col.group }))}
                   visibleColumns={columnManager.visibleColumns}
                   onToggleColumn={columnManager.toggleColumn}
                   onShowAll={columnManager.showAllColumns}
@@ -476,14 +478,14 @@ export default function PCSPage() {
               <MobileControls
                 // Pass the complete filter objects
                 licenseFilter={licenseFilter}
-                architectureFilter={architectureFilter}
-                pretrainDatasetFilter={pretrainDatasetFilter}
-                parameterFilter={parameterFilter}
+                architectureFilter={architectureFilter} // Empty filter - disabled
+                pretrainDatasetFilter={pretrainDatasetFilter} // Empty filter - disabled
+                parameterFilter={parameterFilter} // Keep for interface compatibility, but slider is commented out
                 
                 // Pass the available data
                 availableLicenses={availableLicenses}
-                availableArchitectures={availableArchitectures}
-                availablePretrainDatasets={availablePretrainDatasets}
+                availableArchitectures={availableArchitectures} // Empty array - disabled
+                availablePretrainDatasets={availablePretrainDatasets} // Empty array - disabled
                 
                 // Benchmark selection (using grouped data)
                 availableBenchmarks={benchmarkGroups.map(group => ({
@@ -575,14 +577,14 @@ export default function PCSPage() {
                   </div>
 
                   {/* Active Filters Indicator */}
-                  {!isLoading && (search || licenseFilter.selectedItems.size > 0 || architectureFilter.selectedItems.size > 0 || pretrainDatasetFilter.selectedItems.size > 0 || parameterFilter.isFiltered) && (
+                  {!isLoading && (search || licenseFilter.selectedItems.size > 0 /* || architectureFilter.selectedItems.size > 0 || pretrainDatasetFilter.selectedItems.size > 0 || parameterFilter.isFiltered */) && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>Filtered by:</span>
                       {search && <span className="bg-muted px-2 py-0.5 rounded">Search</span>}
                       {licenseFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">License</span>}
-                      {architectureFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>}
-                      {pretrainDatasetFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrained Datasets</span>}
-                      {parameterFilter.isFiltered && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>}
+                      {/* {architectureFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Architecture</span>} */}
+                      {/* {pretrainDatasetFilter.selectedItems.size > 0 && <span className="bg-muted px-2 py-0.5 rounded">Pretrained Datasets</span>} */}
+                      {/* {parameterFilter.isFiltered && <span className="bg-muted px-2 py-0.5 rounded">Parameters</span>} */}
                     </div>
                   )}
 

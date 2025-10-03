@@ -5,16 +5,16 @@
         "task": "Instance Segmentation",
         "benchmark": "LVIS",
         "description": "Large Vocabulary Instance Segmentation",
-        "columns": ["model", "parameters", "cgf", "ap"]
+        "columns": ["model", "cgf", "ap"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -43,10 +43,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -59,10 +59,10 @@
         {
           "metadata": {
             "model": "LLMDet-L",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
             "github_url": "",
-            "paper_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -75,10 +75,10 @@
         {
           "metadata": {
             "model": "DINO-X",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -91,7 +91,7 @@
         {
           "metadata": {
             "model": "Gemini 2.5",
-            "license": "N/A",
+            "license": "Proprietary",
             "architecture": "",
             "github_url": "",
             "paper_url": "",
@@ -127,16 +127,16 @@
         "task": "Instance Segmentation",
         "benchmark": "SA-Co",
         "description": "Segment Anything Compositional",
-        "columns": ["model", "parameters", "gold", "silver", "bronze", "bio"]
+        "columns": ["model", "gold", "silver", "bronze", "bio"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -169,10 +169,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -187,10 +187,10 @@
         {
           "metadata": {
             "model": "LLMDet-L",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
             "github_url": "",
-            "paper_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -205,10 +205,10 @@
         {
           "metadata": {
             "model": "DINO-X",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -223,7 +223,7 @@
         {
           "metadata": {
             "model": "Gemini 2.5",
-            "license": "N/A",
+            "license": "Proprietary",
             "architecture": "",
             "github_url": "",
             "paper_url": "",
@@ -265,16 +265,16 @@
         "task": "Box Detection",
         "benchmark": "LVIS",
         "description": "Large Vocabulary Instance Segmentation - Box Detection",
-        "columns": ["model", "parameters", "cgf", "ap"]
+        "columns": ["model", "cgf", "ap"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -303,10 +303,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -319,10 +319,10 @@
         {
           "metadata": {
             "model": "LLMDet-L",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
             "github_url": "",
-            "paper_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -335,10 +335,10 @@
         {
           "metadata": {
             "model": "DINO-X",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -351,7 +351,7 @@
         {
           "metadata": {
             "model": "Gemini 2.5",
-            "license": "N/A",
+            "license": "Proprietary",
             "architecture": "",
             "github_url": "",
             "paper_url": "",
@@ -387,16 +387,16 @@
         "task": "Box Detection",
         "benchmark": "COCO",
         "description": "Common Objects in Context - Box Detection",
-        "columns": ["model", "parameters", "ap", "ap_coco_o"]
+        "columns": ["model", "ap", "ap_coco_o"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -425,10 +425,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -441,10 +441,10 @@
         {
           "metadata": {
             "model": "LLMDet-L",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
             "github_url": "",
-            "paper_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -457,10 +457,10 @@
         {
           "metadata": {
             "model": "DINO-X",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -473,7 +473,7 @@
         {
           "metadata": {
             "model": "Gemini 2.5",
-            "license": "N/A",
+            "license": "Proprietary",
             "architecture": "",
             "github_url": "",
             "paper_url": "",
@@ -509,16 +509,16 @@
         "task": "Box Detection",
         "benchmark": "SA-Co",
         "description": "Segment Anything Compositional - Box Detection",
-        "columns": ["model", "parameters", "gold", "silver", "bronze", "bio"]
+        "columns": ["model", "gold", "silver", "bronze", "bio"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -551,10 +551,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -569,10 +569,10 @@
         {
           "metadata": {
             "model": "LLMDet-L",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
             "github_url": "",
-            "paper_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -587,10 +587,10 @@
         {
           "metadata": {
             "model": "DINO-X",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -605,7 +605,7 @@
         {
           "metadata": {
             "model": "Gemini 2.5",
-            "license": "N/A",
+            "license": "Proprietary",
             "architecture": "",
             "github_url": "",
             "paper_url": "",
@@ -647,16 +647,16 @@
         "task": "Semantic Segmentation",
         "benchmark": "ADE-847",
         "description": "ADE20K dataset with 847 classes",
-        "columns": ["model", "parameters", "miou"]
+        "columns": ["model", "miou"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -683,10 +683,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -702,16 +702,16 @@
         "task": "Semantic Segmentation",
         "benchmark": "PC-59",
         "description": "Pascal Context with 59 classes",
-        "columns": ["model", "parameters", "miou"]
+        "columns": ["model", "miou"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -738,10 +738,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -757,16 +757,16 @@
         "task": "Semantic Segmentation",
         "benchmark": "Cityscapes",
         "description": "Urban scene understanding dataset",
-        "columns": ["model", "parameters", "miou"]
+        "columns": ["model", "miou"]
       },
       "models": [
         {
           "metadata": {
             "model": "OWLv2",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/google-research/scenic",
+            "paper_url": "https://arxiv.org/abs/2306.09683",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}
@@ -793,10 +793,10 @@
         {
           "metadata": {
             "model": "gDino-T",
-            "license": "N/A",
+            "license": "Apache 2.0",
             "architecture": "",
-            "github_url": "",
-            "paper_url": "",
+            "github_url": "https://github.com/IDEA-Research/GroundingDINO",
+            "paper_url": "https://arxiv.org/abs/2303.05499",
             "param_count": null,
             "pretrain_datasets": [],
             "run_parameters": {}

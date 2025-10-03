@@ -111,7 +111,7 @@ export function MobileControls({
                   <FunnelIcon size={16} />
                   <h3 className="font-semibold">Filters</h3>
                 </div>
-                <DropdownFilterCheckbox
+                {/* <DropdownFilterCheckbox
                   icon={CircuitryIcon}
                   title="Architecture"
                   label="Filter by Architecture"
@@ -122,9 +122,9 @@ export function MobileControls({
                   onSelectAll={architectureFilter.selectAll}
                 />
 
-                <Separator />
+                <Separator /> */}
 
-                <DropdownFilterSlider
+                {/* <DropdownFilterSlider
                   icon={CpuIcon}
                   title="Parameters"
                   label="Filter by Parameter Count"
@@ -132,9 +132,9 @@ export function MobileControls({
                   step={0.1}
                   {...parameterFilter}
                 />
-                <Separator />
+                <Separator /> */}
 
-                <DropdownFilterCheckbox
+                {/* <DropdownFilterCheckbox
                   icon={DatabaseIcon}
                   title="Pretrained Datasets"
                   label="Filter by Pretrained Datasets"
@@ -144,7 +144,7 @@ export function MobileControls({
                   onClearAll={pretrainDatasetFilter.clearAll}
                   onSelectAll={pretrainDatasetFilter.selectAll}
                 />
-                <Separator />
+                <Separator /> */}
 
                 <DropdownFilterCheckbox
                   icon={FileTextIcon}
@@ -192,11 +192,13 @@ export function MobileControls({
                 </div>
 
                 <ColumnToggle
-                  columns={columnManager.allColumns.map((col) => ({
-                    key: col.key,
-                    label: col.label,
-                    group: col.group,
-                  }))}
+                  columns={columnManager.allColumns
+                    .filter(col => col.key !== 'metadata.param_count') // Hide parameter column from toggle
+                    .map((col) => ({
+                      key: col.key,
+                      label: col.label,
+                      group: col.group,
+                    }))}
                   visibleColumns={columnManager.visibleColumns}
                   onToggleColumn={columnManager.toggleColumn}
                   onShowAll={columnManager.showAllColumns}
