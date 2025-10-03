@@ -60,8 +60,8 @@
           "metadata": {
             "model": "LLMDet-L",
             "license": "Apache 2.0",
-            "architecture": "",
-            "github_url": "",
+            "architecture": "https://github.com/iSEE-Laboratory/LLMDet",
+            "github_url": "https://github.com/iSEE-Laboratory/LLMDet",
             "paper_url": "https://arxiv.org/abs/2501.18954",
             "param_count": null,
             "pretrain_datasets": [],
@@ -694,6 +694,66 @@
           "results": {
             "miou": null
           }
+        },
+        {
+          "metadata": {
+            "model": "LLMDet-L",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "DINO-X",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "Gemini 2.5",
+            "license": "Proprietary",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "SAM 3",
+            "license": "N/A",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": 14.7
+          }
         }
       ]
     },
@@ -749,6 +809,66 @@
           "results": {
             "miou": null
           }
+        },
+        {
+          "metadata": {
+            "model": "LLMDet-L",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "DINO-X",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "Gemini 2.5",
+            "license": "Proprietary",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "SAM 3",
+            "license": "N/A",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": 59.4
+          }
         }
       ]
     },
@@ -803,6 +923,66 @@
           },
           "results": {
             "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "LLMDet-L",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "https://arxiv.org/abs/2501.18954",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "DINO-X",
+            "license": "Apache 2.0",
+            "architecture": "",
+            "github_url": "https://github.com/IDEA-Research/DINO-X-API",
+            "paper_url": "https://arxiv.org/abs/2411.14347",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "Gemini 2.5",
+            "license": "Proprietary",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": null
+          }
+        },
+        {
+          "metadata": {
+            "model": "SAM 3",
+            "license": "N/A",
+            "architecture": "",
+            "github_url": "",
+            "paper_url": "",
+            "param_count": null,
+            "pretrain_datasets": [],
+            "run_parameters": {}
+          },
+          "results": {
+            "miou": 65.1
           }
         }
       ]
