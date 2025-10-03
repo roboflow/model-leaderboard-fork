@@ -369,8 +369,8 @@ export default function PCSClient() {
       <TaskCard 
         title="Promptable Concept Segmentation"
         description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
-        videoUrl={ `${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-pcs.mp4`}
-        videoPosterUrl={`${process.env.NEXT_PUBLIC_BASE_PATH}/video-leaderboard-pcs.avif`}
+        videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
+        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
       />
 
       {/* Main Leaderboard */}
