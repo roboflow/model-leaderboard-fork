@@ -147,23 +147,23 @@ export default function PCSClient() {
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("results.ap") // Default to AP for LVIS
+  const [sortColumn, setSortColumn] = useState<string>("results.gold") // Default to AP for LVIS
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.lvis")
+  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.sa_co")
 
   // Cast the imported data to our PCS type
   const pcsData = pcsResults as unknown as PCSData
   
   // Debug logging to help identify issues
-  useEffect(() => {
-    console.log('PCS Data loaded:', {
-      hasInstanceSegmentation: !!pcsData?.instance_segmentation,
-      hasBoxDetection: !!pcsData?.box_detection,
-      hasSemanticSegmentation: !!pcsData?.semantic_segmentation,
-      selectedBenchmark
-    })
-  }, [pcsData, selectedBenchmark])
+  // useEffect(() => {
+  //   console.log('PCS Data loaded:', {
+  //     hasInstanceSegmentation: !!pcsData?.instance_segmentation,
+  //     hasBoxDetection: !!pcsData?.box_detection,
+  //     hasSemanticSegmentation: !!pcsData?.semantic_segmentation,
+  //     selectedBenchmark
+  //   })
+  // }, [pcsData, selectedBenchmark])
 
   // ============================================================================
   // BENCHMARK GROUPS & CURRENT DATA
@@ -172,16 +172,16 @@ export default function PCSClient() {
     {
       groupName: "Instance Segmentation",
       benchmarks: [
-        { key: "instance_segmentation.lvis", label: "LVIS" },
-        { key: "instance_segmentation.sa_co", label: "SA-Co" }
+        { key: "instance_segmentation.sa_co", label: "SA-Co" },
+        { key: "instance_segmentation.lvis", label: "LVIS" }
       ]
     },
     {
       groupName: "Box Detection",
       benchmarks: [
+        { key: "box_detection.sa_co", label: "SA-Co" },
         { key: "box_detection.lvis", label: "LVIS" },
         { key: "box_detection.coco", label: "COCO" },
-        { key: "box_detection.sa_co", label: "SA-Co" }
       ]
     },
     {
@@ -353,25 +353,50 @@ export default function PCSClient() {
   return (
     <>
       {/* Hero Section */}
-      <HeroSection 
-        title="Computer Vision"
-        subtitle="Model Leaderboard"
-        description="Compare computer vision models across top benchmarks for their respective tasks."
-      />
 
       <TaskToggle 
         tasks={[
           { href: "/", label: "Object Detection" },
-          { href: "/pcs", label: "PCS" }
+          { href: "/pcs", label: "Promptable Concept Segmentation" }
         ]}
       />
 
-      <TaskCard 
+      {/* <section className="pt-6 sm:pt-12">
+      <div className="container-base">
+        <div className="flex">
+          <div className="space-y-2">
+            <Badge variant="primary">
+              <Link href="https://github.com/roboflow/supervision" target="_blank" className="flex gap-1">
+              Powered by supervision <ArrowSquareOutIcon size={14} weight="thin" />
+              </Link>
+            </Badge>
+            <h1 className="text-3xl sm:text-4xl">
+              <span className="text-primary-foreground">Promptable Concept Segmentation</span>
+              Model Leaderboard
+            </h1>
+            <p className="prose prose-sm max-w-lg">
+            Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> */}
+      <HeroSection 
         title="Promptable Concept Segmentation"
+        subtitle="Model Leaderboard"
         description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
         videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
         videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
       />
+
+     
+
+      {/* <TaskCard 
+        title="Promptable Concept Segmentation"
+        description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
+        videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
+        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
+      /> */}
 
       {/* Main Leaderboard */}
       <section className="pb-12">
