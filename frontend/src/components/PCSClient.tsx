@@ -385,8 +385,8 @@ export default function PCSClient() {
         title="Promptable Concept Segmentation"
         subtitle="Model Leaderboard"
         description="Identify the location of all instances of a visual concept in an image with pixel-level precision (or predict nothing if the concept does not exist) using text prompts, specific regions of an image as reference, or both. Model performance is measured by how well the model accurately identifies real-world objects in complex scenes."
-        videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
-        videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
+        videoUrl="/model-leaderboard-fork/raccoon-tails-pcs.mp4"
+        videoPosterUrl="/model-leaderboard-fork/raccoon-tails.avif"
       />
 
      
