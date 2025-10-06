@@ -44,8 +44,8 @@ export function HeroSection({
     // </section>
     <section className="pt-6">
         <div className="container-base">
-          <div className="flex lg:flex-row flex-col justify-between lg:gap-16 gap-6">
-            <div className="space-y-2 max-w-lg lg:w-full">
+          <div className="flex md:flex-row flex-col justify-between md:gap-16 gap-6">
+            <div className="space-y-2 max-w-lg md:w-full">
               <Badge variant="primary">
                 <Link href={badgeHref} target="_blank" className="flex items-center gap-1">
                   {badgeText} <ArrowSquareOutIcon size={14} weight="thin" />
@@ -56,7 +56,7 @@ export function HeroSection({
               </h1>
               <p className="prose prose-sm">{description}</p>
             </div>
-            <div className="w-full h-full aspect-video bg-foreground/5 rounded-md overflow-hidden">
+            <div className="hidden sm:block md:w-1/2 lg:w-1/3 h-full aspect-video bg-foreground/5 rounded-md overflow-hidden">
             <video autoPlay muted className="w-full h-full object-cover" poster={videoPosterUrl}>
               <source src={videoUrl} type="video/mp4" />
             </video>
