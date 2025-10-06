@@ -56,7 +56,7 @@ export function HeroSection({
               </h1>
               <p className="prose prose-sm">{description}</p>
             </div>
-            <div className="hidden md:block md:max-w-[500px] h-full aspect-video bg-foreground/5 rounded-md overflow-hidden">
+            <div className="hidden md:block md:max-w-[500px] h-full aspect-auto bg-foreground/5 rounded-md overflow-hidden">
             <video autoPlay muted className="w-full h-full object-cover" poster={videoPosterUrl}>
               <source src={videoUrl} type="video/mp4" />
             </video>
