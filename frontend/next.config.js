@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // basePath: '/model-leaderboard-fork',
-  // assetPrefix: '/model-leaderboard-fork',
+  basePath: '/model-leaderboard-fork',
+  assetPrefix: '/model-leaderboard-fork',
 }
 
 module.exports = nextConfig
