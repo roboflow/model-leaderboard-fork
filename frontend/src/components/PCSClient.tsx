@@ -384,7 +384,7 @@ export default function PCSClient() {
       <HeroSection 
         title="Promptable Concept Segmentation"
         subtitle="Model Leaderboard"
-        description="Identify the location of objects in an image with pixel-level precision using text prompts, point prompts, or specific regions of an image as reference. Model performance is measured by how well the model accurately identifies real-world objects."
+        description="Promptable Concept Segmentation (PCS) models identify the location of objects in an image with pixel-level precision (masks) provided text prompts, point prompts, or specific regions of an image as reference. PCS models are open vocabulary, not limited to fixed classes. Leaderboard results are shown for zero shot (AP₀ i.e. no finetuning or few shot) accuracy unless otherwise noted."
         videoUrl="/model-leaderboard-fork/video-leaderboard-pcs.mp4"
         videoPosterUrl="/model-leaderboard-fork/video-leaderboard-pcs.avif"
       />
