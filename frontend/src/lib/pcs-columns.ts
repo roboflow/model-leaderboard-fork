@@ -51,7 +51,7 @@ export const pcsColumns: PCSColumn[] = [
     defaultVisible: true,
     sortable: true,
     benchmarks: ["lvis"], // Only LVIS shows CGF
-    tooltip: "Compositional Generalization Factor",
+    tooltip: "Classification-gated F1",
     formatter: 'decimal'
   },
   {
