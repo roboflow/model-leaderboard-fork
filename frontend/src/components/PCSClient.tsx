@@ -100,12 +100,18 @@ interface BenchmarkData {
 interface PCSData {
   instance_segmentation: {
     lvis: BenchmarkData
-    sa_co: BenchmarkData
+    sa_co_gold: BenchmarkData
+    sa_co_silver: BenchmarkData
+    sa_co_bronze: BenchmarkData
+    sa_co_bio: BenchmarkData
   }
   box_detection: {
     lvis: BenchmarkData
     coco: BenchmarkData
-    sa_co: BenchmarkData
+    sa_co_gold: BenchmarkData
+    sa_co_silver: BenchmarkData
+    sa_co_bronze: BenchmarkData
+    sa_co_bio: BenchmarkData
   }
   semantic_segmentation: {
     ade_847: BenchmarkData
@@ -147,10 +153,10 @@ export default function PCSClient() {
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("results.gold") // Default to AP for LVIS
+  const [sortColumn, setSortColumn] = useState<string>("results.cgf") // Default to CGF for SA-Co variants
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.sa_co")
+  const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.sa_co_gold")
 
   // Cast the imported data to our PCS type
   const pcsData = pcsResults as unknown as PCSData
@@ -172,14 +178,20 @@ export default function PCSClient() {
     {
       groupName: "Instance Segmentation",
       benchmarks: [
-        { key: "instance_segmentation.sa_co", label: "SA-Co" },
+        { key: "instance_segmentation.sa_co_gold", label: "SA-Co/Gold" },
+        { key: "instance_segmentation.sa_co_silver", label: "SA-Co/Silver" },
+        { key: "instance_segmentation.sa_co_bronze", label: "SA-Co/Bronze" },
+        { key: "instance_segmentation.sa_co_bio", label: "SA-Co/Bio" },
         { key: "instance_segmentation.lvis", label: "LVIS" }
       ]
     },
     {
       groupName: "Box Detection",
       benchmarks: [
-        { key: "box_detection.sa_co", label: "SA-Co" },
+        { key: "box_detection.sa_co_gold", label: "SA-Co/Gold" },
+        { key: "box_detection.sa_co_silver", label: "SA-Co/Silver" },
+        { key: "box_detection.sa_co_bronze", label: "SA-Co/Bronze" },
+        { key: "box_detection.sa_co_bio", label: "SA-Co/Bio" },
         { key: "box_detection.lvis", label: "LVIS" },
         { key: "box_detection.coco", label: "COCO" },
       ]
@@ -246,7 +258,7 @@ export default function PCSClient() {
     } else if (benchmark.includes('coco')) {
       setSortColumn("results.ap")
     } else if (benchmark.includes('sa_co')) {
-      setSortColumn("results.gold")
+      setSortColumn("results.cgf")
     } else if (benchmark.includes('ade_847') || benchmark.includes('pc_59') || benchmark.includes('cityscapes')) {
       setSortColumn("results.miou")
     } else {

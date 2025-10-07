@@ -18,7 +18,7 @@ export const pcsColumns: PCSColumn[] = [
     group: 'Basic',
     defaultVisible: true,
     sortable: true,
-    benchmarks: ["lvis", "sa_co", "coco", "ade_847", "pc_59", "cityscapes"],
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio", "coco", "ade_847", "pc_59", "cityscapes"],
     tooltip: "Name of the computer vision model"
   },
   {
@@ -28,7 +28,7 @@ export const pcsColumns: PCSColumn[] = [
     group: 'Basic',
     defaultVisible: false,
     sortable: true,
-    benchmarks: ["lvis", "sa_co", "coco", "ade_847", "pc_59", "cityscapes"],
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio", "coco", "ade_847", "pc_59", "cityscapes"],
     tooltip: "Total number of trainable parameters in millions",
     formatter: 'parameters'
   },
@@ -50,7 +50,7 @@ export const pcsColumns: PCSColumn[] = [
     group: 'Core Metrics',
     defaultVisible: true,
     sortable: true,
-    benchmarks: ["lvis"], // Only LVIS shows CGF
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio"], // LVIS and all SA-Co variants show CGF
     tooltip: "Classification-gated F1",
     formatter: 'decimal'
   },
@@ -77,57 +77,13 @@ export const pcsColumns: PCSColumn[] = [
     formatter: 'decimal'
   },
   {
-    key: "results.gold",
-    label: "Gold",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: true,
-    sortable: true,
-    benchmarks: ["sa_co"], // Only SA-Co shows tier columns
-    tooltip: "7 domains, 3 human annotations per image-NP pair",
-    formatter: 'decimal'
-  },
-  {
-    key: "results.silver",
-    label: "Silver",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    sortable: true,
-    benchmarks: ["sa_co"], // Only SA-Co shows tier columns
-    tooltip: "10 domains, 1 human annotation per image-NP pair",
-    formatter: 'decimal'
-  },
-  {
-    key: "results.bronze",
-    label: "Bronze",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    sortable: true,
-    benchmarks: ["sa_co"], // Only SA-Co shows tier columns
-    tooltip: "9 existing datasets with mask annotations",
-    formatter: 'decimal'
-  },
-  {
-    key: "results.bio",
-    label: "Bio",
-    width: "w-40",
-    group: 'Size-Specific',
-    defaultVisible: false,
-    sortable: true,
-    benchmarks: ["sa_co"], // Only SA-Co shows tier columns
-    tooltip: "9 existing datasets with SAM 2 generated masks",
-    formatter: 'decimal'
-  },
-  {
     key: "paper",
     label: "Paper",
     width: "w-10",
     sortable: false,
     group: 'Metadata',
     defaultVisible: true,
-    benchmarks: ["lvis", "sa_co", "coco", "ade_847", "pc_59", "cityscapes"],
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio", "coco", "ade_847", "pc_59", "cityscapes"],
     tooltip: "Link to research paper"
   },
   {
@@ -137,7 +93,7 @@ export const pcsColumns: PCSColumn[] = [
     group: 'Metadata',
     defaultVisible: true,
     sortable: true,
-    benchmarks: ["lvis", "sa_co", "coco", "ade_847", "pc_59", "cityscapes"],
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio", "coco", "ade_847", "pc_59", "cityscapes"],
     tooltip: "Software license (e.g., MIT, Apache-2.0, AGPL-3.0)"
   }
 ]
