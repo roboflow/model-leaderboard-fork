@@ -45,7 +45,7 @@ export const pcsColumns: PCSColumn[] = [
   },
   {
     key: "results.cgf",
-    label: "CGF",
+    label: "CGF1",
     width: "w-40",
     group: 'Core Metrics',
     defaultVisible: true,
