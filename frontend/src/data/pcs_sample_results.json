@@ -20,7 +20,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 35.5,
+            "cgf": 20.1,
             "cgf_asterisk": true,
             "ap": null,
             "ap_asterisk": true
@@ -38,7 +38,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 45.7,
+            "cgf": 29.3,
             "cgf_asterisk": true,
             "ap": 43.4,
             "ap_asterisk": true
@@ -56,7 +56,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 32.9,
+            "cgf": 14.7,
             "cgf_asterisk": true,
             "ap": null,
             "ap_asterisk": true
@@ -74,7 +74,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 48.1,
+            "cgf": 35.1,
             "cgf_asterisk": true,
             "ap": 36.3,
             "ap_asterisk": true
@@ -110,7 +110,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.8,
+            "cgf": 13.4,
             "cgf_asterisk": true,
             "ap": null,
             "ap_asterisk": true
@@ -128,9 +128,9 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 52.8,
+            "cgf": 37.2,
             "cgf_asterisk": true,
-            "ap": 47.0,
+            "ap": 48.5,
             "ap_asterisk": true
           }
         }
@@ -156,7 +156,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 22.9,
+            "cgf": 17.3,
             "cgf_asterisk": true
           }
         },
@@ -172,7 +172,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 34.3,
+            "cgf": 24.6,
             "cgf_asterisk": true
           }
         },
@@ -188,7 +188,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 9.1,
+            "cgf": 3.3,
             "cgf_asterisk": true
           }
         },
@@ -204,7 +204,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.9,
+            "cgf": 6.5,
             "cgf_asterisk": true
           }
         },
@@ -220,7 +220,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 27.7,
+            "cgf": 21.3,
             "cgf_asterisk": true
           }
         },
@@ -236,7 +236,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 16.4,
+            "cgf": 13.0,
             "cgf_asterisk": true
           }
         },
@@ -252,7 +252,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 65.0,
+            "cgf": 54.1,
             "cgf_asterisk": true
           }
         }
@@ -278,7 +278,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.1,
+            "cgf": 7.6,
             "cgf_asterisk": true
           }
         },
@@ -294,7 +294,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.3,
+            "cgf": 11.5,
             "cgf_asterisk": true
           }
         },
@@ -310,7 +310,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 7.4,
+            "cgf": 2.7,
             "cgf_asterisk": true
           }
         },
@@ -326,7 +326,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.1,
+            "cgf": 7.1,
             "cgf_asterisk": true
           }
         },
@@ -358,7 +358,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 10.5,
+            "cgf": 8.3,
             "cgf_asterisk": true
           }
         },
@@ -374,7 +374,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 57.1,
+            "cgf": 49.6,
             "cgf_asterisk": true
           }
         }
@@ -400,7 +400,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 8.5,
+            "cgf": 3.9,
             "cgf_asterisk": true
           }
         },
@@ -416,7 +416,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.3,
+            "cgf": 11.7,
             "cgf_asterisk": true
           }
         },
@@ -432,7 +432,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 11.1,
+            "cgf": 7.0,
             "cgf_asterisk": true
           }
         },
@@ -448,7 +448,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 18.8,
+            "cgf": 12.5,
             "cgf_asterisk": true
           }
         },
@@ -480,7 +480,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 8.9,
+            "cgf": 7.3,
             "cgf_asterisk": true
           }
         },
@@ -496,7 +496,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 49.5,
+            "cgf": 42.6,
             "cgf_asterisk": true
           }
         }
@@ -507,7 +507,7 @@
         "task": "Instance Segmentation",
         "benchmark": "SA-Co/Bio",
         "description": "Segment Anything Compositional - Bio Tier",
-        "columns": ["model", "cgf"]
+        "columns": ["model", "pmf"]
       },
       "models": [
         {
@@ -522,8 +522,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 1.1,
-            "cgf_asterisk": true
+            "pmf": 0.64,
+            "pmf_asterisk": true
           }
         },
         {
@@ -538,8 +538,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.2,
-            "cgf_asterisk": true
+            "pmf": 0.04,
+            "pmf_asterisk": true
           }
         },
         {
@@ -554,8 +554,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.6,
-            "cgf_asterisk": true
+            "pmf": 0.34,
+            "pmf_asterisk": true
           }
         },
         {
@@ -570,8 +570,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.5,
-            "cgf_asterisk": true
+            "pmf": 0.15,
+            "pmf_asterisk": true
           }
         },
         {
@@ -586,8 +586,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": null,
-            "cgf_asterisk": true
+            "pmf": null,
+            "pmf_asterisk": true
           }
         },
         {
@@ -602,8 +602,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 10.2,
-            "cgf_asterisk": true
+            "pmf": 10.7,
+            "pmf_asterisk": true
           }
         },
         {
@@ -618,8 +618,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 59.3,
-            "cgf_asterisk": true
+            "pmf": 55.4,
+            "pmf_asterisk": true
           }
         }
       ]
@@ -646,7 +646,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 35.2,
+            "cgf": 19.9,
             "cgf_asterisk": true,
             "ap": 35.2,
             "ap_asterisk": true
@@ -664,7 +664,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 47.4,
+            "cgf": 30.2,
             "cgf_asterisk": true,
             "ap": 45.5,
             "ap_asterisk": true
@@ -682,7 +682,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 33.8,
+            "cgf": 15.1,
             "cgf_asterisk": true,
             "ap": 20.5,
             "ap_asterisk": true
@@ -700,7 +700,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 53.7,
+            "cgf": 39.3,
             "cgf_asterisk": true,
             "ap": 42.0,
             "ap_asterisk": true
@@ -736,7 +736,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 23.7,
+            "cgf": 16.1,
             "cgf_asterisk": true,
             "ap": null,
             "ap_asterisk": true
@@ -754,9 +754,9 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 57.5,
+            "cgf": 40.6,
             "cgf_asterisk": true,
-            "ap": 51.7,
+            "ap": 53.6,
             "ap_asterisk": true
           }
         }
@@ -889,9 +889,9 @@
             "run_parameters": {}
           },
           "results": {
-            "ap": 53.5,
+            "ap": 56.4,
             "ap_asterisk": true,
-            "ap_coco_o": 55.5,
+            "ap_coco_o": 55.7,
             "ap_coco_o_asterisk": true
           }
         }
@@ -917,7 +917,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 23.3,
+            "cgf": 16.9,
             "cgf_asterisk": true
           }
         },
@@ -933,7 +933,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 35.4,
+            "cgf": 24.5,
             "cgf_asterisk": true
           }
         },
@@ -949,7 +949,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 9.4,
+            "cgf": 3.4,
             "cgf_asterisk": true
           }
         },
@@ -965,7 +965,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 13.5,
+            "cgf": 6.8,
             "cgf_asterisk": true
           }
         },
@@ -981,7 +981,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 29.4,
+            "cgf": 22.5,
             "cgf_asterisk": true
           }
         },
@@ -997,7 +997,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 18.7,
+            "cgf": 14.4,
             "cgf_asterisk": true
           }
         },
@@ -1013,7 +1013,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 67.7,
+            "cgf": 55.7,
             "cgf_asterisk": true
           }
         }
@@ -1039,7 +1039,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 11.7,
+            "cgf": 7.1,
             "cgf_asterisk": true
           }
         },
@@ -1055,7 +1055,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.2,
+            "cgf": 11.0,
             "cgf_asterisk": true
           }
         },
@@ -1071,7 +1071,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 6.8,
+            "cgf": 2.5,
             "cgf_asterisk": true
           }
         },
@@ -1087,7 +1087,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 11.5,
+            "cgf": 6.7,
             "cgf_asterisk": true
           }
         },
@@ -1119,7 +1119,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.2,
+            "cgf": 9.4,
             "cgf_asterisk": true
           }
         },
@@ -1135,7 +1135,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 58.0,
+            "cgf": 50.0,
             "cgf_asterisk": true
           }
         }
@@ -1161,7 +1161,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 8.5,
+            "cgf": 4.1,
             "cgf_asterisk": true
           }
         },
@@ -1177,7 +1177,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.4,
+            "cgf": 12.0,
             "cgf_asterisk": true
           }
         },
@@ -1193,7 +1193,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.3,
+            "cgf": 7.6,
             "cgf_asterisk": true
           }
         },
@@ -1209,7 +1209,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 20.6,
+            "cgf": 14.0,
             "cgf_asterisk": true
           }
         },
@@ -1241,7 +1241,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 10.1,
+            "cgf": 8.2,
             "cgf_asterisk": true
           }
         },
@@ -1257,7 +1257,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 53.1,
+            "cgf": 47.1,
             "cgf_asterisk": true
           }
         }
@@ -1268,7 +1268,7 @@
         "task": "Box Detection",
         "benchmark": "SA-Co/Bio",
         "description": "Segment Anything Compositional - Box Detection - Bio Tier",
-        "columns": ["model", "cgf"]
+        "columns": ["model", "pmf"]
       },
       "models": [
         {
@@ -1283,8 +1283,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 1.6,
-            "cgf_asterisk": true
+            "pmf": 0.95,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1299,8 +1299,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.3,
-            "cgf_asterisk": true
+            "pmf": 0.08,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1315,8 +1315,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.7,
-            "cgf_asterisk": true
+            "pmf": 0.35,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1331,8 +1331,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.6,
-            "cgf_asterisk": true
+            "pmf": 0.17,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1347,8 +1347,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": null,
-            "cgf_asterisk": true
+            "pmf": null,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1363,8 +1363,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.0,
-            "cgf_asterisk": true
+            "pmf": 12.4,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1379,8 +1379,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 60.0,
-            "cgf_asterisk": true
+            "pmf": 56.3,
+            "pmf_asterisk": true
           }
         }
       ]
@@ -1503,7 +1503,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 14.7,
+            "miou": 13.8,
             "miou_asterisk": true
           }
         }
@@ -1625,7 +1625,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 59.4,
+            "miou": 60.8,
             "miou_asterisk": true
           }
         }
@@ -1747,7 +1747,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 65.1,
+            "miou": 65.2,
             "miou_asterisk": true
           }
         }

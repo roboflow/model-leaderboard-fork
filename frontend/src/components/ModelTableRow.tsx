@@ -87,6 +87,7 @@ interface ModelTableRowProps {
   columns: Column[]
   sortColumn?: string
   columnRange?: { min: number, max: number, column: string } | null
+  selectedBenchmark?: string // Optional: for PCS tables to determine formatting
 }
 
 function getNestedValue(obj: any, path: string) {
@@ -94,7 +95,7 @@ function getNestedValue(obj: any, path: string) {
 }
 
 // Helper function to format values based on column formatter
-const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: boolean = false) => {
+const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: boolean = false, selectedBenchmark?: string) => {
   if (value === null || value === undefined) return '—'
   if (typeof value !== 'number') return value
   
@@ -104,7 +105,9 @@ const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: bool
   if (column?.formatter) {
     switch (column.formatter) {
       case 'decimal':
-        formattedValue = formatters.decimal(value, 1)
+        // Use 2 decimal places for sa_co_bio metrics (pmf), otherwise 1
+        const decimalPlaces = (selectedBenchmark?.includes('sa_co_bio') && column.key === 'results.pmf') ? 2 : 1
+        formattedValue = formatters.decimal(value, decimalPlaces)
         break
       case 'percentage': 
         formattedValue = formatters.percentage(value)
@@ -128,10 +131,11 @@ const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: bool
   return formattedValue
 }
 
-export function ModelTableRow({ result, columns, sortColumn, columnRange }: ModelTableRowProps) {
+export function ModelTableRow({ result, columns, sortColumn, columnRange, selectedBenchmark }: ModelTableRowProps) {
   // Check if this is a PCS table by looking for PCS-specific columns
   const isPCSTable = columns.some(col => 
     col.key === 'results.cgf' || 
+    col.key === 'results.pmf' ||
     col.key === 'results.miou' || 
     col.key === 'results.gold' || 
     col.key === 'results.ap_coco_o'
@@ -244,7 +248,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange }: Mode
           shouldShowAsterisk = asteriskFlag !== undefined ? asteriskFlag : (value !== null && value !== undefined)
         }
         
-        baseContent = getFormattedValue(value, column, shouldShowAsterisk)
+        baseContent = getFormattedValue(value, column, shouldShowAsterisk, selectedBenchmark)
     }
 
     // Add horizontal bar background if this is the sorted column and it's numeric
