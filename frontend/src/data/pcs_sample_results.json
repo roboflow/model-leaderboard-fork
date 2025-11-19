@@ -1039,7 +1039,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 11.7,
+            "cgf": 7.1,
             "cgf_asterisk": true
           }
         },
@@ -1055,7 +1055,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.2,
+            "cgf": 11.0,
             "cgf_asterisk": true
           }
         },
@@ -1071,7 +1071,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 6.8,
+            "cgf": 2.5,
             "cgf_asterisk": true
           }
         },
@@ -1087,7 +1087,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 11.5,
+            "cgf": 6.7,
             "cgf_asterisk": true
           }
         },
@@ -1119,7 +1119,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.2,
+            "cgf": 9.4,
             "cgf_asterisk": true
           }
         },
@@ -1135,7 +1135,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 58.0,
+            "cgf": 50.0,
             "cgf_asterisk": true
           }
         }
