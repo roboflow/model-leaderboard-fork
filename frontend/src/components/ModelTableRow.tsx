@@ -105,8 +105,8 @@ const getFormattedValue = (value: any, column?: Column, shouldShowAsterisk: bool
   if (column?.formatter) {
     switch (column.formatter) {
       case 'decimal':
-        // Use 2 decimal places for sa_co_bio metrics, otherwise 1
-        const decimalPlaces = (selectedBenchmark?.includes('sa_co_bio') && column.key === 'results.cgf') ? 2 : 1
+        // Use 2 decimal places for sa_co_bio metrics (pmf), otherwise 1
+        const decimalPlaces = (selectedBenchmark?.includes('sa_co_bio') && column.key === 'results.pmf') ? 2 : 1
         formattedValue = formatters.decimal(value, decimalPlaces)
         break
       case 'percentage': 
@@ -135,6 +135,7 @@ export function ModelTableRow({ result, columns, sortColumn, columnRange, select
   // Check if this is a PCS table by looking for PCS-specific columns
   const isPCSTable = columns.some(col => 
     col.key === 'results.cgf' || 
+    col.key === 'results.pmf' ||
     col.key === 'results.miou' || 
     col.key === 'results.gold' || 
     col.key === 'results.ap_coco_o'

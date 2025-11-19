@@ -68,6 +68,7 @@ interface PCSModelResult {
   }
   results: {
     cgf?: number | null
+    pmf?: number | null
     ap?: number | null
     ap_coco_o?: number | null
     gold?: number | null
@@ -77,6 +78,7 @@ interface PCSModelResult {
     miou?: number | null
     // Optional asterisk control for each metric
     cgf_asterisk?: boolean
+    pmf_asterisk?: boolean
     ap_asterisk?: boolean
     ap_coco_o_asterisk?: boolean
     gold_asterisk?: boolean
@@ -133,6 +135,7 @@ function getSearchableText(result: PCSModelResult): string {
     result.metadata.param_count?.toString() || '',
     // Add all result values that exist
     result.results.cgf?.toString() || '',
+    result.results.pmf?.toString() || '',
     result.results.ap?.toString() || '',
     result.results.ap_coco_o?.toString() || '',
     result.results.gold?.toString() || '',
@@ -153,7 +156,7 @@ export default function PCSClient() {
   // STATE
   // ============================================================================
   const [search, setSearch] = useState("")
-  const [sortColumn, setSortColumn] = useState<string>("results.cgf") // Default to CGF for SA-Co variants
+  const [sortColumn, setSortColumn] = useState<string>("results.cgf") // Default to CGF for SA-Co variants (will be updated based on benchmark)
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [isLoading, setIsLoading] = useState(true)
   const [selectedBenchmark, setSelectedBenchmark] = useState("instance_segmentation.sa_co_gold")
@@ -257,6 +260,8 @@ export default function PCSClient() {
       setSortColumn("results.ap")
     } else if (benchmark.includes('coco')) {
       setSortColumn("results.ap")
+    } else if (benchmark.includes('sa_co_bio')) {
+      setSortColumn("results.pmf")
     } else if (benchmark.includes('sa_co')) {
       setSortColumn("results.cgf")
     } else if (benchmark.includes('ade_847') || benchmark.includes('pc_59') || benchmark.includes('cityscapes')) {
