@@ -507,7 +507,7 @@
         "task": "Instance Segmentation",
         "benchmark": "SA-Co/Bio",
         "description": "Segment Anything Compositional - Bio Tier",
-        "columns": ["model", "cgf"]
+        "columns": ["model", "pmf"]
       },
       "models": [
         {
@@ -522,8 +522,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.64,
-            "cgf_asterisk": true
+            "pmf": 0.64,
+            "pmf_asterisk": true
           }
         },
         {
@@ -538,8 +538,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.04,
-            "cgf_asterisk": true
+            "pmf": 0.04,
+            "pmf_asterisk": true
           }
         },
         {
@@ -554,8 +554,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.34,
-            "cgf_asterisk": true
+            "pmf": 0.34,
+            "pmf_asterisk": true
           }
         },
         {
@@ -570,8 +570,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.15,
-            "cgf_asterisk": true
+            "pmf": 0.15,
+            "pmf_asterisk": true
           }
         },
         {
@@ -586,8 +586,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": null,
-            "cgf_asterisk": true
+            "pmf": null,
+            "pmf_asterisk": true
           }
         },
         {
@@ -602,8 +602,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 10.7,
-            "cgf_asterisk": true
+            "pmf": 10.7,
+            "pmf_asterisk": true
           }
         },
         {
@@ -618,8 +618,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 55.4,
-            "cgf_asterisk": true
+            "pmf": 55.4,
+            "pmf_asterisk": true
           }
         }
       ]
@@ -1161,7 +1161,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 8.5,
+            "cgf": 4.1,
             "cgf_asterisk": true
           }
         },
@@ -1177,7 +1177,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 19.4,
+            "cgf": 12.0,
             "cgf_asterisk": true
           }
         },
@@ -1193,7 +1193,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.3,
+            "cgf": 7.6,
             "cgf_asterisk": true
           }
         },
@@ -1209,7 +1209,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 20.6,
+            "cgf": 14.0,
             "cgf_asterisk": true
           }
         },
@@ -1241,7 +1241,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 10.1,
+            "cgf": 8.2,
             "cgf_asterisk": true
           }
         },
@@ -1257,7 +1257,7 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 53.1,
+            "cgf": 47.1,
             "cgf_asterisk": true
           }
         }
@@ -1268,7 +1268,7 @@
         "task": "Box Detection",
         "benchmark": "SA-Co/Bio",
         "description": "Segment Anything Compositional - Box Detection - Bio Tier",
-        "columns": ["model", "cgf"]
+        "columns": ["model", "pmf"]
       },
       "models": [
         {
@@ -1283,8 +1283,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 1.6,
-            "cgf_asterisk": true
+            "pmf": 0.95,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1299,8 +1299,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.3,
-            "cgf_asterisk": true
+            "pmf": 0.08,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1315,8 +1315,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.7,
-            "cgf_asterisk": true
+            "pmf": 0.35,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1331,8 +1331,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 0.6,
-            "cgf_asterisk": true
+            "pmf": 0.17,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1347,8 +1347,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": null,
-            "cgf_asterisk": true
+            "pmf": null,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1363,8 +1363,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 12.0,
-            "cgf_asterisk": true
+            "pmf": 12.4,
+            "pmf_asterisk": true
           }
         },
         {
@@ -1379,8 +1379,8 @@
             "run_parameters": {}
           },
           "results": {
-            "cgf": 60.0,
-            "cgf_asterisk": true
+            "pmf": 56.3,
+            "pmf_asterisk": true
           }
         }
       ]
