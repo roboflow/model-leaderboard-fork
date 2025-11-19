@@ -552,6 +552,7 @@ export default function PCSClient() {
                         columns={columnManager.filteredColumns as any} // Type assertion for compatibility
                         sortColumn={sortColumn}
                         columnRange={columnRange}
+                        selectedBenchmark={selectedBenchmark}
                       />
                     ))
                   )}
