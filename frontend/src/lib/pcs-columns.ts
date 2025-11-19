@@ -50,8 +50,19 @@ export const pcsColumns: PCSColumn[] = [
     group: 'Core Metrics',
     defaultVisible: true,
     sortable: true,
-    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze", "sa_co_bio"], // LVIS and all SA-Co variants show CGF
+    benchmarks: ["lvis", "sa_co_gold", "sa_co_silver", "sa_co_bronze"], // LVIS and SA-Co variants (except bio) show CGF
     tooltip: "Classification-gated F1",
+    formatter: 'decimal'
+  },
+  {
+    key: "results.pmf",
+    label: "PMF1",
+    width: "w-40",
+    group: 'Core Metrics',
+    defaultVisible: true,
+    sortable: true,
+    benchmarks: ["sa_co_bio"], // SA-Co/Bio shows PMF
+    tooltip: "Positive Macro F1",
     formatter: 'decimal'
   },
   {
