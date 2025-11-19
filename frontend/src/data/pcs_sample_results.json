@@ -130,7 +130,7 @@
           "results": {
             "cgf": 37.2,
             "cgf_asterisk": true,
-            "ap": 47.0,
+            "ap": 48.5,
             "ap_asterisk": true
           }
         }
@@ -756,7 +756,7 @@
           "results": {
             "cgf": 40.6,
             "cgf_asterisk": true,
-            "ap": 51.7,
+            "ap": 53.6,
             "ap_asterisk": true
           }
         }
@@ -889,9 +889,9 @@
             "run_parameters": {}
           },
           "results": {
-            "ap": 53.5,
+            "ap": 56.4,
             "ap_asterisk": true,
-            "ap_coco_o": 55.5,
+            "ap_coco_o": 55.7,
             "ap_coco_o_asterisk": true
           }
         }
@@ -1503,7 +1503,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 14.7,
+            "miou": 13.8,
             "miou_asterisk": true
           }
         }
@@ -1625,7 +1625,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 59.4,
+            "miou": 60.8,
             "miou_asterisk": true
           }
         }
@@ -1747,7 +1747,7 @@
             "run_parameters": {}
           },
           "results": {
-            "miou": 65.1,
+            "miou": 65.2,
             "miou_asterisk": true
           }
         }
