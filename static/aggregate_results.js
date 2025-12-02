@@ -999,7 +999,7 @@ const results = [
       "model": "RF-DETR-B",
       "license": "Apache-2.0",
       "github_url": "https://github.com/roboflow/rf-detr",
-      "paper_url": "",
+      "paper_url": "https://arxiv.org/abs/2511.09554",
       "run_parameters": {
         "resolution": 560,
         "num_queries": 300,
@@ -1071,7 +1071,7 @@ const results = [
       "model": "RF-DETR-L",
       "license": "Apache-2.0",
       "github_url": "https://github.com/roboflow/rf-detr",
-      "paper_url": "",
+      "paper_url": "https://arxiv.org/abs/2511.09554",
       "run_parameters": {
         "resolution": 560,
         "num_queries": 300,
